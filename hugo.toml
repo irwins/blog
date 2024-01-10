@@ -1,4 +1,4 @@
-baseURL = 'https://irwins.github.io/blog/"'
+baseURL = 'https://irwins.github.io/'
 languageCode = 'en-us'
 title = 'My digital journey'
 theme = "m10c"
