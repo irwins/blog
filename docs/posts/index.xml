@@ -6,8 +6,15 @@
     <description>Recent content in Posts on My digital journey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Oct 2023 20:08:03 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 18 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to Azure Resource Graph (ARG)</title>
+      <link>https://irwins.github.io/blog/posts/introduction-to-arg/</link>
+      <pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://irwins.github.io/blog/posts/introduction-to-arg/</guid>
+      <description>Azure Resource Graph is one of those thing I stumbled upon while learning (or attempting) kusto query. At first it was just curiousity and then I realized the possibilities it opens up. In hindsight it has always been there, but to truly appreciate ARG you need that aha moment that you&amp;rsquo;ll only get by trying it out! So let&amp;rsquo;s dive in to some things I learned along the way&amp;hellip;&#xA;What is Azoure Resource Graph?</description>
+    </item>
     <item>
       <title>A new era</title>
       <link>https://irwins.github.io/blog/posts/a-new-era/</link>
