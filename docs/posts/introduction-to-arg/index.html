@@ -13,12 +13,12 @@
 
     
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to Azure Resource Graph (ARG)"/>
-<meta name="twitter:description" content="Azure Resource Graph is one of those thing I stumbled upon while learning (or attempting) kusto query. At first it was just curiousity and then I realized the possibilities it opens up. In hindsight it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive in to some things I learned along the way&hellip;
-What is Azoure Resource Graph?"/>
+<meta name="twitter:description" content="Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
+What is Azure Resource Graph?"/>
 
     <meta property="og:title" content="Introduction to Azure Resource Graph (ARG)" />
-<meta property="og:description" content="Azure Resource Graph is one of those thing I stumbled upon while learning (or attempting) kusto query. At first it was just curiousity and then I realized the possibilities it opens up. In hindsight it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive in to some things I learned along the way&hellip;
-What is Azoure Resource Graph?" />
+<meta property="og:description" content="Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
+What is Azure Resource Graph?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://irwins.github.io/blog/posts/introduction-to-arg/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-18T00:00:00+00:00" />
@@ -89,9 +89,18 @@ What is Azoure Resource Graph?" />
       </div>
     </header>
     <div class="post-content">
-      <p>Azure Resource Graph is one of those thing I stumbled upon while learning (or attempting) kusto query. At first it was just curiousity and then I realized the possibilities it opens up. In hindsight it has always been there, but to truly appreciate ARG you need that <em>aha</em> moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive in to some things I learned along the way&hellip;</p>
-<h2 id="what-is-azoure-resource-graph">What is Azoure Resource Graph?</h2>
-<p>Azure Resource Graph (ARG) helps you explore your resources for a specific tenant, of which you can filter down: management group; subscription; type; loction just to name a few. Before ARG, if I wanted to get a list of say all the resources I have, I&rsquo;d do the following in pwsh</p>
+      <p>Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that <em>aha</em> moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;</p>
+<h2 id="what-is-azure-resource-graph">What is Azure Resource Graph?</h2>
+<p>Azure Resource Graph (ARG) helps you explore your resources for a specific tenant, of which you can filter down:</p>
+<ul>
+<li>management group</li>
+<li>subscription</li>
+<li>resource group</li>
+<li>type</li>
+<li>loction</li>
+<li>resourceId</li>
+</ul>
+<p>Before ARG, if I wanted to get a list of say all the resources I have, I&rsquo;d do the following in pwsh</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$resources = Get-AzResource | ForEach-Object {
 </span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
 </span></span><span style="display:flex;"><span>        ResourceGroupName = $_.ResourceGroupName
@@ -148,7 +157,7 @@ What is Azoure Resource Graph?" />
 </span></span></code></pre></div><p>Be sure to have a look at the <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/azure-monitor-data-explorer-proxy#query-data-in-azure-resource-graph-by-using-arg-preview">documentation</a>. This opens up so many possibilities!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Learning kusto query is must! Granted it can be overwhelming at times, but like everything you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth investing in. I&rsquo;ll end on this note but I&rsquo;ll be back with some more ARG soon&hellip;</p>
-<p>Rg./Urv</p>
+<p>Ttyl/Urv</p>
 
     </div>
     <div class="post-footer">

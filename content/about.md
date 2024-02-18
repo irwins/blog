@@ -2,7 +2,7 @@
 title = "About me"
 +++
 
-My name Irwin. I've been in IT some 25+ years.
+My name is Irwin. I've been in IT some 25+ years.
 I'm passionte about automation!
 
 I am familiar with a number of programming languages, but am strongest in PowerShell.

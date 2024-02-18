@@ -4,11 +4,20 @@ date = 2024-02-18
 draft = false
 +++
 
-Azure Resource Graph is one of those thing I stumbled upon while learning (or attempting) kusto query. At first it was just curiousity and then I realized the possibilities it opens up. In hindsight it has always been there, but to truly appreciate ARG you need that _aha_ moment that you'll only get by trying it out! So let's dive in to some things I learned along the way...
+Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that _aha_ moment that you'll only get by trying it out! So let's dive into some things I learned along the way...
 
-## What is Azoure Resource Graph?
+## What is Azure Resource Graph?
 
-Azure Resource Graph (ARG) helps you explore your resources for a specific tenant, of which you can filter down: management group; subscription; type; loction just to name a few. Before ARG, if I wanted to get a list of say all the resources I have, I'd do the following in pwsh
+Azure Resource Graph (ARG) helps you explore your resources for a specific tenant, of which you can filter down:
+
+- management group
+- subscription
+- resource group
+- type
+- loction
+- resourceId
+
+Before ARG, if I wanted to get a list of say all the resources I have, I'd do the following in pwsh
 
 ```pwsh
 $resources = Get-AzResource | ForEach-Object {
@@ -99,4 +108,4 @@ Be sure to have a look at the [documentation](https://learn.microsoft.com/en-us/
 
 Learning kusto query is must! Granted it can be overwhelming at times, but like everything you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth investing in. I'll end on this note but I'll be back with some more ARG soon...
 
-Rg./Urv
+Ttyl/Urv
