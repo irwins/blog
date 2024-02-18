@@ -37,7 +37,7 @@ $resources | Group-Object -Property ResourceType | ForEach-Object {
 }
 ```
 
-Now here's the thing, this will do if you have one subscription. So at first I wasn't impressed until... I had a customer with 150+ subscriptions that needed managing... Can you imagine all that context switching? The horror... That's where ARG shines!
+Now here's the thing, this will do if you have one subscription. So at first, I wasn't impressed until... I had a customer with 150+ subscriptions that needed managing. Can you imagine all that context switching? The horror. That's where ARG shines!
 
 Here's what the kql would look like:
 
@@ -64,15 +64,15 @@ I know, this query may seem daunting, I'm still learning as well. Have a look at
 
 ## ARG and Governance go together
 
-Did someone say [resource tagging](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/govern/guides/standard/prescriptive-guidance#resource-tagging)? Honestly if there ever was a reason for tagging this would be it. Imagine having to report on resources you manage without properly tagging them. Now just think about that on a larger scale...
+Did someone say [resource tagging](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/govern/guides/standard/prescriptive-guidance#resource-tagging)? Honestly, if there ever was a reason for tagging, this would be it. Imagine having to report on resources you manage without properly tagging them. Now just think about that on a larger scale...
 
-Naming convention is great... I know, I know... if you want to start a heated discussion...People have strong opnions on this subject...Tag your resources please!
+Naming convention is great. ( I know, I know...) if you want to start a heated discussion. People have strong opnions on this subject. Tag your resources please!
 
 ARG and tagging are a match made in heaven!
 
 ## ARG in the portal
 
-Ever wonder how the portal gets all the alerts for a specific resource? ARG! Before, I'd do a F12 to see what was going on under the hood. I found out it was just an ARG query, a complicated one, but ARG nonetheless. Turns out that isn't necessary anymore. You can _open query_ in the portal these days. I was blown away and terrified at the same time! Up to that time I'd never seen _**union, set_has_element**_ used in ARG queries. This kql is going to take some getting used to...And that's only ARG for now... Imagine going full Azure Data Explorer kql! One can only dream...
+Ever wonder how the portal gets all the alerts for a specific resource? ARG! Before, I'd do a F12 to see what was going on under the hood. I found out it was just an ARG query, a complicated one, but ARG nonetheless. Turns out that isn't necessary anymore. You can _open query_ in the portal these days. I was blown away and terrified at the same time! Up to that point I'd never seen _**union, set_has_element**_ used in ARG queries. This kql is going to take some getting used to. And that's only ARG for now, imagine going full Azure Data Explorer kql! One can only dream.
 
 ## Things to consider
 
@@ -80,13 +80,13 @@ Here are some things to think about.
 
 ### ARG kusto query is a subset
 
-I've seen some complex query using the _let_ operator. Let doesn't work in ARG, or maybe I'm not doing it correct. Which isn't so say it isn't a skill you can't aquire. The _let_ operator works just fine in loganaylitics queries, something I'm getting more into when setting up monitoring alerts.
+I've seen some complex query using the _let_ operator. _Let_ doesn't work in ARG, or maybe I'm not doing it correctly. Which isn't so say it isn't a skill you can't aquire. The _let_ operator works just fine in loganalytics queries (something I'm getting more into when setting up monitoring alerts).
 
 ### Correlate ARG with Azure Monitor Logs
 
-You can do quite some nifty stuff by integrating ARG in you LogAnalytic workspace query.
+You can do quite some nifty stuff by integrating ARG in your LogAnalytic workspace query.
 
-Here's one I borrowed for the documentation:
+Here's one I borrowed from the online documentation:
 
 _Retrieve performance data related to CPU utilization and filter to resources with the “prod” tag._
 
@@ -106,6 +106,6 @@ Be sure to have a look at the [documentation](https://learn.microsoft.com/en-us/
 
 ## Conclusion
 
-Learning kusto query is must! Granted it can be overwhelming at times, but like everything you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth investing in. I'll end on this note but I'll be back with some more ARG soon...
+Learning kusto query is a must! Granted, it can be overwhelming at times, but, like everything, you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth cultivating. I'll end on this note but I'll be back with some more ARG soon...
 
 Ttyl/Urv
