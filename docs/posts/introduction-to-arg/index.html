@@ -13,12 +13,12 @@
 
     
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to Azure Resource Graph (ARG)"/>
-<meta name="twitter:description" content="Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
-What is Azure Resource Graph?"/>
+<meta name="twitter:description" content="Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
+What is Azure Resource Graph (ARG)?"/>
 
     <meta property="og:title" content="Introduction to Azure Resource Graph (ARG)" />
-<meta property="og:description" content="Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
-What is Azure Resource Graph?" />
+<meta property="og:description" content="Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;
+What is Azure Resource Graph (ARG)?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://irwins.github.io/blog/posts/introduction-to-arg/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-18T00:00:00+00:00" />
@@ -84,23 +84,17 @@ What is Azure Resource Graph?" />
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          4 min read
+          5 min read
         </div>
       </div>
     </header>
     <div class="post-content">
-      <p>Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that <em>aha</em> moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;</p>
-<h2 id="what-is-azure-resource-graph">What is Azure Resource Graph?</h2>
-<p>Azure Resource Graph (ARG) helps you explore your resources for a specific tenant, of which you can filter down:</p>
-<ul>
-<li>management group</li>
-<li>subscription</li>
-<li>resource group</li>
-<li>type</li>
-<li>loction</li>
-<li>resourceId</li>
-</ul>
-<p>Before ARG, if I wanted to get a list of say all the resources I have, I&rsquo;d do the following in pwsh</p>
+      <p>Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that <em>aha</em> moment that you&rsquo;ll only get by trying it out! So let&rsquo;s dive into some things I learned along the way&hellip;</p>
+<h2 id="what-is-azure-resource-graph-arg">What is Azure Resource Graph (ARG)?</h2>
+<p>Azure Resource Graph is a powerful tool that allows you to explore, analyze, and manage your Azure resources at scale, efficiently. You can use it to query your Azure inventory, monitor your resource changes, and optimize your resource costs. With the increasing complexity of <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/">cloud environments</a> there is a need for a unified query mechanism. ARG makes that possible.</p>
+<p>What challenges does ARG solve? What benifits can it bring?</p>
+<h3 id="gain-visibility-and-insight">Gain visibility and insight</h3>
+<p>ARG gives you visibility and insight into your Azure resources across subscriptions and management groups. Before ARG, if I wanted to get a list of say all the resources I have, I&rsquo;d do the following in pwsh</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$resources = Get-AzResource | ForEach-Object {
 </span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
 </span></span><span style="display:flex;"><span>        ResourceGroupName = $_.ResourceGroupName
@@ -116,12 +110,14 @@ What is Azure Resource Graph?" />
 </span></span><span style="display:flex;"><span>        Count = $_.Count
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now here&rsquo;s the thing, this will do if you have one subscription. So at first I wasn&rsquo;t impressed until&hellip; I had a customer with 150+ subscriptions that needed managing&hellip; Can you imagine all that context switching? The horror&hellip; That&rsquo;s where ARG shines!</p>
-<p>Here&rsquo;s what the kql would look like:</p>
+</span></span></code></pre></div><p>Now here&rsquo;s the thing, this will do if you have one subscription. So at first, I wasn&rsquo;t impressed until&hellip; I had a customer with 150+ subscriptions that needed managing. Can you imagine all that context switching? The horror. That&rsquo;s where ARG shines!</p>
+<h3 id="perform-complex-queries-using-kusto-query-language-kql">Perform complex queries using Kusto Query Language (kql)</h3>
+<p>Here&rsquo;s what the kql would look like to gain visibility:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
 </span></span><span style="display:flex;"><span>| summarize count=count() by type
 </span></span><span style="display:flex;"><span>| order by type asc
-</span></span></code></pre></div><p>This will give you the same result only faster&hellip; AND&hellip; on a larger scale. So here&rsquo;s what that query would look like on a larger scale:</p>
+</span></span></code></pre></div><p>This will give you the same result only faster!
+On a larger scale that query could look like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
 </span></span><span style="display:flex;"><span>| join kind=leftouter(
 </span></span><span style="display:flex;"><span>    resourcecontainers
@@ -131,19 +127,34 @@ What is Azure Resource Graph?" />
 </span></span><span style="display:flex;"><span>| summarize count=count() by subscriptionName,type
 </span></span><span style="display:flex;"><span>| order by subscriptionName,type asc
 </span></span></code></pre></div><p>I know, this query may seem daunting, I&rsquo;m still learning as well. Have a look at the official <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">documentation</a> to get you started</p>
-<h2 id="arg-and-governance-go-together">ARG and Governance go together</h2>
-<p>Did someone say <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/govern/guides/standard/prescriptive-guidance#resource-tagging">resource tagging</a>? Honestly if there ever was a reason for tagging this would be it. Imagine having to report on resources you manage without properly tagging them. Now just think about that on a larger scale&hellip;</p>
-<p>Naming convention is great&hellip; I know, I know&hellip; if you want to start a heated discussion&hellip;People have strong opnions on this subject&hellip;Tag your resources please!</p>
+<h3 id="track-and-audit-azure-resource-changes">Track and audit Azure resource changes</h3>
+<p>Azure <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/how-to/get-resource-changes?tabs=azure-cli">Documentation</a> has a section dedicated to just that! That is a blog on it&rsquo;s own.</p>
+<h3 id="optimize-azure-resource-utilization-and-costs">Optimize Azure resource utilization and costs</h3>
+<p>ARG is at the heart of many <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/finops/capabilities-efficiency#building-on-the-basics">fundamental best practices</a>. I encourage you to explore the possibilities ARG can provide.</p>
+<h3 id="export-and-visualize-query-results">Export and visualize query results</h3>
+<p>ARG queries can be visualized using:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-overview">Azure Workbooks</a></li>
+<li><a href="https://learn.microsoft.com/en-us/power-query/connectors/azure-resource-graph">PowerBI</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/first-query-portal#import-example-resource-graph-explorer-dashboards">Dashboards</a></li>
+</ul>
+<p>Azure workbooks is definitely worth investigating and will definitely impress your manager!</p>
+<h2 id="best-practices-and-tips">Best practices and tips</h2>
+<h3 id="tagging-resources-for-better-organization">Tagging resources for better organization</h3>
+<p>Did someone say <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/govern/guides/standard/prescriptive-guidance#resource-tagging">resource tagging</a>? Honestly, if there ever was a reason for tagging, this would be it. Imagine having to report on resources you manage without properly tagging them. Now just think about that on a larger scale&hellip;</p>
+<p>Naming convention is great. ( I know, I know&hellip;) if you want to start a heated discussion. People have strong opnions on this subject. Tag your resources please!</p>
 <p>ARG and tagging are a match made in heaven!</p>
-<h2 id="arg-in-the-portal">ARG in the portal</h2>
-<p>Ever wonder how the portal gets all the alerts for a specific resource? ARG! Before, I&rsquo;d do a F12 to see what was going on under the hood. I found out it was just an ARG query, a complicated one, but ARG nonetheless. Turns out that isn&rsquo;t necessary anymore. You can <em>open query</em> in the portal these days. I was blown away and terrified at the same time! Up to that time I&rsquo;d never seen <em><strong>union, set_has_element</strong></em> used in ARG queries. This kql is going to take some getting used to&hellip;And that&rsquo;s only ARG for now&hellip; Imagine going full Azure Data Explorer kql! One can only dream&hellip;</p>
+<h3 id="regularly-reviewing-and-optimizing-queries">Regularly reviewing and optimizing queries</h3>
+<p>Having shared queries in ARG helps keep discussion centralized. Another advantage of using shared queries is that they can be accessed programatically, keeping the query centralized. Any update to the shared query will be reflected in your code, saving you effectively from updating query code in you scripts!</p>
+<h3 id="explore-arg-in-the-portal">Explore ARG in the portal</h3>
+<p>Ever wonder how the portal gets all the alerts for a specific resource? ARG! Before, I&rsquo;d do a F12 to see what was going on under the hood. I found out it was just an ARG query, a complicated one, but ARG nonetheless. Turns out that isn&rsquo;t necessary anymore. You can <em>open query</em> in the portal these days. I was blown away and terrified at the same time! Up to that point I&rsquo;d never seen <em><strong>union, set_has_element</strong></em> used in ARG queries. This kql is going to take some getting used to. And that&rsquo;s only ARG for now, imagine going full Azure Data Explorer kql! One can only dream.</p>
 <h2 id="things-to-consider">Things to consider</h2>
 <p>Here are some things to think about.</p>
 <h3 id="arg-kusto-query-is-a-subset">ARG kusto query is a subset</h3>
-<p>I&rsquo;ve seen some complex query using the <em>let</em> operator. Let doesn&rsquo;t work in ARG, or maybe I&rsquo;m not doing it correct. Which isn&rsquo;t so say it isn&rsquo;t a skill you can&rsquo;t aquire. The <em>let</em> operator works just fine in loganaylitics queries, something I&rsquo;m getting more into when setting up monitoring alerts.</p>
+<p>I&rsquo;ve seen some complex query using the <em>let</em> operator. <em>Let</em> doesn&rsquo;t work in ARG, or maybe I&rsquo;m not doing it correctly. Which isn&rsquo;t so say it isn&rsquo;t a skill you can&rsquo;t aquire. The <em>let</em> operator works just fine in loganalytics queries (something I&rsquo;m getting more into when setting up monitoring alerts).</p>
 <h3 id="correlate-arg-with-azure-monitor-logs">Correlate ARG with Azure Monitor Logs</h3>
-<p>You can do quite some nifty stuff by integrating ARG in you LogAnalytic workspace query.</p>
-<p>Here&rsquo;s one I borrowed for the documentation:</p>
+<p>You can do quite some nifty stuff by integrating ARG in your LogAnalytic workspace query.</p>
+<p>Here&rsquo;s one I borrowed from the online documentation:</p>
 <p><em>Retrieve performance data related to CPU utilization and filter to resources with the “prod” tag.</em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>InsightsMetrics
 </span></span><span style="display:flex;"><span>| where Name == <span style="color:#e6db74">&#34;UtilizationPercentage&#34;</span>
@@ -156,8 +167,18 @@ What is Azure Resource Graph?" />
 </span></span><span style="display:flex;"><span>| where tostring(tags.Env) == <span style="color:#e6db74">&#34;Prod&#34;</span>
 </span></span></code></pre></div><p>Be sure to have a look at the <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/azure-monitor-data-explorer-proxy#query-data-in-azure-resource-graph-by-using-arg-preview">documentation</a>. This opens up so many possibilities!</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Learning kusto query is must! Granted it can be overwhelming at times, but like everything you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth investing in. I&rsquo;ll end on this note but I&rsquo;ll be back with some more ARG soon&hellip;</p>
+<p>Learning kusto query is a must! Granted, it can be overwhelming at times, but, like everything, you need to practice. When faced with a complex query, break it down. It is an aquired taste, but one worth cultivating. I&rsquo;ll end on this note but I&rsquo;ll be back with some more ARG soon&hellip;</p>
 <p>Ttyl/Urv</p>
+<h2 id="additional-resources">Additional resources:</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">Azure Resource documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/resource-graph-samples?tabs=azure-cli">Azure Resource Graph for Azure Monitor</a></li>
+<li><a href="https://github.com/eshlomo1/Azure-Monitor-Ninja-Training/tree/master">Azure Monitor Ninja training</a></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/samples/samples-by-table?tabs=azure-cli">Sample Resource Graph queries for common scenarios</a></li>
+</ul>
 
     </div>
     <div class="post-footer">

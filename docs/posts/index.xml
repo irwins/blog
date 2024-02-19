@@ -13,7 +13,7 @@
       <link>https://irwins.github.io/blog/posts/introduction-to-arg/</link>
       <pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://irwins.github.io/blog/posts/introduction-to-arg/</guid>
-      <description>Azure Resource Graph is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&amp;rsquo;ll only get by trying it out! So let&amp;rsquo;s dive into some things I learned along the way&amp;hellip;&#xA;What is Azure Resource Graph?</description>
+      <description>Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you&amp;rsquo;ll only get by trying it out! So let&amp;rsquo;s dive into some things I learned along the way&amp;hellip;&#xA;What is Azure Resource Graph (ARG)?</description>
     </item>
     <item>
       <title>A new era</title>
