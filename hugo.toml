@@ -4,6 +4,15 @@ title = 'My digital journey'
 theme = "m10c"
 paginate = 10
 publishDir = "docs"
+enableEmoji = true
+
+[[module.mounts]]
+source = 'static'
+target = 'static'
+
+[[module.mounts]]
+source = 'images'
+target = 'static/images'
 
 [menu]
   [[menu.main]]
