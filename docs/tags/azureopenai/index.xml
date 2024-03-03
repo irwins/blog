@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AzureOpenAI on My digital journey</title>
+    <link>http://localhost:1313/blog/tags/azureopenai/</link>
+    <description>Recent content in AzureOpenAI on My digital journey</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Feb 2024 08:18:21 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/tags/azureopenai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure OpenAI Assistant</title>
+      <link>http://localhost:1313/blog/posts/azure-openai-assistant/</link>
+      <pubDate>Fri, 23 Feb 2024 08:18:21 +0100</pubDate>
+      <guid>http://localhost:1313/blog/posts/azure-openai-assistant/</guid>
+      <description>OpenAI is the next shiny thing I&amp;rsquo;ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn&amp;rsquo;t use its full potential (Also I&amp;rsquo;m quite frugal&amp;hellip;&amp;#x1f60f;). Fortunately there&amp;rsquo;s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.&#xA;When Microsoft announced their version, I was excited about it, as I&amp;rsquo;m always in Azure. I also have a monthly credit to spend.</description>
+    </item>
+  </channel>
+</rss>

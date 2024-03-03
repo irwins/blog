@@ -6,6 +6,9 @@ paginate = 10
 publishDir = "docs"
 enableEmoji = true
 
+[taxonomies]
+  tag = 'tags'
+
 [[module.mounts]]
 source = 'static'
 target = 'static'

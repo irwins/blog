@@ -1,7 +1,8 @@
 +++
 title = 'Azure OpenAI Assistant'
-date = 2024-02-23T08:18:21+01:00
-draft = true
+date = 2024-03-01
+tags = ['Development', 'OpenAIAssistant', 'AzureOpenAI']
+draft = false
 +++
 
 ## OpenAI is the next shiny thing
@@ -157,7 +158,55 @@ Ok so up to this point, you've done your deployment and now you can create your 
 
 ### Instructions
 
+To better guide the personality of an assistant, instructions are needed. The more precise the better. I found a great [GitHub](https://github.com/f/awesome-chatgpt-prompts) repo that taught me a thing or two. Feel free to sponsor if you find it useful.
+
+I've been doing a bit of Azure Resource Graph queries. Why not see how assitant could help? :grin:
+
+Here's my instruction: _I want you to act as a an azure resource graph specialist. You're skilled at creating kusto queries for managing, monitoring and optimising Azure Resources._
+
+Did I mention Doug Finke also has a module called [PSWeave](https://github.com/dfinke/PSWeave).The InstructionPrompts are way more elaborate. For now, I'll use a simpler approach. Prompting is a different mindset.
 
 ### Conversing with AzOpenAI assistant
 
+With an assistant, you can have a conversation. It's not a google search. The sooner you realize that, the more patience you'll have :smile:
+
+Let's start the assistant off with something easy.
+
 ![Chat 01](../../images/azure-openai-assistant/chat-01.png)
+
+Nice! It gave me a query that worked! Let's add the _subscriptionName_ as well
+
+![Chat 02](../../images/azure-openai-assistant/chat-4.png)
+
+Ah, close. Here's where I'd get frustrated in the past and just give up. I know what it needs to be... Let's see if I can guide the assistant to better results.
+
+![Chat 03](../../images/azure-openai-assistant/chat-5.png)
+
+Impressive! It came back with the join kind=leftouter. It still won't work but we're heading in the right direction. Remember trust, but verify.
+
+![Chat 04](../../images/azure-openai-assistant/chat-6.png)
+
+Told the assistant I made a mistake and where I was expecting the resource type.
+
+![Chat 05](../../images/azure-openai-assistant/chat-7.png)
+
+This is what I was expecting the first time around. If you're like me you'd probably have quit after the first attempt. Using AI doesn't mean you don't have to be knowledgable about the subject... By having a conversation I was able to coach the assistant to what I wanted.
+
+![Chat 06](../../images/azure-openai-assistant/chat-9.png)
+
+Here's where the work I did started to payoff. The assistant uses what we discussed to improve on future request. I asked the assitant to return _bastion_ only. While processing the whole experience , I thought, why not ask the assistant where I could've improved my _prompt_ for a better experience.
+
+![Chat 06](../../images/azure-openai-assistant/chat-10.png)
+
+## Conclusion
+
+The sooner you realise, this isn't a google search, but more of a conversation that helps explore the possibilities, the more fun you'll start having... Don't expect perfection, Have fun learning this new skill!
+
+## Additional resources
+
+- [Azure Resource documentation](https://learn.microsoft.com/en-us/azure/governance/resource-graph/)
+- [Azure Resource Graph for Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/resource-graph-samples?tabs=azure-cli)
+- [Azure Monitor Ninja training](https://github.com/eshlomo1/Azure-Monitor-Ninja-Training/tree/master)
+- [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts)
+- [PowerShellAIAssitant](https://github.com/dfinke/PowerShellAIAssistant)
+- [PSWeave](https://github.com/dfinke/PSWeave)

@@ -4,7 +4,7 @@
     <title>Azure OpenAI Assistant // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.123.2">
+    <meta name="generator" content="Hugo 0.123.7">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -21,8 +21,8 @@ When Microsoft announced their version, I was excited about it, as I&rsquo;m alw
 When Microsoft announced their version, I was excited about it, as I&rsquo;m always in Azure. I also have a monthly credit to spend." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/blog/posts/azure-openai-assistant/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-02-23T08:18:21+01:00" />
-<meta property="article:modified_time" content="2024-02-23T08:18:21+01:00" />
+<meta property="article:published_time" content="2024-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-01T00:00:00+00:00" />
 
 
 
@@ -77,14 +77,23 @@ When Microsoft announced their version, I was excited about it, as I&rsquo;m alw
   <title>calendar</title>
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
 </svg>
-          Feb 23, 2024
+          Mar 1, 2024
         </div>
         <div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          4 min read
+          6 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="http://localhost:1313/blog/tags/development/">Development</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/openaiassistant/">OpenAIAssistant</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/azureopenai/">AzureOpenAI</a>
         </div>
       </div>
     </header>
@@ -216,8 +225,37 @@ What? No PowerShell?!? A poor craftsman always blames his tools&hellip;There is 
 <p>As an introduction I&rsquo;d advice using the <em>Studio</em> to browse around. Once your comfortable you can give Doug Finke his <a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssistant</a> module a try. It supports both OpenAI &amp; AzureOpenAI &#x1f604;. Doug has contributed quite a few popular modules over the years with <a href="https://www.powershellgallery.com/packages/ImportExcel/7.8.6">ImportExcel</a> being &ldquo;the chef&rsquo;s kiss&rdquo;</p>
 <p>Ok so up to this point, you&rsquo;ve done your deployment and now you can create your assistant&hellip;</p>
 <h3 id="instructions">Instructions</h3>
+<p>To better guide the personality of an assistant, instructions are needed. The more precise the better. I found a great <a href="https://github.com/f/awesome-chatgpt-prompts">GitHub</a> repo that taught me a thing or two. Feel free to sponsor if you find it useful.</p>
+<p>I&rsquo;ve been doing a bit of Azure Resource Graph queries. Why not see how assitant could help? &#x1f601;</p>
+<p>Here&rsquo;s my instruction: <em>I want you to act as a an azure resource graph specialist. You&rsquo;re skilled at creating kusto queries for managing, monitoring and optimising Azure Resources.</em></p>
+<p>Did I mention Doug Finke also has a module called <a href="https://github.com/dfinke/PSWeave">PSWeave</a>.The InstructionPrompts are way more elaborate. For now, I&rsquo;ll use a simpler approach. Prompting is a different mindset.</p>
 <h3 id="conversing-with-azopenai-assistant">Conversing with AzOpenAI assistant</h3>
+<p>With an assistant, you can have a conversation. It&rsquo;s not a google search. The sooner you realize that, the more patience you&rsquo;ll have &#x1f604;</p>
+<p>Let&rsquo;s start the assistant off with something easy.</p>
 <p><img src="../../images/azure-openai-assistant/chat-01.png" alt="Chat 01"></p>
+<p>Nice! It gave me a query that worked! Let&rsquo;s add the <em>subscriptionName</em> as well</p>
+<p><img src="../../images/azure-openai-assistant/chat-4.png" alt="Chat 02"></p>
+<p>Ah, close. Here&rsquo;s where I&rsquo;d get frustrated in the past and just give up. I know what it needs to be&hellip; Let&rsquo;s see if I can guide the assistant to better results.</p>
+<p><img src="../../images/azure-openai-assistant/chat-5.png" alt="Chat 03"></p>
+<p>Impressive! It came back with the join kind=leftouter. It still won&rsquo;t work but we&rsquo;re heading in the right direction. Remember trust, but verify.</p>
+<p><img src="../../images/azure-openai-assistant/chat-6.png" alt="Chat 04"></p>
+<p>Told the assistant I made a mistake and where I was expecting the resource type.</p>
+<p><img src="../../images/azure-openai-assistant/chat-7.png" alt="Chat 05"></p>
+<p>This is what I was expecting the first time around. If you&rsquo;re like me you&rsquo;d probably have quit after the first attempt. Using AI doesn&rsquo;t mean you don&rsquo;t have to be knowledgable about the subject&hellip; By having a conversation I was able to coach the assistant to what I wanted.</p>
+<p><img src="../../images/azure-openai-assistant/chat-9.png" alt="Chat 06"></p>
+<p>Here&rsquo;s where the work I did started to payoff. The assistant uses what we discussed to improve on future request. I asked the assitant to return <em>bastion</em> only. While processing the whole experience , I thought, why not ask the assistant where I could&rsquo;ve improved my <em>prompt</em> for a better experience.</p>
+<p><img src="../../images/azure-openai-assistant/chat-10.png" alt="Chat 06"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The sooner you realise, this isn&rsquo;t a google search, but more of a conversation that helps explore the possibilities, the more fun you&rsquo;ll start having&hellip; Don&rsquo;t expect perfection, Have fun learning this new skill!</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">Azure Resource documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/resource-graph-samples?tabs=azure-cli">Azure Resource Graph for Azure Monitor</a></li>
+<li><a href="https://github.com/eshlomo1/Azure-Monitor-Ninja-Training/tree/master">Azure Monitor Ninja training</a></li>
+<li><a href="https://github.com/f/awesome-chatgpt-prompts">Awesome ChatGPT Prompts</a></li>
+<li><a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssitant</a></li>
+<li><a href="https://github.com/dfinke/PSWeave">PSWeave</a></li>
+</ul>
 
     </div>
     <div class="post-footer">
