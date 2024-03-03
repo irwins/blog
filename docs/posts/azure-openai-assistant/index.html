@@ -221,12 +221,12 @@ What? No PowerShell?!? A poor craftsman always blames his tools&hellip;There is 
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
 </span></span></code></pre></div><p>Ok now that we&rsquo;ve deployed our instance we can get down to business!</p>
-<h2 id="using-aure-openai-assistant">Using Aure OpenAI Assistant</h2>
+<h2 id="using-azure-openai-assistant">Using Azure OpenAI Assistant</h2>
 <p>As an introduction I&rsquo;d advice using the <em>Studio</em> to browse around. Once your comfortable you can give Doug Finke his <a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssistant</a> module a try. It supports both OpenAI &amp; AzureOpenAI &#x1f604;. Doug has contributed quite a few popular modules over the years with <a href="https://www.powershellgallery.com/packages/ImportExcel/7.8.6">ImportExcel</a> being &ldquo;the chef&rsquo;s kiss&rdquo;</p>
 <p>Ok so up to this point, you&rsquo;ve done your deployment and now you can create your assistant&hellip;</p>
 <h3 id="instructions">Instructions</h3>
 <p>To better guide the personality of an assistant, instructions are needed. The more precise the better. I found a great <a href="https://github.com/f/awesome-chatgpt-prompts">GitHub</a> repo that taught me a thing or two. Feel free to sponsor if you find it useful.</p>
-<p>I&rsquo;ve been doing a bit of Azure Resource Graph queries. Why not see how assitant could help? &#x1f601;</p>
+<p>I&rsquo;ve been doing a bit of Azure Resource Graph queries. Why not see how assistant could help? &#x1f601;</p>
 <p>Here&rsquo;s my instruction: <em>I want you to act as a an azure resource graph specialist. You&rsquo;re skilled at creating kusto queries for managing, monitoring and optimising Azure Resources.</em></p>
 <p>Did I mention Doug Finke also has a module called <a href="https://github.com/dfinke/PSWeave">PSWeave</a>.The InstructionPrompts are way more elaborate. For now, I&rsquo;ll use a simpler approach. Prompting is a different mindset.</p>
 <h3 id="conversing-with-azopenai-assistant">Conversing with AzOpenAI assistant</h3>

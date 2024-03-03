@@ -150,7 +150,7 @@ az deployment group create \
 
 Ok now that we've deployed our instance we can get down to business!
 
-## Using Aure OpenAI Assistant
+## Using Azure OpenAI Assistant
 
 As an introduction I'd advice using the _Studio_ to browse around. Once your comfortable you can give Doug Finke his [PowerShellAIAssistant](https://github.com/dfinke/PowerShellAIAssistant) module a try. It supports both OpenAI & AzureOpenAI :smile:. Doug has contributed quite a few popular modules over the years with [ImportExcel](https://www.powershellgallery.com/packages/ImportExcel/7.8.6) being "the chef's kiss"
 
@@ -160,7 +160,7 @@ Ok so up to this point, you've done your deployment and now you can create your 
 
 To better guide the personality of an assistant, instructions are needed. The more precise the better. I found a great [GitHub](https://github.com/f/awesome-chatgpt-prompts) repo that taught me a thing or two. Feel free to sponsor if you find it useful.
 
-I've been doing a bit of Azure Resource Graph queries. Why not see how assitant could help? :grin:
+I've been doing a bit of Azure Resource Graph queries. Why not see how assistant could help? :grin:
 
 Here's my instruction: _I want you to act as a an azure resource graph specialist. You're skilled at creating kusto queries for managing, monitoring and optimising Azure Resources._
 
