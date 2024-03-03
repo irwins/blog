@@ -2,10 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on My digital journey</title>
-    <link>https://irwins.github.io/blog/tags/</link>
+    <link>http://localhost:1313/blog/tags/</link>
     <description>Recent content in Tags on My digital journey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://irwins.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Feb 2024 08:18:21 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AzureOpenAI</title>
+      <link>http://localhost:1313/blog/tags/azureopenai/</link>
+      <pubDate>Fri, 23 Feb 2024 08:18:21 +0100</pubDate>
+      <guid>http://localhost:1313/blog/tags/azureopenai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Development</title>
+      <link>http://localhost:1313/blog/tags/development/</link>
+      <pubDate>Fri, 23 Feb 2024 08:18:21 +0100</pubDate>
+      <guid>http://localhost:1313/blog/tags/development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAIAssistant</title>
+      <link>http://localhost:1313/blog/tags/openaiassistant/</link>
+      <pubDate>Fri, 23 Feb 2024 08:18:21 +0100</pubDate>
+      <guid>http://localhost:1313/blog/tags/openaiassistant/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

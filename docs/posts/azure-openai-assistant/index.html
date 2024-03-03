@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+    <title>Azure OpenAI Assistant // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.123.7">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Azure OpenAI Assistant"/>
+<meta name="twitter:description" content="OpenAI is the next shiny thing I&rsquo;ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn&rsquo;t use its full potential (Also I&rsquo;m quite frugal&hellip;&#x1f60f;). Fortunately there&rsquo;s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.
+When Microsoft announced their version, I was excited about it, as I&rsquo;m always in Azure. I also have a monthly credit to spend."/>
+
+    <meta property="og:title" content="Azure OpenAI Assistant" />
+<meta property="og:description" content="OpenAI is the next shiny thing I&rsquo;ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn&rsquo;t use its full potential (Also I&rsquo;m quite frugal&hellip;&#x1f60f;). Fortunately there&rsquo;s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.
+When Microsoft announced their version, I was excited about it, as I&rsquo;m always in Azure. I also have a monthly credit to spend." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/posts/azure-openai-assistant/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-01T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Azure OpenAI Assistant</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="http://localhost:1313/blog/tags/development/">Development</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/openaiassistant/">OpenAIAssistant</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/azureopenai/">AzureOpenAI</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="openai-is-the-next-shiny-thing">OpenAI is the next shiny thing</h2>
+<p>I&rsquo;ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn&rsquo;t use its full potential (Also I&rsquo;m quite frugal&hellip;&#x1f60f;). Fortunately there&rsquo;s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.</p>
+<p>When Microsoft announced their version, I was excited about it, as I&rsquo;m always in Azure. I also have a monthly credit to spend. You do need to <a href="https://aka.ms/oaiapply">apply</a> for it, but that process is quite easy. Once you gain access the fun can begin!</p>
+<p>FYI, the beauty of Azure OpenAI is that it <a href="https://platform.openai.com/docs/assistants/overview">follows</a> the REST API model of OpenAI closely. That makes transitioning smoothly from one to the other. Have a look at the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/overview">documentation</a> for a better understanding of the capabilities.</p>
+<h2 id="what-is-azure-openai-assistant">What is Azure OpenAI Assistant</h2>
+<p>I like OpenAI&rsquo;s definition:</p>
+<blockquote>
+<p>An Assistant has instructions and can leverage models, tools, and knowledge to respond to user queries.</p>
+</blockquote>
+<p>Think of an assitant as a soundboard, where you you can exchange thoughts and ideas. For better results you need to optimize your instructions, but that is a topic for another time.</p>
+<p>It took me quite some time to grasp this concept. At first I was using the assistant as a google search. An assistant is more than that. With proper instructions, you can have pretty meaningful conversations. It all comes down to your prompting skills. <a href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a> is a thing! It really is the gateway for better results. How to get better at it? Trial and error&hellip; Like everything, practice, practice, practice!</p>
+<h2 id="setting-up-azure-openai-instance">Setting up Azure OpenAI instance</h2>
+<p>Once you&rsquo;re eligble for the OpenAI you can deploy your OpenAI resource. Assistant is currently in <em>Preview</em> and only available from specific regions. I&rsquo;ve defaulted to <em>East US 2</em>.</p>
+<p>You can do this all in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/assistants-quickstart?tabs=command-line&amp;pivots=rest-api#set-up">portal</a>, but I was curious if there was support for bicep deployment. There is&hellip;&#x1f604;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>@<span style="color:#a6e22e">minLength</span>(2)
+</span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">maxLength</span>(64)
+</span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;Name of the AzOpenAI instance&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> name string = <span style="color:#75715e">//Instance name. This has to be unique</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;AzOpenAI instance kind&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> accountKind string = <span style="color:#e6db74">&#39;OpenAI&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">minLength</span>(1)
+</span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;Primary location for all resources&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#e6db74">&#39;eastus2&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> deployments array = [
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    name: <span style="color:#e6db74">&#39;assistant&#39;</span>
+</span></span><span style="display:flex;"><span>    model: <span style="color:#e6db74">&#39;gpt-35-turbo&#39;</span>
+</span></span><span style="display:flex;"><span>    format: <span style="color:#e6db74">&#39;OpenAI&#39;</span>
+</span></span><span style="display:flex;"><span>    version: <span style="color:#e6db74">&#39;0301&#39;</span>
+</span></span><span style="display:flex;"><span>    sku: <span style="color:#e6db74">&#39;Standard&#39;</span>
+</span></span><span style="display:flex;"><span>    capacity: 120
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> sku string = <span style="color:#e6db74">&#39;S0&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> tags object = {
+</span></span><span style="display:flex;"><span>  environment:<span style="color:#e6db74">&#39;DEV&#39;</span>
+</span></span><span style="display:flex;"><span>  createdBy: <span style="color:#75715e">//Your persona</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> open_ai_account <span style="color:#e6db74">&#39;Microsoft.CognitiveServices/accounts@2023-05-01&#39;</span> = {
+</span></span><span style="display:flex;"><span>  name: name
+</span></span><span style="display:flex;"><span>  location: location
+</span></span><span style="display:flex;"><span>  tags:tags
+</span></span><span style="display:flex;"><span>  kind: accountKind
+</span></span><span style="display:flex;"><span>  sku: {
+</span></span><span style="display:flex;"><span>    name: sku
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  properties: {
+</span></span><span style="display:flex;"><span>    customSubDomainName: <span style="color:#a6e22e">toLower</span>(name)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> open_ai_deployment <span style="color:#e6db74">&#39;Microsoft.CognitiveServices/accounts/deployments@2023-05-01&#39;</span> = [<span style="color:#66d9ef">for</span> deployment <span style="color:#66d9ef">in</span> deployments: {
+</span></span><span style="display:flex;"><span>  parent: open_ai_account
+</span></span><span style="display:flex;"><span>  name: deployment.name
+</span></span><span style="display:flex;"><span>  sku: {
+</span></span><span style="display:flex;"><span>    name: deployment.sku
+</span></span><span style="display:flex;"><span>    capacity: deployment.capacity
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  properties: {
+</span></span><span style="display:flex;"><span>      model: {
+</span></span><span style="display:flex;"><span>        name: deployment.model
+</span></span><span style="display:flex;"><span>        format: deployment.format
+</span></span><span style="display:flex;"><span>        version: deployment.version
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      raiPolicyName: <span style="color:#e6db74">&#39;Microsoft.Default&#39;</span>
+</span></span><span style="display:flex;"><span>      versionUpgradeOption: <span style="color:#e6db74">&#39;OnceNewDefaultVersionAvailable&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> endpoint string = open_ai_account.properties.endpoint
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> id string = open_ai_account.id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> name string = open_ai_account.name
+</span></span></code></pre></div><p>Here&rsquo;s the bicepparam to accompany the bicep file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#e6db74">&#39;main.bicep&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location = <span style="color:#e6db74">&#39;eastus2&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> name = <span style="color:#75715e">//Unique instance name</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> sku = <span style="color:#e6db74">&#39;S0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> tags = {
+</span></span><span style="display:flex;"><span>  environment: <span style="color:#e6db74">&#39;DEV&#39;</span>
+</span></span><span style="display:flex;"><span>  createdBy: <span style="color:#e6db74">&#39;Irwin Strachan&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>At this point a pipeline may be a bit much, so here&rsquo;s how to deploy using the az cli.
+What? No PowerShell?!? A poor craftsman always blames his tools&hellip;There is merit in having more than one skill&hellip;&#x1f609;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### LOGIN TENANT</span>
+</span></span><span style="display:flex;"><span>TENANT_ID<span style="color:#f92672">=</span> <span style="color:#75715e">#Your Tenant</span>
+</span></span><span style="display:flex;"><span>SUBSCRIPTION_ID<span style="color:#f92672">=</span> <span style="color:#75715e">#Subscription you applied</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>az login --tenant $TENANT_ID
+</span></span><span style="display:flex;"><span>az account set --subscription $SUBSCRIPTION_ID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### CREATE RESOURCE GROUP</span>
+</span></span><span style="display:flex;"><span>RESOURCE_GROUP_NAME<span style="color:#f92672">=</span>rg-openai
+</span></span><span style="display:flex;"><span>LOCATION<span style="color:#f92672">=</span>eastus2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>az group create -n $RESOURCE_GROUP_NAME -l $LOCATION
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Deploy main bicep template using bicep parameters file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Lint bicep file</span>
+</span></span><span style="display:flex;"><span>az bicep lint --file <span style="color:#75715e">#Refer to your bicep file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Validate bicep file</span>
+</span></span><span style="display:flex;"><span>az deployment group validate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Preview bicep file</span>
+</span></span><span style="display:flex;"><span>az deployment group what-if <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file\</span>
+</span></span><span style="display:flex;"><span>    --template-file <span style="color:#75715e">#Refer to your bicep file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>az deployment group create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
+</span></span></code></pre></div><p>Ok now that we&rsquo;ve deployed our instance we can get down to business!</p>
+<h2 id="using-aure-openai-assistant">Using Aure OpenAI Assistant</h2>
+<p>As an introduction I&rsquo;d advice using the <em>Studio</em> to browse around. Once your comfortable you can give Doug Finke his <a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssistant</a> module a try. It supports both OpenAI &amp; AzureOpenAI &#x1f604;. Doug has contributed quite a few popular modules over the years with <a href="https://www.powershellgallery.com/packages/ImportExcel/7.8.6">ImportExcel</a> being &ldquo;the chef&rsquo;s kiss&rdquo;</p>
+<p>Ok so up to this point, you&rsquo;ve done your deployment and now you can create your assistant&hellip;</p>
+<h3 id="instructions">Instructions</h3>
+<p>To better guide the personality of an assistant, instructions are needed. The more precise the better. I found a great <a href="https://github.com/f/awesome-chatgpt-prompts">GitHub</a> repo that taught me a thing or two. Feel free to sponsor if you find it useful.</p>
+<p>I&rsquo;ve been doing a bit of Azure Resource Graph queries. Why not see how assitant could help? &#x1f601;</p>
+<p>Here&rsquo;s my instruction: <em>I want you to act as a an azure resource graph specialist. You&rsquo;re skilled at creating kusto queries for managing, monitoring and optimising Azure Resources.</em></p>
+<p>Did I mention Doug Finke also has a module called <a href="https://github.com/dfinke/PSWeave">PSWeave</a>.The InstructionPrompts are way more elaborate. For now, I&rsquo;ll use a simpler approach. Prompting is a different mindset.</p>
+<h3 id="conversing-with-azopenai-assistant">Conversing with AzOpenAI assistant</h3>
+<p>With an assistant, you can have a conversation. It&rsquo;s not a google search. The sooner you realize that, the more patience you&rsquo;ll have &#x1f604;</p>
+<p>Let&rsquo;s start the assistant off with something easy.</p>
+<p><img src="../../images/azure-openai-assistant/chat-01.png" alt="Chat 01"></p>
+<p>Nice! It gave me a query that worked! Let&rsquo;s add the <em>subscriptionName</em> as well</p>
+<p><img src="../../images/azure-openai-assistant/chat-4.png" alt="Chat 02"></p>
+<p>Ah, close. Here&rsquo;s where I&rsquo;d get frustrated in the past and just give up. I know what it needs to be&hellip; Let&rsquo;s see if I can guide the assistant to better results.</p>
+<p><img src="../../images/azure-openai-assistant/chat-5.png" alt="Chat 03"></p>
+<p>Impressive! It came back with the join kind=leftouter. It still won&rsquo;t work but we&rsquo;re heading in the right direction. Remember trust, but verify.</p>
+<p><img src="../../images/azure-openai-assistant/chat-6.png" alt="Chat 04"></p>
+<p>Told the assistant I made a mistake and where I was expecting the resource type.</p>
+<p><img src="../../images/azure-openai-assistant/chat-7.png" alt="Chat 05"></p>
+<p>This is what I was expecting the first time around. If you&rsquo;re like me you&rsquo;d probably have quit after the first attempt. Using AI doesn&rsquo;t mean you don&rsquo;t have to be knowledgable about the subject&hellip; By having a conversation I was able to coach the assistant to what I wanted.</p>
+<p><img src="../../images/azure-openai-assistant/chat-9.png" alt="Chat 06"></p>
+<p>Here&rsquo;s where the work I did started to payoff. The assistant uses what we discussed to improve on future request. I asked the assitant to return <em>bastion</em> only. While processing the whole experience , I thought, why not ask the assistant where I could&rsquo;ve improved my <em>prompt</em> for a better experience.</p>
+<p><img src="../../images/azure-openai-assistant/chat-10.png" alt="Chat 06"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The sooner you realise, this isn&rsquo;t a google search, but more of a conversation that helps explore the possibilities, the more fun you&rsquo;ll start having&hellip; Don&rsquo;t expect perfection, Have fun learning this new skill!</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">Azure Resource documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/resource-graph-samples?tabs=azure-cli">Azure Resource Graph for Azure Monitor</a></li>
+<li><a href="https://github.com/eshlomo1/Azure-Monitor-Ninja-Training/tree/master">Azure Monitor Ninja training</a></li>
+<li><a href="https://github.com/f/awesome-chatgpt-prompts">Awesome ChatGPT Prompts</a></li>
+<li><a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssitant</a></li>
+<li><a href="https://github.com/dfinke/PSWeave">PSWeave</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
