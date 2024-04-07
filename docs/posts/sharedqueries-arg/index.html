@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+    <title>Getting started with shared queries in Azure Resource Graph (ARG) // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Getting started with shared queries in Azure Resource Graph (ARG)"/>
+<meta name="twitter:description" content="I&rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&rsquo;t think much of until I wanted a better way to manage my queries. That was my aha moment &#x1f601;. Shared queries makes for a better management experience of your queries.
+What are Azure Resource Graph shared queries? Microsoft&rsquo;s documentation explains it best:"/>
+
+    <meta property="og:title" content="Getting started with shared queries in Azure Resource Graph (ARG)" />
+<meta property="og:description" content="I&rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&rsquo;t think much of until I wanted a better way to manage my queries. That was my aha moment &#x1f601;. Shared queries makes for a better management experience of your queries.
+What are Azure Resource Graph shared queries? Microsoft&rsquo;s documentation explains it best:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/posts/sharedqueries-arg/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-07T08:17:21+02:00" />
+<meta property="article:modified_time" content="2024-04-07T08:17:21+02:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Getting started with shared queries in Azure Resource Graph (ARG)</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 7, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>I&rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&rsquo;t think much of until I wanted a better way to manage my queries. That was my <em>aha</em> moment &#x1f601;. Shared queries makes for a better management experience of your queries.</p>
+<h2 id="what-are-azure-resource-graph-shared-queries">What are Azure Resource Graph shared queries?</h2>
+<p>Microsoft&rsquo;s <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/tutorials/create-share-query">documentation</a> explains it best:</p>
+<blockquote>
+<p>A Shared query is an Azure Resource Manager resource that can be managed with Azure role-based access control (Azure RBAC) and protected with resource locks. When you share queries, you help your team realize goals of consistency and efficiency through repetition.</p>
+</blockquote>
+<p>I quickly realised sharing kql code manually would be a chore. Hardcoding kql in script is a recipe for disaster. Shared queries makes for a better and efficient querying experience. Definitely a step in the right direction. But working in the portal isn&rsquo;t really my thing, so lets automate creating shared queries with a little bicep &amp; Powershell shall we?</p>
+<h2 id="managing-shared-query-code">Managing shared query code</h2>
+<p>I definitely wanted to have the code in json format as this is easy to import in bicep. After a few attempts, I came up with the following:</p>
+<ul>
+<li>Use a psd1 file to contain the necessary data.</li>
+<li>Import the pds1 file.</li>
+<li>Convert To Json for later use.</li>
+</ul>
+<p>Why go through all that hassle? I wanted to seperate maintenance &amp; execution. Create a psd1 per shared query makes for easier overview and maintenance by the team. Also, for some reason my code wasn&rsquo;t formatting the way I expected, this works.</p>
+<p>Here&rsquo;s what a psd1 shared query looks like for bastion</p>
+<p><em><strong>alert-bastion.psd1</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>@{
+</span></span><span style="display:flex;"><span>    name        = <span style="color:#e6db74">&#39;alert-bastion&#39;</span>
+</span></span><span style="display:flex;"><span>    description = <span style="color:#e6db74">&#39;ManagedServices shared query alert bastion&#39;</span>
+</span></span><span style="display:flex;"><span>    code        = <span style="color:#e6db74">@&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">resources
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| join kind=leftouter(
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    resourcecontainers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    | where type==&#39;microsoft.resources/subscriptions&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    | project subscriptionName=name, subscriptionId
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">) on subscriptionId
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| where type == &#34;microsoft.network/bastionhosts&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| extend details = pack_all()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| project subscriptionName, subscriptionId, location,resourceGroup,name,type,id,details
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| order by subscriptionName asc
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;@</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In order to process all the psd1 files we&rsquo;ll use the following PowerShell script:</p>
+<p><em><strong>Convert-QueriesToJson.ps1</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>[CmdletBinding()]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">string</span>]$QueriesPath = <span style="color:#e6db74">&#34;queries/src&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$sharedQueries = Get-ChildItem -Path $QueriesPath -Recurse -Include *.psd1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$jsonQueries = $sharedQueries |
+</span></span><span style="display:flex;"><span>ForEach-Object {
+</span></span><span style="display:flex;"><span>    Import-LocalizedData `
+</span></span><span style="display:flex;"><span>        -BaseDirectory $_.DirectoryName `
+</span></span><span style="display:flex;"><span>        -FileName $_.Name
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$jsonQueries | ConvertTo-Json | Out-File <span style="color:#e6db74">&#34;queries/src/sharedQueries.json&#34;</span>
+</span></span></code></pre></div><p>This imports the psd1 files and converts to a Json array:</p>
+<p><em><strong>sharedQueries.json</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;ManagedServices shared query alert application gateway&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;alert-application-gateway&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;resources\n| join kind=leftouter(\n    resourcecontainers\n    | where type==&#39;microsoft.resources/subscriptions&#39;\n    | project subscriptionName=name, subscriptionId\n) on subscriptionId\n| where type =~ &#39;Microsoft.Network/applicationGateways&#39;\n| extend skuName = properties.sku.name\n| extend details = pack_all()\n| where skuName != &#39;WAF_Medium&#39;\n| project subscriptionName, subscriptionId, location,resourceGroup,name,skuName,type,id,details\n| order by subscriptionName asc&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;ManagedServices shared query alert bastion&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;alert-bastion&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;resources\n| join kind=leftouter(\n    resourcecontainers\n    | where type==&#39;microsoft.resources/subscriptions&#39;\n    | project subscriptionName=name, subscriptionId\n) on subscriptionId\n| where type == \&#34;microsoft.network/bastionhosts\&#34;\n| extend details = pack_all()\n| project subscriptionName, subscriptionId, location,resourceGroup,name,type,id,details\n| order by subscriptionName asc&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>]
+</span></span></code></pre></div><p>Doing it this way, I made sure my kql <em>code</em> was formatted correctly.</p>
+<h2 id="deploy-shared-queries-bicep">Deploy shared queries (bicep)</h2>
+<p>Deploying the queries using bicep is pretty straightforward:</p>
+<ul>
+<li>Load sharedQueries.json usingbicep&rsquo;s json function</li>
+<li>Iterate over the array</li>
+</ul>
+<p>A little preparation goes a long way&hellip;&#x1f609;</p>
+<p><em><strong>main.bicep</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> tags object
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> jsonQueries = <span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">loadTextContent</span>(<span style="color:#e6db74">&#39;../src/sharedQueries.json&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> sharedQueries <span style="color:#e6db74">&#39;Microsoft.ResourceGraph/queries@2018-09-01-preview&#39;</span> = [<span style="color:#66d9ef">for</span> query <span style="color:#66d9ef">in</span> jsonQueries: {
+</span></span><span style="display:flex;"><span>  name: query.name
+</span></span><span style="display:flex;"><span>  location: <span style="color:#e6db74">&#39;global&#39;</span>
+</span></span><span style="display:flex;"><span>  tags: tags
+</span></span><span style="display:flex;"><span>  properties: {
+</span></span><span style="display:flex;"><span>    query: query.code
+</span></span><span style="display:flex;"><span>    description: query.description
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> deployedSharedQueries array = [<span style="color:#66d9ef">for</span> (query, i) <span style="color:#66d9ef">in</span> jsonQueries: {
+</span></span><span style="display:flex;"><span>  name: sharedQueries[i].name
+</span></span><span style="display:flex;"><span>  id: sharedQueries[i].id
+</span></span><span style="display:flex;"><span>}]
+</span></span></code></pre></div><p>Here&rsquo;s the bicepparam file:</p>
+<p><em><strong>main.dev.bicepparam</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#e6db74">&#39;main.bicep&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> tags = {
+</span></span><span style="display:flex;"><span>  environment: <span style="color:#e6db74">&#39;dev&#39;</span>
+</span></span><span style="display:flex;"><span>  createdBy: <span style="color:#e6db74">&#39;&lt;ContactInfo&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Shared queries supports RBAC, so you could get creative on who has access&hellip; Just puttin it out there&hellip; &#x1f609;</p>
+<p>I enjoy using az cli when it comes to prototyping&hellip;</p>
+<p><em><strong>deploy.azcli</strong></em>_</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### LOGIN TENANT</span>
+</span></span><span style="display:flex;"><span>TENANT_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;your_tenant_id&#39;</span>
+</span></span><span style="display:flex;"><span>SUBSCRIPTION_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&lt;your_subscription&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>LOCATION<span style="color:#f92672">=</span>westeurope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>az login --tenant $TENANT_ID
+</span></span><span style="display:flex;"><span>az account set --subscription $SUBSCRIPTION_ID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### CREATE RESOURCE GROUP</span>
+</span></span><span style="display:flex;"><span>RESOURCE_GROUP_NAME<span style="color:#f92672">=</span>rg-az-monitor
+</span></span><span style="display:flex;"><span>az group create -n $RESOURCE_GROUP_NAME -l $LOCATION
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Deploy main bicep template using bicep parameters file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Lint bicep file</span>
+</span></span><span style="display:flex;"><span>az bicep lint --file queries/infra/main.bicep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Validate bicep file</span>
+</span></span><span style="display:flex;"><span>az deployment group validate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters queries/infra/main.dev.bicepparam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Preview bicep file</span>
+</span></span><span style="display:flex;"><span>az deployment group what-if <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters queries/infra/main.dev.bicepparam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template-file queries/infra/main.bicep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>utcNow<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -u +<span style="color:#e6db74">&#34;%Y%m%d%H%M%S&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>az deployment group create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --name shared-queries-$utcNow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters queries/infra/main.dev.bicepparam
+</span></span></code></pre></div><h2 id="running-a-shared-query">Running a shared query</h2>
+<p>Running a <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/concepts/query-language#shared-query-syntax-preview">shared query</a> using the shared query URI makes it all worth it. The documentation does state that it&rsquo;s in preview, so fingers crossed.</p>
+<blockquote>
+<p>To call a shared query inside a Resource Graph query, use the {{shared-query-uri}}</p>
+</blockquote>
+<p>This is how to do this using PowerShell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$sharedQueryResults = Search-AzGraph -Query <span style="color:#e6db74">&#34;{{</span>$SharedResourceIdQuery<span style="color:#e6db74">}}&#34;</span> -UseTenantScope -First <span style="color:#ae81ff">1000</span>
+</span></span></code></pre></div><p>The URI takes you directly to the query, no need for context switching! Queries are limited to 1000 result. You can <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/paginate-powershell">paginate</a> query results or&hellip;</p>
+<p>Use your shared query and refine down the line</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$sharedQueryResults = Search-AzGraph -Query <span style="color:#e6db74">&#34;{{</span>$SharedResourceIdQuery<span style="color:#e6db74">}} | where &lt;fill_in&gt;&#34;</span> -UseTenantScope -First <span style="color:#ae81ff">1000</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Shared queries definitely makes for a better management experience for you and your team. By keeping the kql code central, you won&rsquo;t need to update any hardcoded kql queries in scripts!
+The query code can be revised and results reviewed at any time! What&rsquo;s not to love about that? &#x1f601; I hope this useful in some way. Happy share querying!</p>
+<p>Ttyl/Urv</p>
+<h2 id="additional-resources">Additional resources:</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/">Azure Resource Graph documentation</a></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/samples/samples-by-table?tabs=azure-cli">Sample Resource Graph queries for common scenarios</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

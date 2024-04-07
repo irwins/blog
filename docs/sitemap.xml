@@ -2,33 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://irwins.github.io/blog/posts/azure-openai-assistant/</loc>
+    <loc>http://localhost:1313/blog/posts/sharedqueries-arg/</loc>
+    <lastmod>2024-04-07T08:17:21+02:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/</loc>
+    <lastmod>2024-04-07T08:17:21+02:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/posts/</loc>
+    <lastmod>2024-04-07T08:17:21+02:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/posts/azure-openai-assistant/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/tags/azureopenai/</loc>
+    <loc>http://localhost:1313/blog/tags/azureopenai/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/tags/development/</loc>
+    <loc>http://localhost:1313/blog/tags/development/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/</loc>
+    <loc>http://localhost:1313/blog/tags/openaiassistant/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/tags/openaiassistant/</loc>
+    <loc>http://localhost:1313/blog/tags/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/posts/</loc>
-    <lastmod>2024-03-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/</loc>
-    <lastmod>2024-03-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/posts/introduction-to-arg/</loc>
+    <loc>http://localhost:1313/blog/posts/introduction-to-arg/</loc>
     <lastmod>2024-02-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/posts/a-new-era/</loc>
+    <loc>http://localhost:1313/blog/posts/a-new-era/</loc>
     <lastmod>2023-10-09T20:08:03+02:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/about/</loc>
+    <loc>http://localhost:1313/blog/about/</loc>
   </url>
 </urlset>
