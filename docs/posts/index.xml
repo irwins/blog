@@ -13,7 +13,7 @@
       <link>http://localhost:1313/blog/posts/sharedqueries-arg/</link>
       <pubDate>Sun, 07 Apr 2024 08:17:21 +0200</pubDate>
       <guid>http://localhost:1313/blog/posts/sharedqueries-arg/</guid>
-      <description>I&amp;rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&amp;rsquo;t think much of until I wanted a better way to manage my queries. That was my aha moment &amp;#x1f601;. Shared queries makes better management of your queries.&#xA;What are Azure Resource Graph shared queries? Microsoft&amp;rsquo;s documentation explains it best:</description>
+      <description>I&amp;rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&amp;rsquo;t think much of until I wanted a better way to manage my queries. That was my aha moment &amp;#x1f601;. Shared queries makes for a better management experience of your queries.&#xA;What are Azure Resource Graph shared queries? Microsoft&amp;rsquo;s documentation explains it best:</description>
     </item>
     <item>
       <title>Azure OpenAI Assistant</title>
