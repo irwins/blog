@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Pim Access Review // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.125.4">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+  
+
+
+    <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Pim Access Review">
+<meta name="twitter:description" content="My team recently got an automation request concerning privileged role access review. I&rsquo;ve always been on the consumer side, so getting some PIM hands-on automation sound like fun! This was an interesting challenge on a few levels, I&rsquo;ll explain as we go along&hellip;
+What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we&rsquo;ll be focusing on is EntraId Role management.">
+
+    <meta property="og:url" content="https://irwins.github.io/blog/posts/pim-access-review/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Pim Access Review">
+  <meta property="og:description" content="My team recently got an automation request concerning privileged role access review. I’ve always been on the consumer side, so getting some PIM hands-on automation sound like fun! This was an interesting challenge on a few levels, I’ll explain as we go along…
+What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we’ll be focusing on is EntraId Role management.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-28T08:57:41+02:00">
+    <meta property="article:modified_time" content="2024-04-28T08:57:41+02:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://irwins.github.io/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Pim Access Review</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 28, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>My team recently got an automation request concerning privileged role access review. I&rsquo;ve always been on the consumer side, so getting some PIM hands-on automation sound like fun!
+This was an interesting challenge on a few levels, I&rsquo;ll explain as we go along&hellip;</p>
+<h2 id="what-is-pim">What is PIM?</h2>
+<p><a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure">PIM (Priveleged Identity Management)</a> enables you to manage, control, and monitor access to important resources in your organization. The part we&rsquo;ll be focusing on is EntraId Role management. There&rsquo;s quite a bit you can do with PIM! I highly recommend reading the documentation!</p>
+<h2 id="pim-prerequisites">PIM prerequisites</h2>
+<p>The first challenge is having an environment to develop. PIM requires a P1/P2 license. You can start a trial for 30 days, but after that you have to pay. I&rsquo;m quite frugal, so&hellip; not an option! That&rsquo;s why Dev tenants where awesome! I say where because they aren&rsquo;t readily available anymore. Which makes developing a challenge. EntraId admins aren&rsquo;t too keen on letting you play in their production tenant and rightly so! I got lucky and was able to use a colleague&rsquo;s almost expired dev tenant. Crisis adverted!</p>
+<h2 id="pim-entraid-role-assigments">PIM EntraId Role assigments</h2>
+<p>PIM role assignments gives you JIT (just in time) privileged access to Azure resources. Sometimes you do need elevated permission if only for a brief moment. PIM makes that possible!
+I took this oppertunity to learn a bit more about PIM. The better you understand the process, the better chances of automating &#x1f609;</p>
+<p>With PIM you can make assignments for:</p>
+<ul>
+<li>Microsoft Entra roles</li>
+<li>Azure roles</li>
+<li>Groups</li>
+</ul>
+<p>Here&rsquo;s where why understanding the process matters. At first I thought our objective was to create the assignments. No it wasn&rsquo;t. Then I got sidetracked with group access review. No that wasn&rsquo;t it either. So after a bit of back-and-forth, I came to understand it&rsquo;s just the access review bit for Microsoft Entra roles. The lesson here, don&rsquo;t overengineer&hellip;Still I&rsquo;m glad I did invest some time in it&hellip; The more you know!</p>
+<h2 id="pim-microsoft-entra-role-access-review">PIM Microsoft Entra role Access review</h2>
+<p>As always the <a href="https://learn.microsoft.com/en-us/graph/tutorial-accessreviews-roleassignments?toc=%2Fentra%2Fidentity%2Fprivileged-identity-management%2Ftoc.json&amp;bc=%2Fentra%2Fidentity%2Fid-governance%2Fprivileged-identity-management%2Fbreadcrumb%2Ftoc.json&amp;tabs=powershell">online</a> documentation does a better job at explaining this.</p>
+<p>Right! Now that we agreed on what needs to be automated we can get started!</p>
+<p>Here&rsquo;s something I&rsquo;d advice when getting started on you PIM journey:</p>
+<ul>
+<li>Read the documentation! There we&rsquo;re quiet a few WTF&rsquo;s on my side that could have been avoided.</li>
+<li>Use an application. Best to get started with it right away! The documentation tells you which API permission you need, spoiler:
+it&rsquo;s <em>AccessReview.ReadWrite.All</em> if you&rsquo;re feeling generous&hellip; <em>AccessReview.Read.All</em> for only reporting.</li>
+<li>API permissions isn&rsquo;t enough, you application need to be assigned to a role depending on the resource. For Entra you have two options:
+<ul>
+<li>Identity governance administrator</li>
+<li>Priveleged Role administrator</li>
+</ul>
+</li>
+</ul>
+<p>Here is the fun part when it comes to the role assignment, do you really want the application permanently assigned to the role? No, ofcourse not. That&rsquo;s where delegation comes in. But that&rsquo;s for another time.</p>
+<p>I needed to give you all this background because it took me quite some attempts to fully understand what we wanted to accomplish which is the following:</p>
+<blockquote>
+<p>PIM Entra role access review sends a notification when an upcoming access reviewing is pending. It also sends a notification once the review end date passes and applies the decisions. there is no in between notification that tells you, in the case of multiple reviewers, if a reviewer already did the review.</p>
+</blockquote>
+<p>So why would that be a concern? Well depending on how the access review is set up. every reviewer gets an email about the review and when it&rsquo;s done. Depending on the review window, the review will only be applied <strong>after</strong> the review end date or if a reviewer <strong>stops</strong> the review. Then it&rsquo;s applied immediately and notifications are sent out.</p>
+<p>I had some trouble with the last bit. Yes, we can stop the review, but should we? The access review is there for reason. When there are multiple reviwers they can veto each others decision. That isn&rsquo;t the case once you stop the access review. I feel stopping the review process should be unanimously decided.</p>
+<p>That&rsquo;s when we came up with the next best thing, make a report of access reviews that are eligible for closing. That way you can update the reviewers the current state and let them decide if it&rsquo;s done yes or no.</p>
+<h2 id="pim-access-review-state">PIM access review state</h2>
+<p>Testing access review isn&rsquo;t as straightforward as you&rsquo;d think! When developing start off with a one-time review and work your way up. I added a quarterly review which start way later, which meant it didn&rsquo;t show up. It makes sense in hindsight&hellip;</p>
+<p>When creating a one-time review always add an extra day to the end date. I noticed it failed without it.</p>
+<p>Now for the actual fun bit! The code!!!</p>
+<p>On of my responsibility as a senior is mentoring. Anyone who knows me, knows I&rsquo;m a huge fan of PowerShell! Nothing makes me happier than coding in PowerShell &#x1f604;</p>
+<p>I created a simple module to get things going. This will suffice for now.</p>
+<p><em><strong>PimHelper.psm1</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#75715e">#Set script variable</span>
+</span></span><span style="display:flex;"><span>$script:graphApiVersion = <span style="color:#e6db74">&#34;Beta&#34;</span>
+</span></span><span style="display:flex;"><span>$script:baseUri = <span style="color:#e6db74">&#34;https://graph.microsoft.com/</span>$($graphApiVersion)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> New-MgGraphLogin {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        $ClientId,
+</span></span><span style="display:flex;"><span>        $ClientSecret,
+</span></span><span style="display:flex;"><span>        $TenantId
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $securePassword = ConvertTo-SecureString -String $ClientSecret -AsPlainText -Force
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $mgCredential = [<span style="color:#66d9ef">pscredential</span>]::new($ClientId, $securePassword)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Connect-MgGraph -TenantId $TenantId -ClientSecretCredential $mgCredential -NoWelcome
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinition {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>        $ApiPath = <span style="color:#e6db74">&#39;identityGovernance/accessReviews/definitions&#39;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $uri = <span style="color:#e6db74">&#34;</span>$baseUri<span style="color:#e6db74">/{0}&#34;</span> <span style="color:#f92672">-f</span> $ApiPath
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Get-MgContext) {
+</span></span><span style="display:flex;"><span>        (Invoke-MgRestMethod -Method GET -Uri $uri).value
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        Write-Error <span style="color:#e6db74">&#39;Please login to MgGraph first&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDecisions {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>        [<span style="color:#66d9ef">object[]</span>]$Definitions,
+</span></span><span style="display:flex;"><span>        $ApiPath = <span style="color:#e6db74">&#39;identityGovernance/accessReviews/definitions&#39;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $Definitions |
+</span></span><span style="display:flex;"><span>    ForEach-Object {
+</span></span><span style="display:flex;"><span>        $displayName = $_.DisplayName
+</span></span><span style="display:flex;"><span>        $id = $_.id
+</span></span><span style="display:flex;"><span>        $status = $_.Status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $uri = <span style="color:#e6db74">&#34;</span>$baseUri<span style="color:#e6db74">/{0}/{1}/instances/{1}/decisions&#34;</span> <span style="color:#f92672">-f</span> $ApiPath, $id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $accessReviewDecision = (Invoke-MgRestMethod -Method GET -Uri $uri).value
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Write-Verbose <span style="color:#e6db74">&#34;Decisions for [</span>$displayName<span style="color:#e6db74">/</span>$id<span style="color:#e6db74">] count [</span>$($accessReviewDecision.count)<span style="color:#e6db74">]&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!$accessReviewDecision) {
+</span></span><span style="display:flex;"><span>            [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>                DisplayName = $displayName
+</span></span><span style="display:flex;"><span>                DefinitionId = $id
+</span></span><span style="display:flex;"><span>                AccessReviewStatus = <span style="color:#e6db74">&#34;NotStarted&#34;</span>
+</span></span><span style="display:flex;"><span>                TargetDisplayName = $null
+</span></span><span style="display:flex;"><span>                ResourceDisplayName = $null
+</span></span><span style="display:flex;"><span>                Decision = <span style="color:#e6db74">&#39;NotReviewed&#39;</span> <span style="color:#75715e">#Edge case NotStarted therefore NotReviewed</span>
+</span></span><span style="display:flex;"><span>                Justification = $null
+</span></span><span style="display:flex;"><span>                ReviewedBy = $null
+</span></span><span style="display:flex;"><span>                ReviewedDateTime = $null
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $accessReviewDecision |
+</span></span><span style="display:flex;"><span>        ForEach-Object {
+</span></span><span style="display:flex;"><span>            [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>                DisplayName = $displayName
+</span></span><span style="display:flex;"><span>                DefinitionId = $id
+</span></span><span style="display:flex;"><span>                AccessReviewStatus = $status
+</span></span><span style="display:flex;"><span>                TargetDisplayName = $_.target.userDisplayName
+</span></span><span style="display:flex;"><span>                ResourceDisplayName = $_.resource.displayName
+</span></span><span style="display:flex;"><span>                Decision = $_.decision
+</span></span><span style="display:flex;"><span>                Justification = $_.Justification
+</span></span><span style="display:flex;"><span>                ReviewedBy = $_.reviewedBy.userPrincipalName
+</span></span><span style="display:flex;"><span>                ReviewedDateTime = $_.reviewedDateTime
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The module helps me log in with my client credentials. There are two main functions:</p>
+<ul>
+<li>Get-AccessReviewDefinition. Retrieves the AccessReview definitions</li>
+<li>Get-AccessReviewDecisions. Retrieves the AccessReview decisions. There is an edge case. Decision count will be null if not started</li>
+</ul>
+<p>I&rsquo;m almost certain this will need refactoring. As far as MVP goes we have a working concept, it just works in my dev tenant&hellip; &#x1f601;</p>
+<p>Here&rsquo;s the script to get the current state of the AcccessReview currently in progress</p>
+<p><em><strong>Get-AccessReviewDecisionState.ps1</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span>(
+</span></span><span style="display:flex;"><span>   $TenantId
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Import-Module $PSSCriptRoot/pimHelper.psm1 -Force
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$paramLogin = @{
+</span></span><span style="display:flex;"><span>    ClientId = <span style="color:#e6db74">&#39;your clientId&#39;</span>
+</span></span><span style="display:flex;"><span>    ClientSecret = <span style="color:#e6db74">&#39;your clientSecret. Ideally from a keyvault&#39;</span>
+</span></span><span style="display:flex;"><span>    TenantId = $TenantID
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Login MgGraph</span>
+</span></span><span style="display:flex;"><span>New-MgGraphLogin @paramLogin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Get AccessReview Definitions</span>
+</span></span><span style="display:flex;"><span>$accessReviewDefinitions = Get-AccessReviewDefinition
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Verbose <span style="color:#e6db74">&#34;AccessReview definition count [</span>$($accessReviewDefinitions.count)<span style="color:#e6db74">]&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Get ongoing AccessReviews</span>
+</span></span><span style="display:flex;"><span>$ongoingAccessReview = $accessReviewDefinitions |
+</span></span><span style="display:flex;"><span>Where-Object {$_.Status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;InProgress&#39;</span>} |
+</span></span><span style="display:flex;"><span>ForEach-Object {
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>        DisplayName = $_.displayName
+</span></span><span style="display:flex;"><span>        Id = $_.Id
+</span></span><span style="display:flex;"><span>        Status = $_.status
+</span></span><span style="display:flex;"><span>        Details = $_
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$lookupOngoingAccessReview = $ongoingAccessReview | Group-Object -AsHashTable -AsString -Property Id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Verbose <span style="color:#e6db74">&#34;Ongoing AccessReview decisions count [</span>$($ongoingAccessReview.count)<span style="color:#e6db74">]&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$accessReviewDecisions = Get-AccessReviewDecisions -Definitions $ongoingAccessReview
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$lookupAccessReviewDecisions = $accessReviewDecisions |
+</span></span><span style="display:flex;"><span>Group-Object -AsHashTable -AsString -Property DefinitionId
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Find the access reviews eligable for closing</span>
+</span></span><span style="display:flex;"><span>$eligibleToClose = $lookupAccessReviewDecisions.Keys |
+</span></span><span style="display:flex;"><span>ForEach-Object {
+</span></span><span style="display:flex;"><span>    $eligible = $false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($lookupAccessReviewDecisions.$_.Decision <span style="color:#f92672">-notcontains</span> (<span style="color:#e6db74">&#39;NotReviewed&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        $eligible =$true
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $reviewed = $null
+</span></span><span style="display:flex;"><span>    $notReviewed = $null
+</span></span><span style="display:flex;"><span>    $totalCount = $null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($lookupAccessReviewDecisions.$_.AccessReviewStatus <span style="color:#f92672">-notcontains</span> (<span style="color:#e6db74">&#39;NotStarted&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        $reviewed = ($lookupAccessReviewDecisions.$_.Decision | Where-Object {$_ <span style="color:#f92672">-ne</span> <span style="color:#e6db74">&#39;NotReviewed&#39;</span>}).count
+</span></span><span style="display:flex;"><span>        $notReviewed = ($lookupAccessReviewDecisions.$_.Decision | Where-Object {$_ <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;NotReviewed&#39;</span>}).count
+</span></span><span style="display:flex;"><span>        $totalCount = ($lookupAccessReviewDecisions.$_).count
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>        DisplayName = $lookupOngoingAccessReview.$_.DisplayName
+</span></span><span style="display:flex;"><span>        DefinitionId = $_
+</span></span><span style="display:flex;"><span>        TotalCount = $totalCount
+</span></span><span style="display:flex;"><span>        ReviewedCount = $reviewed
+</span></span><span style="display:flex;"><span>        NotReviewedCount = $notReviewed
+</span></span><span style="display:flex;"><span>        Eligible = $eligible
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$eligibleToClose
+</span></span></code></pre></div><p>here&rsquo;s what the output looks like</p>
+<p><img src="../../images/pim-access-review/pim-access-decisions-eligible.png" alt="Eligible to complete"></p>
+<p>Two haven&rsquo;t been started and one is in progress. The total count for the one in progress is 4. Two haven&rsquo;t been reviewed. One has been approved and one denied.
+A review can either be denied/approved</p>
+<p><img src="../../images/pim-access-review/reviewed.png" alt="State reviewed"></p>
+<p>Which begs the question, remind me why we&rsquo;re doing this? I can see the progress in the portal&hellip;I think a better description of the process will help. Yes, a reviewer could stop the review once completed. If all are in agreement then by all means go ahead. As for the current state, have a look at the results in the Portal. Well actually, we don&rsquo;t want to waste time waiting on all the reviewers&hellip; Maybe have less reviewers then? &#x1f601; Also, we&rsquo;d like to complete the access review once a reviewer has done it. Then I&rsquo;d suggest stopping it. If that is part of your agreement.</p>
+<p>As for the state of the review, I found where I needed to look (Hindsight eh? &#x1f609;):</p>
+<p>You can find this under <em>Tasks - Review access</em> in the Portal</p>
+<p><img src="../../images/pim-access-review/active-access-reviews.png" alt="State active"></p>
+<p>We want to give the reviewers a heads up when the review has been done. The Portal does an execellent job of showing the results and the remaining items!
+As for closing, let the reviewers decide if they&rsquo;d like to stop the process to complete it.</p>
+<p><img src="../../images/pim-access-review/stop-access-review.png" alt="Stop access review"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I had fun working on this assignment! In hindsight, I wonder if it is valid. I feel describing the access review process is the crucial bit. Make sure you&rsquo;re following business protocol. It is cool though using PowerShell to get the same insight&hellip; &#x1f609; PowerShell is a means, not a reason in itself</p>
+<p>Hope it helps you in your PIM journey and what you should be on the lookout for. Don&rsquo;t be afraid to question the status quo. Just because you can, doesn&rsquo;t mean you should&hellip;</p>
+<p>Ttyl/Urv</p>
+<h2 id="additional-resources">Additional resources:</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/">PIM Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/graph/tutorial-accessreviews-roleassignments?toc=%2Fentra%2Fid-governance%2Ftoc.json&amp;bc=%2Fentra%2Fid-governance%2Fbreadcrumb%2Ftoc.json&amp;tabs=http">Review access roles</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -4,10 +4,17 @@
     <title>My digital journey</title>
     <link>https://irwins.github.io/blog/</link>
     <description>Recent content on My digital journey</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2024 08:17:21 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2024 08:57:41 +0200</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pim Access Review</title>
+      <link>https://irwins.github.io/blog/posts/pim-access-review/</link>
+      <pubDate>Sun, 28 Apr 2024 08:57:41 +0200</pubDate>
+      <guid>https://irwins.github.io/blog/posts/pim-access-review/</guid>
+      <description>My team recently got an automation request concerning privileged role access review. I&amp;rsquo;ve always been on the consumer side, so getting some PIM hands-on automation sound like fun! This was an interesting challenge on a few levels, I&amp;rsquo;ll explain as we go along&amp;hellip;&#xA;What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we&amp;rsquo;ll be focusing on is EntraId Role management.</description>
+    </item>
     <item>
       <title>Getting started with shared queries in Azure Resource Graph (ARG)</title>
       <link>https://irwins.github.io/blog/posts/sharedqueries-arg/</link>
