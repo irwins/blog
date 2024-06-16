@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Bicep Graph Support // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bicep Graph Support">
+  <meta name="twitter:description" content="Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).
+For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources
+Just a quick heads up it still is in preview aka not ready for production 😁">
+
+    <meta property="og:url" content="https://irwins.github.io/blog/posts/bicep-graph-support/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Bicep Graph Support">
+  <meta property="og:description" content="Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).
+For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources
+Just a quick heads up it still is in preview aka not ready for production 😁">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-16T05:11:56+02:00">
+    <meta property="article:modified_time" content="2024-06-16T05:11:56+02:00">
+    <meta property="article:tag" content="EntraId">
+    <meta property="article:tag" content="Graph">
+    <meta property="article:tag" content="Bicep">
+    <meta property="article:tag" content="IaC">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://irwins.github.io/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Bicep Graph Support</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 16, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://irwins.github.io/blog/tags/entraid/">EntraId</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/graph/">Graph</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/bicep/">Bicep</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/iac/">IaC</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).</p>
+<p><img src="../../images/bicep-graph-support/current-graph-resources.drawio.png" alt="Graph resources"></p>
+<p>For those new to <a href="https://learn.microsoft.com/en-gb/azure/azure-resource-manager/bicep/overview?tabs=bicep">bicep</a>, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources</p>
+<p>Just a quick heads up it still is in preview aka not ready for production &#x1f601;</p>
+<h2 id="why-bother">Why bother?</h2>
+<p>As it so happens I need to create some security groups as part of a migration. I&rsquo;m a fan of any and eveything IaC (Infrastructure as Code) related! Having this as part of your solution avoids manual configuration and helps with enforcing your desired environment states.</p>
+<p>I think it&rsquo;s really cool being able to deploy a security group using bicep! Don&rsquo;t get me wrong, nothing wrong with using Powershell &#x1f609;</p>
+<p>Let&rsquo;s dive in shall we?</p>
+<h2 id="deploying-security-groups-using-bicep">Deploying security groups using bicep</h2>
+<p>To get started we need to enable the bicep preview feature by configuring <em><em>bicepconfig.json</em></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;experimentalFeaturesEnabled&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;extensibility&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In the main.bicep, we need to supply the provider. Type <em>provider microsoftGraph</em>, to let the compiler know that you&rsquo;re using Microsoft Graph types.</p>
+<p>After that it&rsquo;s business as usual if your already familiar with authoring bicep files, a skillset well worth investing in!</p>
+<p>I added a managedIdentity in the mix as well, more on that later&hellip;
+Here&rsquo;s what the main.bicep file looks like</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>provider microsoftGraph
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> securityGroupDisplayName string = <span style="color:#e6db74">&#39;myBicepSecurityGroup&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> managedIdentityName string = <span style="color:#e6db74">&#39;myBicepManagedIdentity&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> securityGroup <span style="color:#e6db74">&#39;Microsoft.Graph/groups@v1.0&#39;</span> = {
+</span></span><span style="display:flex;"><span>  displayName: securityGroupDisplayName
+</span></span><span style="display:flex;"><span>  mailEnabled: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  mailNickname: securityGroupDisplayName
+</span></span><span style="display:flex;"><span>  securityEnabled: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  uniqueName: <span style="color:#a6e22e">guid</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">toLower</span>(securityGroupDisplayName)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span>managedIdentity.id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tenant</span>().tenantId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>  owners: [
+</span></span><span style="display:flex;"><span>    managedIdentity.properties.principalId
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> managedIdentity <span style="color:#e6db74">&#39;Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30&#39;</span> = {
+</span></span><span style="display:flex;"><span>  name: managedIdentityName
+</span></span><span style="display:flex;"><span>  location: location
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> managedIdentityResource object = {
+</span></span><span style="display:flex;"><span>  managementIdentityPrincipalId: managedIdentity.properties.principalId
+</span></span><span style="display:flex;"><span>  managementIdentityDisplayName: managedIdentity.name
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> securityGroupResource object = {
+</span></span><span style="display:flex;"><span>  securityGroupObjectId: securityGroup.id
+</span></span><span style="display:flex;"><span>  securityGroupUniqueName: securityGroup.uniqueName
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The property that peaked my interest was <em>uniqueName</em>. I hadn&rsquo;t seen that before. In the past I made use of a psuedo hash in order to distinguish my security group. Here&rsquo;s the thing we all ran into at some point. You create a security group in EntraId (Ok this was back in the AzureAd era) only to end up with multiple versions if you&rsquo;re not careful. If your script wasn&rsquo;t idempotent your could end up with multiple versions. The displayName would be the same, just another objectId. Hence, why filtering on displayName isn&rsquo;t always a great experience. Case in point:</p>
+<p><img src="../../images/bicep-graph-support/multiple-displaynames.drawio.png" alt="Graph resources"></p>
+<p>My first attempts playing with uniqueName</p>
+<p>The uniqueName reminds me of Acitive Directory&rsquo;s <em>sAMAccountName</em></p>
+<p>The beauty of the uniqueName is that it&rsquo;s immutable. I knew immediately that the uniqueName would be guid generated in bicep!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>uniqueName: <span style="color:#a6e22e">guid</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">toLower</span>(securityGroupDisplayName)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span>managedIdentity.id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tenant</span>().tenantId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><p>I can generate a guid using: displayName (security group), managedIdentityId and tenantId. Now you can always determine which object you meant to apply! Happy days, expect this is still in preview&hellip; &#x1f614;</p>
+<p>Here&rsquo;s some documentation to read up this: <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">group-upsert</a>
+I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&hellip; &#x1f609;</p>
+<h2 id="using-uniquename-in-powershell">Using uniqueName in PowerShell</h2>
+<p>While I&rsquo;m tempted to just go ahead and use it in production (Don&rsquo;t!) it got me thinking, where is this uniqueName in the cmdlets? and how can I harness this power?</p>
+<p>I remember wanting the same function used in bicep to generate a guid in PowerShell. Turns out you can! <strong>Simon Wahlin</strong> has created a module <a href="https://www.powershellgallery.com/packages/AzExpression/0.2.7">AzExpression</a> that delivers this functionality!</p>
+<p>Let&rsquo;s give that a try, we&rsquo;ll create a security group in bicep (with the generated guid) and retrieve in PowerShell using AzExpression to generate the guid. We&rsquo;ve got the bicep bit covered.</p>
+<p>As much as I love PowerShell when it comes to bicep deployment, I prefer az cli.</p>
+<blockquote>
+<p>A poor craftsman always blames his tools&hellip;</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### Deploy main.bicep</span>
+</span></span><span style="display:flex;"><span>    TENANT_ID<span style="color:#f92672">=</span>&lt;your-tenant-id&gt;
+</span></span><span style="display:flex;"><span>    SUBSCRIPTION_ID<span style="color:#f92672">=</span>&lt;your-subscription-id&gt;
+</span></span><span style="display:flex;"><span>    LOCATION<span style="color:#f92672">=</span>&lt;location&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    az login --tenant $TENANT_ID
+</span></span><span style="display:flex;"><span>    az account set --subscription $SUBSCRIPTION_ID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">### CREATE RESOURCE GROUP</span>
+</span></span><span style="display:flex;"><span>    RESOURCE_GROUP_NAME<span style="color:#f92672">=</span>entra-id-rg
+</span></span><span style="display:flex;"><span>    az group create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -n $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -l $LOCATION <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --tags <span style="color:#e6db74">&#34;Environment=Dev&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    az group exists -n $RESOURCE_GROUP_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">### Lint bicep file</span>
+</span></span><span style="display:flex;"><span>    az bicep lint --file main.bicep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">### Validate bicep file</span>
+</span></span><span style="display:flex;"><span>    az deployment group validate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --parameters main.bicepparam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">### Preview bicep file</span>
+</span></span><span style="display:flex;"><span>    az deployment group what-if <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --parameters main.bicepparam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --template-file main.bicep
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    utcNow<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -u +<span style="color:#e6db74">&#34;%Y%m%d%H%M%S&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    az deployment group create <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --name entraId-$utcNow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template-file main.bicep <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters main.bicepparam
+</span></span></code></pre></div><p>You&rsquo;ll get a warning letting you it&rsquo;s an experimental feature. Here&rsquo;s how to retrieve the security group using the generated guid from AzExpression using PowerShell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Param</span> (
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">string</span>]$ManagedIdentityId ,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">string</span>]$GroupName ,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">string</span>]$TenantId
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#region verify module is installed</span>
+</span></span><span style="display:flex;"><span>$requiredModule = Get-Module -Name Microsoft.Graph.Groups -ListAvailable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (!$requiredModule) {
+</span></span><span style="display:flex;"><span>    Write-Output <span style="color:#e6db74">&#34;Installing required PowerShell module &#39;Microsoft.Graph.Groups&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Install-Module `
+</span></span><span style="display:flex;"><span>        -Name <span style="color:#e6db74">&#39;Microsoft.Graph.Groups&#39;</span> `
+</span></span><span style="display:flex;"><span>        -Force `
+</span></span><span style="display:flex;"><span>        -Scope CurrentUser `
+</span></span><span style="display:flex;"><span>        -SkipPublisherCheck `
+</span></span><span style="display:flex;"><span>        -AllowClobber `
+</span></span><span style="display:flex;"><span>        -Repository PSGallery
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$null = Connect-AzAccount -TenantId $TenantId
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$accessToken = Get-AzAccessToken -ResourceUrl <span style="color:#e6db74">&#39;https://graph.microsoft.com/&#39;</span>
+</span></span><span style="display:flex;"><span>$null = Connect-MgGraph -AccessToken $($accesstoken.Token | ConvertTo-SecureString -AsPlainText -Force) -NoWelcome
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$uniqueName = New-AzGuid -InputStrings $GroupName.ToLower(), $ManagedIdentityId, $TenantId
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;UniqueName: </span>$uniqueName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Get-MgGroupByUniqueName -UniqueName $uniqueName
+</span></span></code></pre></div><p>The guid is case-sensitive. That&rsquo;s the reason for converting displayName tolower(), maybe the managedIdentity should also be converted&hellip; &#x1f914;</p>
+<p>I used it to retrieve the security group. New-MgGroup supports the uniqueName. I didn&rsquo;t see that property on New-AzAdGroup.</p>
+<h2 id="some-things-to-consider">Some things to consider</h2>
+<h3 id="portal-experience-uniquename">Portal experience uniqueName</h3>
+<p>Searching in the portal with the uniqueName doesn&rsquo;t return anything. Not sure if that is intentional. You&rsquo;ll need to know the uniqueName. Granted you can keep it simple, I thought that generating a guid made for a pretty unique experience&hellip; Hehe&hellip;Couldn&rsquo;t help myself&hellip;&#x1f603;</p>
+<p>You can also use the Get-AzAdGroup (Az.Resources) using the filter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AzAdGroup -Filter <span style="color:#e6db74">&#34;uniqueName eq &#39;&lt;uniqueName&gt;&#39;&#34;</span>
+</span></span></code></pre></div><p>That works just fine. I&rsquo;d advice using New-MgGroup to create a security group supporting uniqueName. Either that or <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">upsert</a>. Making the REST API call keeps you in control, no need to download modules. The graph modules can sometimes be a chore to work with.</p>
+<h3 id="permissions">Permissions</h3>
+<p>I&rsquo;m User admin in my tenant so no issues there. If you&rsquo;re using a ServicePrincipal or ManagedIdentity you&rsquo;ll need to set up the proper Graph API <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">permissions</a>. Just a heads up.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Having the microsoftGraph provider in bicep definitely is a game changer! It will bring you one step closer to having everything as IaC. Can&rsquo;t wait until it isn&rsquo;t experimental anymore.</p>
+<p>Ttyl/Urv</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azadgroup?view=azps-12.0.0">New-AzAdGroup</a></li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azadgroup?view=azps-12.0.0">Get-AzAdGroup</a></li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/new-mggroup?view=graph-powershell-1.0#examples">New-MgGroup</a></li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/get-mggroupbyuniquename?view=graph-powershell-1.0">Get-MgGroupByUniqueName</a></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<ul>
+<li><a href="https://devblogs.microsoft.com/identity/bicep-templates-for-microsoft-graph-resources/">Announcing public preview of Bicep templates support for Microsoft Graph</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

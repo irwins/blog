@@ -6,8 +6,36 @@
     <description>Recent content in Tags on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2024 05:11:56 +0200</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bicep</title>
+      <link>https://irwins.github.io/blog/tags/bicep/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://irwins.github.io/blog/tags/bicep/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EntraId</title>
+      <link>https://irwins.github.io/blog/tags/entraid/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://irwins.github.io/blog/tags/entraid/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Graph</title>
+      <link>https://irwins.github.io/blog/tags/graph/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://irwins.github.io/blog/tags/graph/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IaC</title>
+      <link>https://irwins.github.io/blog/tags/iac/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://irwins.github.io/blog/tags/iac/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AzureOpenAI</title>
       <link>https://irwins.github.io/blog/tags/azureopenai/</link>

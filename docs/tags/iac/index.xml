@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IaC on My digital journey</title>
+    <link>https://irwins.github.io/blog/tags/iac/</link>
+    <description>Recent content in IaC on My digital journey</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Jun 2024 05:11:56 +0200</lastBuildDate>
+    <atom:link href="https://irwins.github.io/blog/tags/iac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bicep Graph Support</title>
+      <link>https://irwins.github.io/blog/posts/bicep-graph-support/</link>
+      <pubDate>Sun, 16 Jun 2024 05:11:56 +0200</pubDate>
+      <guid>https://irwins.github.io/blog/posts/bicep-graph-support/</guid>
+      <description>Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).&#xA;For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources&#xA;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;</description>
+    </item>
+  </channel>
+</rss>

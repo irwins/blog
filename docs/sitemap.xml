@@ -2,13 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://irwins.github.io/blog/</loc>
-    <lastmod>2024-04-28T08:57:41+02:00</lastmod>
+    <loc>https://irwins.github.io/blog/tags/bicep/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/posts/pim-access-review/</loc>
-    <lastmod>2024-04-28T08:57:41+02:00</lastmod>
+    <loc>https://irwins.github.io/blog/posts/bicep-graph-support/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/entraid/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/graph/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/iac/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/</loc>
+    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/posts/pim-access-review/</loc>
     <lastmod>2024-04-28T08:57:41+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/sharedqueries-arg/</loc>
@@ -24,9 +42,6 @@
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/tags/openaiassistant/</loc>
-    <lastmod>2024-03-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/introduction-to-arg/</loc>
