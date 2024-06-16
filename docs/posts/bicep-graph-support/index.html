@@ -97,7 +97,7 @@ Just a quick heads up it still is in preview aka not ready for production 😁">
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          5 min read
+          6 min read
         </div>
         <div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
@@ -263,7 +263,11 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AzAdGroup -Filter <span style="color:#e6db74">&#34;uniqueName eq &#39;&lt;uniqueName&gt;&#39;&#34;</span>
 </span></span></code></pre></div><p>That works just fine. I&rsquo;d advice using New-MgGroup to create a security group supporting uniqueName. Either that or <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">upsert</a>. Making the REST API call keeps you in control, no need to download modules. The graph modules can sometimes be a chore to work with.</p>
 <h3 id="permissions">Permissions</h3>
-<p>I&rsquo;m User admin in my tenant so no issues there. If you&rsquo;re using a ServicePrincipal or ManagedIdentity you&rsquo;ll need to set up the proper Graph API <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">permissions</a>. Just a heads up.</p>
+<p>If you&rsquo;re using a ServicePrincipal or ManagedIdentity you&rsquo;ll need to set up the proper Graph API <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">permissions</a>.</p>
+<blockquote>
+<p>Update: I got a crash course from <a href="https://x.com/alexandair">Alexander Nikolić</a> on Graph scoping. Turns out that when you aquire an accessToken from AzPS you get AzPS scopes, not yours. I had a quick look and saw that the scope included <em>Directory.AccessAsUser.All</em>. That explains why it worked. I have too much permissions in my own tenant (Hey, it&rsquo;s where I do research&hellip; &#x1f609;). You can read more about that on the <a href="https://graphpermissions.merill.net/permission/Directory.AccessAsUser.All">Microsoft Graph Permission Explorer</a> courtesy of <a href="https://x.com/merill">Merill Fernando</a>. Thanks for bringing that to my attention!</p>
+</blockquote>
+<p>For production I&rsquo;d strongly advice using a Service principal with the proper Graph API permissions&hellip;</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Having the microsoftGraph provider in bicep definitely is a game changer! It will bring you one step closer to having everything as IaC. Can&rsquo;t wait until it isn&rsquo;t experimental anymore.</p>
 <p>Ttyl/Urv</p>

@@ -207,7 +207,11 @@ That works just fine. I'd advice using New-MgGroup to create a security group su
 
 ### Permissions
 
-I'm User admin in my tenant so no issues there. If you're using a ServicePrincipal or ManagedIdentity you'll need to set up the proper Graph API [permissions](https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&tabs=http). Just a heads up.
+If you're using a ServicePrincipal or ManagedIdentity you'll need to set up the proper Graph API [permissions](https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&tabs=http).
+
+>Update: I got a crash course from [Alexander Nikolić](https://x.com/alexandair) on Graph scoping. Turns out that when you aquire an accessToken from AzPS you get AzPS scopes, not yours. I had a quick look and saw that the scope included _Directory.AccessAsUser.All_. That explains why it worked. I have too much permissions in my own tenant (Hey, it's where I do research... :wink:). You can read more about that on the [Microsoft Graph Permission Explorer](https://graphpermissions.merill.net/permission/Directory.AccessAsUser.All) courtesy of [Merill Fernando](https://x.com/merill). Thanks for bringing that to my attention!
+
+For production I'd strongly advice using a Service principal with the proper Graph API permissions...
 
 ## Conclusion
 
