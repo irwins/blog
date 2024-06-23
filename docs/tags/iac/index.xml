@@ -6,8 +6,15 @@
     <description>Recent content in IaC on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Jun 2024 05:11:56 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2024 07:07:04 +0200</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/tags/iac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bicep Testing Framework</title>
+      <link>https://irwins.github.io/blog/posts/bicep-testing-framework/</link>
+      <pubDate>Sat, 22 Jun 2024 07:07:04 +0200</pubDate>
+      <guid>https://irwins.github.io/blog/posts/bicep-testing-framework/</guid>
+      <description>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&amp;rsquo;m familiar with using Pester &amp;#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&amp;rsquo;d give it a try.&#xA;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&#xA;Why validate? Some times, you just want to be sure of the current state of a configuration.</description>
+    </item>
     <item>
       <title>Bicep Graph Support</title>
       <link>https://irwins.github.io/blog/posts/bicep-graph-support/</link>

@@ -2,14 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://irwins.github.io/blog/tags/bicep/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/posts/bicep-testing-framework/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/iac/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
+  </url><url>
     <loc>https://irwins.github.io/blog/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/pester/</loc>
     <lastmod>2024-06-22T07:07:04+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/</loc>
     <lastmod>2024-06-22T07:07:04+02:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/tags/bicep/</loc>
-    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
+    <loc>https://irwins.github.io/blog/tags/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/test/</loc>
+    <lastmod>2024-06-22T07:07:04+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/bicep-graph-support/</loc>
     <lastmod>2024-06-16T05:11:56+02:00</lastmod>
@@ -18,12 +33,6 @@
     <lastmod>2024-06-16T05:11:56+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/tags/graph/</loc>
-    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/iac/</loc>
-    <lastmod>2024-06-16T05:11:56+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/</loc>
     <lastmod>2024-06-16T05:11:56+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/pim-access-review/</loc>

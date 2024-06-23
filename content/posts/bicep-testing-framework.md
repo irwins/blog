@@ -1,7 +1,7 @@
 +++
 title = 'Bicep Testing Framework'
 date = 2024-06-22T07:07:04+02:00
-draft = true
+draft = false
 tags = ['Pester', 'Test', 'bicep', 'IaC']
 +++
 

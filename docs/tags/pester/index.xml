@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pester on My digital journey</title>
-    <link>http://localhost:1313/blog/tags/pester/</link>
+    <link>https://irwins.github.io/blog/tags/pester/</link>
     <description>Recent content in Pester on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Jun 2024 07:07:04 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/tags/pester/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://irwins.github.io/blog/tags/pester/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bicep Testing Framework</title>
-      <link>http://localhost:1313/blog/posts/bicep-testing-framework/</link>
+      <link>https://irwins.github.io/blog/posts/bicep-testing-framework/</link>
       <pubDate>Sat, 22 Jun 2024 07:07:04 +0200</pubDate>
-      <guid>http://localhost:1313/blog/posts/bicep-testing-framework/</guid>
+      <guid>https://irwins.github.io/blog/posts/bicep-testing-framework/</guid>
       <description>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&amp;rsquo;m familiar with using Pester &amp;#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&amp;rsquo;d give it a try.&#xA;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&#xA;Why validate? Some times, you just want to be sure of the current state of a configuration.</description>
     </item>
   </channel>
