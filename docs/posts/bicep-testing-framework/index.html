@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+    <title>Bicep Testing Framework // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.127.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bicep Testing Framework">
+  <meta name="twitter:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
+Just a quick heads up it still is in preview aka not ready for production 😁
+Why validate? Some times, you just want to be sure of the current state of a configuration.">
+
+    <meta property="og:url" content="http://localhost:1313/blog/posts/bicep-testing-framework/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Bicep Testing Framework">
+  <meta property="og:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
+Just a quick heads up it still is in preview aka not ready for production 😁
+Why validate? Some times, you just want to be sure of the current state of a configuration.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-22T07:07:04+02:00">
+    <meta property="article:modified_time" content="2024-06-22T07:07:04+02:00">
+    <meta property="article:tag" content="Pester">
+    <meta property="article:tag" content="Test">
+    <meta property="article:tag" content="Bicep">
+    <meta property="article:tag" content="IaC">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Bicep Testing Framework</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 22, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="http://localhost:1313/blog/tags/pester/">Pester</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/test/">Test</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/bicep/">Bicep</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/iac/">IaC</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&rsquo;m familiar with using Pester &#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&rsquo;d give it a try.</p>
+<p>Just a quick heads up it still is in preview aka not ready for production &#x1f601;</p>
+<h2 id="why-validate">Why validate?</h2>
+<p>Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I&rsquo;d advice against that) or you could use code&hellip; Pester has saved me many of times&hellip; Let&rsquo;s see if bicep can do the same&hellip;</p>
+<h2 id="setting-up-bicep-for-testing">Setting up bicep for testing</h2>
+<h3 id="enable-assertions-and-testframework">Enable assertions and testFramework</h3>
+<p>The bicep experimentalFeature needs to be enabled. You can do this by adding it to the <em>bicepconfig.json</em> file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Json" data-lang="Json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;experimentalFeaturesEnabled&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;testFramework&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;assertions&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="create-testbicep-to-author-test">Create test.bicep to author test</h3>
+<p>I&rsquo;m keeping it simple and just deploy a simple storageAccount, just to see what I&rsquo;m working with&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+</span></span><span style="display:flex;"><span>  params: {
+</span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
+</span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span>    skuName: <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>    storageAccountName: <span style="color:#e6db74">&#39;stBicepTest&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>To author the test you use the test keyword, give it a name and a reference to the bicep file to test.</p>
+<p>There are some limitations:</p>
+<ul>
+<li>You must pass in a parameter object, you cannot reference an existing parameter file currently</li>
+<li>Test blocks must be in a separate file from the .bicep template you want to test</li>
+<li>Test result output summary is not standardized</li>
+</ul>
+<h3 id="author-assert-statements-within-the-referenced-bicep-file">Author assert statements within the referenced bicep file</h3>
+<p>Now for the assertions. The <em>assert</em> statements can be any boolean expression that references parameters, variables, or resource names. These boolean expressions can include Bicep functions such as &ldquo;contains()&rdquo;, &ldquo;length()&rdquo;, etc.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> kind string = <span style="color:#e6db74">&#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> skuName string = <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> storageAccount <span style="color:#e6db74">&#39;Microsoft.Storage/storageAccounts@2019-06-01&#39;</span> = {
+</span></span><span style="display:flex;"><span>  name: storageAccountName
+</span></span><span style="display:flex;"><span>  location: location
+</span></span><span style="display:flex;"><span>  kind: kind
+</span></span><span style="display:flex;"><span>  sku: {
+</span></span><span style="display:flex;"><span>    name: skuName
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Test expected values</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageKind =  kind <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageSkuName = skuName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageLocation = <span style="color:#a6e22e">contains</span>(location,<span style="color:#e6db74">&#39;europe&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Test expected naming convention</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageName = <span style="color:#a6e22e">startsWith</span>(storageAccount.name,<span style="color:#e6db74">&#39;st&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> storageAccount array = [{
+</span></span><span style="display:flex;"><span>    name: storageAccount.name
+</span></span><span style="display:flex;"><span>    id: storageAccount.id
+</span></span><span style="display:flex;"><span>    kind: storageAccount.kind
+</span></span><span style="display:flex;"><span>    skuName: storageAccount.sku.name
+</span></span><span style="display:flex;"><span>}]
+</span></span></code></pre></div><p>Here are some limitations you should know of:</p>
+<ul>
+<li>You can only assert on parameters, variables, and resource names with current functionality</li>
+<li>You cannot assert on resource size, location, or other propreties yet as these depend on runtime deployment functionality</li>
+</ul>
+<p>Here is what that means for the following assertions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#75715e">//This won&#39;t work. It depends on runtime deployment fucntionality</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageSkuName = skuName <span style="color:#f92672">==</span> storageAccount.sku.name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//This is hardcore to validate only for &#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Note: Look into bicep array functions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageSkuName = skuName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//This asserts if location is somewhere in europe</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageLocation = <span style="color:#a6e22e">contains</span>(location,<span style="color:#e6db74">&#39;europe&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Resource name starts with &#39;st&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageName = <span style="color:#a6e22e">startsWith</span>(storageAccount.name,<span style="color:#e6db74">&#39;st&#39;</span>)
+</span></span></code></pre></div><h3 id="run-bicep-test">Run bicep test</h3>
+<p>The moment we&rsquo;ve all waited for! To execute the test run the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bicep test bicep/test.bicep
+</span></span></code></pre></div><p>It passed!</p>
+<p><img src="../../images/bicep-testing-framework/bicep-test-passed.drawio.png" alt="bicep test passed"></p>
+<p>Ok, I was expecting each assertion in the test. I tried looking up if there was flag to expand the output&hellip; I didn&rsquo;t find any. It&rsquo;s experimental, so I can&rsquo;t complain.</p>
+<p>But what does a failed test looks like? I&rsquo;m glad you asked!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+</span></span><span style="display:flex;"><span>  params: {
+</span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
+</span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV1&#39;</span> <span style="color:#75715e">//This should complain it&#39;s not &#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span>    skuName: <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>    storageAccountName: <span style="color:#e6db74">&#39;stBicepTest&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>It failed!</p>
+<p><img src="../../images/bicep-testing-framework/bicep-test-failed.drawio.png" alt="bicep test failed"></p>
+<p>storageKind assertion failed. The evaluation did metion that 1/4 assertions failed. Again I was expecting to see the ones that were succesful as well&hellip; I&rsquo;m sure it&rsquo;s a flag I don&rsquo;t know about&hellip;</p>
+<p>Let&rsquo;s add one more failure</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+</span></span><span style="display:flex;"><span>  params: {
+</span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
+</span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV1&#39;</span> <span style="color:#75715e">//This should complain it&#39;s not &#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span>    skuName: <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>    storageAccountName: <span style="color:#e6db74">&#39;slBicepTest&#39;</span> <span style="color:#75715e">//StorageAccount name should start with &#39;st&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="../../images/bicep-testing-framework/bicep-test-failures.drawio.png" alt="bicep tests failed"></p>
+<p>Ok! Both failed as expected!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The current bicep test functionality is more akin to validating parameters values and naming conventions. If your naming convention dictates that you storage account name starts with &lsquo;st&rsquo; then sure by all means use it. What I&rsquo;m really interested in, is validating <em>after</em> the deployment. Bicep test  doesn&rsquo;t support runtime deployment functionality at the moment.</p>
+<p>I asked  the community if it&rsquo;s worth investing. Currently development is on hold. I&rsquo;d agrue using pester might be a better fit for validating actual deployments! That will be for a next time &#x1f609;</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://github.com/Azure/bicep/issues/11967">Bicep experimental test framework</a></li>
+<li><a href="https://github.com/Azure/bicep/issues/11966">Proposal: Bicep testing framework</a></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<ul>
+<li><a href="https://pester.dev/">pester</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
