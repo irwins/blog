@@ -81,12 +81,12 @@ assert storageLocation = contains(location,'europe')
 //Test expected naming convention
 assert storageName = startsWith(storageAccount.name,'st')
 
-output storageAccount array = [{
+output storageAccount object = {
     name: storageAccount.name
     id: storageAccount.id
     kind: storageAccount.kind
     skuName: storageAccount.sku.name
-}]
+}
 
 ```
 

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Pester Validation Deployments // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.128.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pester Validation Deployments">
+  <meta name="twitter:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
+Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.">
+
+    <meta property="og:url" content="https://irwins.github.io/blog/posts/pester-validation-deployments/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Pester Validation Deployments">
+  <meta property="og:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
+Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-28T15:24:38+02:00">
+    <meta property="article:modified_time" content="2024-06-28T15:24:38+02:00">
+    <meta property="article:tag" content="Pester">
+    <meta property="article:tag" content="Test">
+    <meta property="article:tag" content="Bicep">
+    <meta property="article:tag" content="IaC">
+    <meta property="article:tag" content="Azure">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://irwins.github.io/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Pester Validation Deployments</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 28, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://irwins.github.io/blog/tags/pester/">Pester</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/test/">Test</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/bicep/">Bicep</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/iac/">IaC</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/azure/">Azure</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Previously, I had a look at the <a href="https://irwins.github.io/blog/posts/bicep-testing-framework/">bicep testing framework</a>. The assertions done are more to validate parameter,variables and resource names. You can&rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &#x1f609;</p>
+<p><a href="https://pester.dev/">Pester</a> is <em>the</em> test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&rsquo;t resonate with me, until I saw Kevin Marquette use pester to <a href="https://pshirwin.wordpress.com/2015/11/06/pester-script-to-test-dns-configuration/">validate</a> outcome of what a script was suppose to do. That changed my life!</p>
+<p>This is me everytime Is sit down to use pester &#x1f601;</p>
+<p><img src="../../images/pester-validation-deployments/pester-ovf.drawio.png" alt="Use it solely for Operation validation"></p>
+<p>Pester is definitely worth looking into. Pester v6 is in the works as we speak! Let&rsquo;s have a look at what pester could mean for us post bicep deployment&hellip;</p>
+<h2 id="why-validate">Why validate?</h2>
+<p>Validating the outcome of what you expect is a game changer. No more guessing! Back in the days I did quite a lot of Active Directory migrations. It feels good knowing that your script did what you expect. Sometimes there was a glitch and pester would pick it up for you.</p>
+<p>Why would you validate post deployment? I mean if the deployment was successful, doesn&rsquo;t that mean things are as you would expect? Sounds like <strong>yak shaving</strong> to me&hellip; Ok hear me out&hellip;</p>
+<p>Say you deployed a solution using bicep and it was successful, yet someone went into the portal and changed a vital property. how would you know? It may/may not break. Ideally you&rsquo;d update your solution and redeploy, IaC remember? Using pester you can quickly validate the current state of your deployed resources. Think configuration drift, did things changed considerably?</p>
+<p>And before you come after me, terraform has something like this in the form of a plan &#x1f601;</p>
+<blockquote>
+<p>Azure recently introduced <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks?tabs=azure-powershell">deployment stacks</a>. Also worth looking into</p>
+</blockquote>
+<p>While there may be valid arguements to use other tools/concepts, let us use pester and see where this goes&hellip; shall we?</p>
+<h2 id="setting-up-bicep-for-pester-testing">Setting up bicep for pester testing</h2>
+<p>How would you go about testing post bicep deployments? My first idea was to have JSON config file. Defintely doable, but no. I&rsquo;d like validate the deployment. That&rsquo;s where <em>output</em> comes in. Output can give you more information at runtime. The biggest challenge is validating the right properties. The goal isn&rsquo;t to validate for validation&rsquo;s sake, it should add value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> kind string = <span style="color:#e6db74">&#39;StorageV2&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> skuName string = <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> storageAccount <span style="color:#e6db74">&#39;Microsoft.Storage/storageAccounts@2019-06-01&#39;</span> = {
+</span></span><span style="display:flex;"><span>  name: storageAccountName
+</span></span><span style="display:flex;"><span>  location: location
+</span></span><span style="display:flex;"><span>  kind: kind
+</span></span><span style="display:flex;"><span>  sku: {
+</span></span><span style="display:flex;"><span>    name: skuName
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> storageAccount object = {
+</span></span><span style="display:flex;"><span>    name: storageAccount.name
+</span></span><span style="display:flex;"><span>    id: storageAccount.id
+</span></span><span style="display:flex;"><span>    kind: storageAccount.kind
+</span></span><span style="display:flex;"><span>    skuName: storageAccount.sku.name
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The key here is to output what you want to validate.</p>
+<p>The next step is to grab the deployment output</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$deployment = Get-AzResourceGroupDeployment -ResourceGroupName <span style="color:#e6db74">&#39;bicep-assert-rg&#39;</span> |
+</span></span><span style="display:flex;"><span>    Sort-Object -Property Timestamp -Descending |
+</span></span><span style="display:flex;"><span>    Select-Object -First <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$deploymentOutput = ($deployment.Outputs.storageAccount | ConvertTo-Json -Depth <span style="color:#ae81ff">10</span> | ConvertFrom-Json).Value
+</span></span></code></pre></div><p>Best practice is to give your deployments <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli#deployment-name">unique names</a>
+Just to keep it simple, grab the deployments from the resource group and sort on TimeStamp descending, selct the first object. This will give you the latest deployment. You may/may not need additional filtering, but you get the drift &#x1f609;</p>
+<p>To get the deployment Output as a PowerShell object I needed to <em>ConvertTo-Json</em> and then <em>ConvertFrom-Json</em> That took a bit of puzzling.</p>
+<h2 id="create-the-pester-test">Create the pester test</h2>
+<p>Ok here&rsquo;s the fun bit, the pester test!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Param</span> (
+</span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">Object</span>]$DeploymentOutPut
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Describe <span style="color:#e6db74">&#34;bicepDeployment&#34;</span> {
+</span></span><span style="display:flex;"><span>    BeforeAll {
+</span></span><span style="display:flex;"><span>        $script:azResource = Get-AzResource -ResourceId $deploymentOutput.id
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Context <span style="color:#e6db74">&#34;storageAccount&#34;</span> {
+</span></span><span style="display:flex;"><span>        It <span style="color:#e6db74">&#34;Resource should resolve&#34;</span> {
+</span></span><span style="display:flex;"><span>            $azResource | Should <span style="color:#f92672">-Not</span> -BeNullOrEmpty
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        It <span style="color:#e6db74">&#34;StoragAccount kind should be &#39;</span>$($deploymentOutput.kind)<span style="color:#e6db74">&#39;&#34;</span> {
+</span></span><span style="display:flex;"><span>            $azResource.Kind | Should -Be $deploymentOutput.kind
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        It <span style="color:#e6db74">&#34;StorageAccount name should be &#39;</span>$($deploymentOutput.name)<span style="color:#e6db74">&#39;&#34;</span> {
+</span></span><span style="display:flex;"><span>            $azResource.Name | Should -Be $deploymentOutput.name
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        It <span style="color:#e6db74">&#34;StorageAccount skuName should be &#39;</span>$($deploymentOutput.skuName)<span style="color:#e6db74">&#39;&#34;</span> {
+</span></span><span style="display:flex;"><span>            $azResource.Sku.Name | Should -Be $deploymentOutput.skuName
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><em>deployment.tests.ps1</em></em></p>
+<p>I&rsquo;m passing the deploymentOutput as a parameter, the expected values. Before running the test let&rsquo;s verify that the resourceId actually resolves. Using Get-AzResource is enough for our testing purposes. From there we can validate the actual value to the expected value.</p>
+<p>To execute the test do the following</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$container = New-PesterContainer `
+</span></span><span style="display:flex;"><span>    -Path <span style="color:#e6db74">&#39;bicep/deployment.tests.ps1&#39;</span> ` <span style="color:#75715e">#Path to your pester test</span>
+</span></span><span style="display:flex;"><span>    -Data @{ DeploymentOutPut = $deploymentOutPut}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Invoke-Pester `
+</span></span><span style="display:flex;"><span>    -Container $container `
+</span></span><span style="display:flex;"><span>    -CI `
+</span></span><span style="display:flex;"><span>    -Output Detailed
+</span></span></code></pre></div><p>Pester v5 setup is a bit different. Be sure to visit <a href="https://pester.dev">pester.dev</a> for more information on running pester tests.</p>
+<p><img src="../../images/pester-validation-deployments/pester-test-passed.drawio.png" alt="Pester test passed"></p>
+<p>Nice! The tests passed. Like someone once told me, never trust a test that doesn&rsquo;t fail&hellip; Let&rsquo;s do that!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$failedDeployment = [<span style="color:#66d9ef">PSCustomObject</span>]@{
+</span></span><span style="display:flex;"><span>    id = $deploymentOutput.id
+</span></span><span style="display:flex;"><span>    kind = <span style="color:#e6db74">&#39;FileStorage&#39;</span>
+</span></span><span style="display:flex;"><span>    name = <span style="color:#e6db74">&#39;bicepassertsa&#39;</span>
+</span></span><span style="display:flex;"><span>    skuName = <span style="color:#e6db74">&#39;Standard_LRS&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$failedContainer = New-PesterContainer `
+</span></span><span style="display:flex;"><span>    -Path <span style="color:#e6db74">&#39;bicep/deployment.tests.ps1&#39;</span> `
+</span></span><span style="display:flex;"><span>    -Data @{ DeploymentOutPut = $failedDeployment}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Invoke-Pester `
+</span></span><span style="display:flex;"><span>    -Container $failedContainer `
+</span></span><span style="display:flex;"><span>    -CI `
+</span></span><span style="display:flex;"><span>    -Output Detailed
+</span></span></code></pre></div><p>I intentionally changed the kind and name. Here&rsquo;s what a failed test looks like
+<img src="../../images/pester-validation-deployments/pester-test-failed-01.drawio.png" alt="Pester test failed 01">
+<img src="../../images/pester-validation-deployments/pester-test-failed-02.drawio.png" alt="Pester test failed 02">
+<img src="../../images/pester-validation-deployments/pester-test-failed-03.drawio.png" alt="Pester test failed 03"></p>
+<p>The kind and name test failed as expected.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Pester can definitely help with validating post runtime deployment! It&rsquo;s a great way to detect configuration drift. I realize there are other ways of doing this. I do have some terraform skills as well, but I prefer bicep for anything Azure related when IaC is required. Azure deployment stack is the new kid on the block. It&rsquo;ll be interesting to see how that evolves.</p>
+<p>Using pester to validate deployments is an option, yet another tool you can add to your toolbox. Having unique deployment names, makes a deployment much like a snapshot, giving you leverage on your validation time frame. You could potentionally go back even further and verify when a configuration drift started. You could also use a scheduled pipeline to keep track of your solution expected outcome. The possibilities&hellip; &#x1f601; I hope this is some value to you!</p>
+<p>Ttyl,</p>
+<p>Urv</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://github.com/Azure/bicep/issues/11967">Bicep experimental test framework</a></li>
+<li><a href="https://github.com/Azure/bicep/issues/11966">Proposal: Bicep testing framework</a></li>
+<li><a href="https://developer.hashicorp.com/terraform/cli/commands/plan">Terraform plan</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks?tabs=azure-powershell">Azure deployment stack</a></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<ul>
+<li><a href="https://pester.dev/">pester</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

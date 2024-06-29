@@ -6,8 +6,15 @@
     <description>Recent content in Bicep on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jun 2024 07:07:04 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 28 Jun 2024 15:24:38 +0200</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pester Validation Deployments</title>
+      <link>https://irwins.github.io/blog/posts/pester-validation-deployments/</link>
+      <pubDate>Fri, 28 Jun 2024 15:24:38 +0200</pubDate>
+      <guid>https://irwins.github.io/blog/posts/pester-validation-deployments/</guid>
+      <description>Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &amp;#x1f609;&#xA;Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.</description>
+    </item>
     <item>
       <title>Bicep Testing Framework</title>
       <link>https://irwins.github.io/blog/posts/bicep-testing-framework/</link>

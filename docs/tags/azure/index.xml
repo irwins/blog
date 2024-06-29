@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Test on My digital journey</title>
-    <link>https://irwins.github.io/blog/tags/test/</link>
-    <description>Recent content in Test on My digital journey</description>
+    <title>Azure on My digital journey</title>
+    <link>https://irwins.github.io/blog/tags/azure/</link>
+    <description>Recent content in Azure on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 28 Jun 2024 15:24:38 +0200</lastBuildDate>
-    <atom:link href="https://irwins.github.io/blog/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://irwins.github.io/blog/tags/azure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pester Validation Deployments</title>
       <link>https://irwins.github.io/blog/posts/pester-validation-deployments/</link>
       <pubDate>Fri, 28 Jun 2024 15:24:38 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/pester-validation-deployments/</guid>
       <description>Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &amp;#x1f609;&#xA;Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.</description>
-    </item>
-    <item>
-      <title>Bicep Testing Framework</title>
-      <link>https://irwins.github.io/blog/posts/bicep-testing-framework/</link>
-      <pubDate>Sat, 22 Jun 2024 07:07:04 +0200</pubDate>
-      <guid>https://irwins.github.io/blog/posts/bicep-testing-framework/</guid>
-      <description>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&amp;rsquo;m familiar with using Pester &amp;#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&amp;rsquo;d give it a try.&#xA;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&#xA;Why validate? Some times, you just want to be sure of the current state of a configuration.</description>
     </item>
   </channel>
 </rss>
