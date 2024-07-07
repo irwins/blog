@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Identity Governance on My digital journey</title>
+    <link>https://irwins.github.io/blog/tags/identity-governance/</link>
+    <description>Recent content in Identity Governance on My digital journey</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Jul 2024 12:22:31 +0200</lastBuildDate>
+    <atom:link href="https://irwins.github.io/blog/tags/identity-governance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Entra Id Access Review</title>
+      <link>https://irwins.github.io/blog/posts/entra-id-access-review/</link>
+      <pubDate>Sat, 06 Jul 2024 12:22:31 +0200</pubDate>
+      <guid>https://irwins.github.io/blog/posts/entra-id-access-review/</guid>
+      <description>Been working on Identity Governance, access review, and I&amp;rsquo;ll admit it can get confusing real fast!&#xA;If you&amp;rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!&#xA;You&amp;rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&amp;hellip; &amp;#x1f609;</description>
+    </item>
+  </channel>
+</rss>
