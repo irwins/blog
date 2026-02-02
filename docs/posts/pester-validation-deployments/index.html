@@ -4,7 +4,7 @@
     <title>Pester Validation Deployments // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,20 +12,17 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Pester Validation Deployments">
   <meta name="twitter:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
-Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.">
+Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do. That changed my life!">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/pester-validation-deployments/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Pester Validation Deployments">
   <meta property="og:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
-Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.">
+Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do. That changed my life!">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -128,7 +125,7 @@ Pester is the test framework for PowerShell! When I first got introduced to pest
 <p>While there may be valid arguements to use other tools/concepts, let us use pester and see where this goes&hellip; shall we?</p>
 <h2 id="setting-up-bicep-for-pester-testing">Setting up bicep for pester testing</h2>
 <p>How would you go about testing post bicep deployments? My first idea was to have JSON config file. Defintely doable, but no. I&rsquo;d like validate the deployment. That&rsquo;s where <em>output</em> comes in. Output can give you more information at runtime. The biggest challenge is validating the right properties. The goal isn&rsquo;t to validate for validation&rsquo;s sake, it should add value.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
 </span></span><span style="display:flex;"><span>
@@ -153,7 +150,7 @@ Pester is the test framework for PowerShell! When I first got introduced to pest
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The key here is to output what you want to validate.</p>
 <p>The next step is to grab the deployment output</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$deployment = Get-AzResourceGroupDeployment -ResourceGroupName <span style="color:#e6db74">&#39;bicep-assert-rg&#39;</span> |
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$deployment = Get-AzResourceGroupDeployment -ResourceGroupName <span style="color:#e6db74">&#39;bicep-assert-rg&#39;</span> |
 </span></span><span style="display:flex;"><span>    Sort-Object -Property Timestamp -Descending |
 </span></span><span style="display:flex;"><span>    Select-Object -First <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>
@@ -163,7 +160,7 @@ Just to keep it simple, grab the deployments from the resource group and sort on
 <p>To get the deployment Output as a PowerShell object I needed to <em>ConvertTo-Json</em> and then <em>ConvertFrom-Json</em> That took a bit of puzzling.</p>
 <h2 id="create-the-pester-test">Create the pester test</h2>
 <p>Ok here&rsquo;s the fun bit, the pester test!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">Param</span> (
 </span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">Object</span>]$DeploymentOutPut
 </span></span><span style="display:flex;"><span>)
@@ -190,7 +187,7 @@ Just to keep it simple, grab the deployments from the resource group and sort on
 </span></span></code></pre></div><p><em><em>deployment.tests.ps1</em></em></p>
 <p>I&rsquo;m passing the deploymentOutput as a parameter, the expected values. Before running the test let&rsquo;s verify that the resourceId actually resolves. Using Get-AzResource is enough for our testing purposes. From there we can validate the actual value to the expected value.</p>
 <p>To execute the test do the following</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$container = New-PesterContainer `
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$container = New-PesterContainer `
 </span></span><span style="display:flex;"><span>    -Path <span style="color:#e6db74">&#39;bicep/deployment.tests.ps1&#39;</span> ` <span style="color:#75715e">#Path to your pester test</span>
 </span></span><span style="display:flex;"><span>    -Data @{ DeploymentOutPut = $deploymentOutPut}
 </span></span><span style="display:flex;"><span>
@@ -201,7 +198,7 @@ Just to keep it simple, grab the deployments from the resource group and sort on
 </span></span></code></pre></div><p>Pester v5 setup is a bit different. Be sure to visit <a href="https://pester.dev">pester.dev</a> for more information on running pester tests.</p>
 <p><img src="../../images/pester-validation-deployments/pester-test-passed.drawio.png" alt="Pester test passed"></p>
 <p>Nice! The tests passed. Like someone once told me, never trust a test that doesn&rsquo;t fail&hellip; Let&rsquo;s do that!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$failedDeployment = [<span style="color:#66d9ef">PSCustomObject</span>]@{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$failedDeployment = [<span style="color:#66d9ef">PSCustomObject</span>]@{
 </span></span><span style="display:flex;"><span>    id = $deploymentOutput.id
 </span></span><span style="display:flex;"><span>    kind = <span style="color:#e6db74">&#39;FileStorage&#39;</span>
 </span></span><span style="display:flex;"><span>    name = <span style="color:#e6db74">&#39;bicepassertsa&#39;</span>

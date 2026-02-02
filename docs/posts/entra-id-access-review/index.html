@@ -4,7 +4,7 @@
     <title>Entra Id Access Review // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,9 +12,6 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Entra Id Access Review">
@@ -141,7 +138,7 @@ You’ll need a P2 license to play with Identity governance. I still have access
 <p>I started looking first at group membership review. Looking at the <a href="https://learn.microsoft.com/en-us/graph/api/accessreviewset-list-definitions?view=graph-rest-1.0&amp;tabs=powershell">documentation</a> it seems schedule definitions is the place to start. Also, I should have read a bit further&hellip; I mean why read if you can learn things the hard way right? &#x1f601;</p>
 <p>Running the cmdlet <em>Get-MgIdentityGovernanceAccessReviewDefinition</em> gave me more than just the security groups scheduled definitions I saw in my access review blade. The access review interacts with the above mentioned types &#x1f604;</p>
 <p>My first attempt was to filter on the displayName or id.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinition {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinition {
 </span></span><span style="display:flex;"><span>    [CmdletBinding(<span style="color:#a6e22e">DefaultParameterSetName</span> = <span style="color:#e6db74">&#39;DisplayName&#39;</span>)]
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
 </span></span><span style="display:flex;"><span>        [Parameter(<span style="color:#a6e22e">ParameterSetName</span> = <span style="color:#e6db74">&#39;DisplayName&#39;</span>)]
@@ -163,13 +160,13 @@ You’ll need a P2 license to play with Identity governance. I still have access
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The drawback here is that I need to know either the displayName or id, also this doesn&rsquo;t tell me which type I&rsquo;m interacting with.</p>
 <p>That&rsquo;s where the <a href="Get-MgIdentityGovernanceAccessReviewDefinition">$filter</a> query parameter comes in. Rule of thumb, $filter early whenever possible. This <a href="https://learn.microsoft.com/en-us/graph/api/accessreviewset-list-definitions?view=graph-rest-1.0&amp;tabs=powershell#example-2-retrieve-all-access-review-definitions-scoped-to-all-microsoft-365-groups-in-a-tenant">example</a> shows you how to use the filter to retrieve all the access review series scoped to all Microsoft 365 groups in a tenant.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Import-Module Microsoft.Graph.Identity.Governance
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Import-Module Microsoft.Graph.Identity.Governance
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Get-MgIdentityGovernanceAccessReviewDefinition -Filter <span style="color:#e6db74">&#34;contains(scope/microsoft.graph.accessReviewQueryScope/query, &#39;./members&#39;)&#34;</span>
 </span></span></code></pre></div><p>We&rsquo;re on the right track&hellip;</p>
 <h2 id="retrieving-access-definitions-by-types">Retrieving access definitions by types</h2>
 <p>So we can filter which type we&rsquo;re interested in.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinitionByFilter {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinitionByFilter {
 </span></span><span style="display:flex;"><span>    [CmdletBinding()]
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">param</span> (
 </span></span><span style="display:flex;"><span>        [Parameter(<span style="color:#a6e22e">ParameterSetName</span> = <span style="color:#e6db74">&#39;GroupId&#39;</span>)]
@@ -208,7 +205,7 @@ You’ll need a P2 license to play with Identity governance. I still have access
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>This makes retrieving the access review definition a bit less confusing. We&rsquo;re using the <em>ParameterSetName</em> to distinguish between the different types. It also prevents us from selecting more than one at the same time.</p>
 <p>The <em>GroupId</em> is a special one. If you&rsquo;re curious or want the access review of a specific security group just pass the objectId, If anything is found it&rsquo;ll return the accessReview(s). If it returns more than one, you should probably look into why that is. That could make the process of making decisions complicated down the line. I&rsquo;m still learning, but this is something my colleague ran into. Here&rsquo;s how to use the functions</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AccessReviewDefinition -DisplayName <span style="color:#e6db74">&#39;automation-testing&#39;</span> <span style="color:#75715e">#$null if not found</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AccessReviewDefinition -DisplayName <span style="color:#e6db74">&#39;automation-testing&#39;</span> <span style="color:#75715e">#$null if not found</span>
 </span></span><span style="display:flex;"><span>Get-AccessReviewDefinition -Id <span style="color:#e6db74">&#39;4fa06f15-7cf9-437e-aa3f-aad8eeefb66e&#39;</span> <span style="color:#75715e">#fails if it doesn&#39;t exist</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#Filters return $null if they don&#39;t find anything. I feel this is more friendly.</span>

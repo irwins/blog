@@ -4,7 +4,7 @@
     <title>Bicep Graph Support // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,9 +12,6 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Bicep Graph Support">
@@ -122,7 +119,7 @@ Just a quick heads up it still is in preview aka not ready for production 😁">
 <p>Let&rsquo;s dive in shall we?</p>
 <h2 id="deploying-security-groups-using-bicep">Deploying security groups using bicep</h2>
 <p>To get started we need to enable the bicep preview feature by configuring <em><em>bicepconfig.json</em></em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;experimentalFeaturesEnabled&#34;</span>: {
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;extensibility&#34;</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>    }
@@ -131,7 +128,7 @@ Just a quick heads up it still is in preview aka not ready for production 😁">
 <p>After that it&rsquo;s business as usual if your already familiar with authoring bicep files, a skillset well worth investing in!</p>
 <p>I added a managedIdentity in the mix as well, more on that later&hellip;
 Here&rsquo;s what the main.bicep file looks like</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>provider microsoftGraph
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>provider microsoftGraph
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
 </span></span><span style="display:flex;"><span>
@@ -169,7 +166,7 @@ Here&rsquo;s what the main.bicep file looks like</p>
 <p>My first attempts playing with uniqueName</p>
 <p>The uniqueName reminds me of Acitive Directory&rsquo;s <em>sAMAccountName</em></p>
 <p>The beauty of the uniqueName is that it&rsquo;s immutable. I knew immediately that the uniqueName would be guid generated in bicep!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>uniqueName: <span style="color:#a6e22e">guid</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">toLower</span>(securityGroupDisplayName)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span>managedIdentity.id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tenant</span>().tenantId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>uniqueName: <span style="color:#a6e22e">guid</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">toLower</span>(securityGroupDisplayName)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span>managedIdentity.id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tenant</span>().tenantId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
 </span></span></code></pre></div><p>I can generate a guid using: displayName (security group), managedIdentityId and tenantId. Now you can always determine which object you meant to apply! Happy days, expect this is still in preview&hellip; &#x1f614;</p>
 <p>Here&rsquo;s some documentation to read up this: <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">group-upsert</a>
 I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&hellip; &#x1f609;</p>
@@ -181,7 +178,7 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 <blockquote>
 <p>A poor craftsman always blames his tools&hellip;</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### Deploy main.bicep</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### Deploy main.bicep</span>
 </span></span><span style="display:flex;"><span>    TENANT_ID<span style="color:#f92672">=</span>&lt;your-tenant-id&gt;
 </span></span><span style="display:flex;"><span>    SUBSCRIPTION_ID<span style="color:#f92672">=</span>&lt;your-subscription-id&gt;
 </span></span><span style="display:flex;"><span>    LOCATION<span style="color:#f92672">=</span>&lt;location&gt;
@@ -192,9 +189,9 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">### CREATE RESOURCE GROUP</span>
 </span></span><span style="display:flex;"><span>    RESOURCE_GROUP_NAME<span style="color:#f92672">=</span>entra-id-rg
 </span></span><span style="display:flex;"><span>    az group create <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -n $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -l $LOCATION <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --tags <span style="color:#e6db74">&#34;Environment=Dev&#34;</span>
+</span></span></span><span style="display:flex;"><span>        -n $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        -l $LOCATION <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        --tags <span style="color:#e6db74">&#34;Environment=Dev&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    az group exists -n $RESOURCE_GROUP_NAME
 </span></span><span style="display:flex;"><span>
@@ -203,24 +200,24 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">### Validate bicep file</span>
 </span></span><span style="display:flex;"><span>    az deployment group validate <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --parameters main.bicepparam
+</span></span></span><span style="display:flex;"><span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        --parameters main.bicepparam
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">### Preview bicep file</span>
 </span></span><span style="display:flex;"><span>    az deployment group what-if <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --parameters main.bicepparam <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --template-file main.bicep
+</span></span></span><span style="display:flex;"><span>        --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        --parameters main.bicepparam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>        --template-file main.bicep
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    utcNow<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>date -u +<span style="color:#e6db74">&#34;%Y%m%d%H%M%S&#34;</span><span style="color:#66d9ef">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    az deployment group create <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --name entraId-$utcNow <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --template-file main.bicep <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters main.bicepparam
+</span></span></span><span style="display:flex;"><span>    --name entraId-$utcNow <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --template-file main.bicep <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --parameters main.bicepparam
 </span></span></code></pre></div><p>You&rsquo;ll get a warning letting you it&rsquo;s an experimental feature. Here&rsquo;s how to retrieve the security group using the generated guid from AzExpression using PowerShell</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">Param</span> (
 </span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">string</span>]$ManagedIdentityId ,
 </span></span><span style="display:flex;"><span>
@@ -260,7 +257,7 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 <h3 id="portal-experience-uniquename">Portal experience uniqueName</h3>
 <p>Searching in the portal with the uniqueName doesn&rsquo;t return anything. Not sure if that is intentional. You&rsquo;ll need to know the uniqueName. Granted you can keep it simple, I thought that generating a guid made for a pretty unique experience&hellip; Hehe&hellip;Couldn&rsquo;t help myself&hellip;&#x1f603;</p>
 <p>You can also use the Get-AzAdGroup (Az.Resources) using the filter:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AzAdGroup -Filter <span style="color:#e6db74">&#34;uniqueName eq &#39;&lt;uniqueName&gt;&#39;&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AzAdGroup -Filter <span style="color:#e6db74">&#34;uniqueName eq &#39;&lt;uniqueName&gt;&#39;&#34;</span>
 </span></span></code></pre></div><p>That works just fine. I&rsquo;d advice using New-MgGroup to create a security group supporting uniqueName. Either that or <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">upsert</a>. Making the REST API call keeps you in control, no need to download modules. The graph modules can sometimes be a chore to work with.</p>
 <h3 id="permissions">Permissions</h3>
 <p>If you&rsquo;re using a ServicePrincipal or ManagedIdentity you&rsquo;ll need to set up the proper Graph API <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">permissions</a>.</p>

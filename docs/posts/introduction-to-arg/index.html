@@ -4,7 +4,7 @@
     <title>Introduction to Azure Resource Graph (ARG) // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,20 +12,17 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Introduction to Azure Resource Graph (ARG)">
   <meta name="twitter:description" content="Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you’ll only get by trying it out! So let’s dive into some things I learned along the way…
-What is Azure Resource Graph (ARG)?">
+What is Azure Resource Graph (ARG)? Azure Resource Graph is a powerful tool that allows you to explore, analyze, and manage your Azure resources at scale, efficiently. You can use it to query your Azure inventory, monitor your resource changes, and optimize your resource costs. With the increasing complexity of cloud environments there is a need for a unified query mechanism. ARG makes that possible.">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/introduction-to-arg/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Introduction to Azure Resource Graph (ARG)">
   <meta property="og:description" content="Azure Resource Graph (ARG) is one of those things I stumbled upon while learning (or attempting) kusto query. At first, it was just curiousity, and then I realized the possibilities it opens up. In hindsight, it has always been there, but to truly appreciate ARG you need that aha moment that you’ll only get by trying it out! So let’s dive into some things I learned along the way…
-What is Azure Resource Graph (ARG)?">
+What is Azure Resource Graph (ARG)? Azure Resource Graph is a powerful tool that allows you to explore, analyze, and manage your Azure resources at scale, efficiently. You can use it to query your Azure inventory, monitor your resource changes, and optimize your resource costs. With the increasing complexity of cloud environments there is a need for a unified query mechanism. ARG makes that possible.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -102,7 +99,7 @@ What is Azure Resource Graph (ARG)?">
 <p>What challenges does ARG solve? What benifits can it bring?</p>
 <h3 id="gain-visibility-and-insight">Gain visibility and insight</h3>
 <p>ARG gives you visibility and insight into your Azure resources across subscriptions and management groups. Before ARG, if I wanted to get a list of say all the resources I have, I&rsquo;d do the following in pwsh</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$resources = Get-AzResource | ForEach-Object {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>$resources = Get-AzResource | ForEach-Object {
 </span></span><span style="display:flex;"><span>    [<span style="color:#66d9ef">PSCustomObject</span>]@{
 </span></span><span style="display:flex;"><span>        ResourceGroupName = $_.ResourceGroupName
 </span></span><span style="display:flex;"><span>        ResourceName = $_.ResourceName
@@ -120,12 +117,12 @@ What is Azure Resource Graph (ARG)?">
 </span></span></code></pre></div><p>Now here&rsquo;s the thing, this will do if you have one subscription. So at first, I wasn&rsquo;t impressed until&hellip; I had a customer with 150+ subscriptions that needed managing. Can you imagine all that context switching? The horror. That&rsquo;s where ARG shines!</p>
 <h3 id="perform-complex-queries-using-kusto-query-language-kql">Perform complex queries using Kusto Query Language (kql)</h3>
 <p>Here&rsquo;s what the kql would look like to gain visibility:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
 </span></span><span style="display:flex;"><span>| summarize count=count() by type
 </span></span><span style="display:flex;"><span>| order by type asc
 </span></span></code></pre></div><p>This will give you the same result only faster!
 On a larger scale that query could look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>resources
 </span></span><span style="display:flex;"><span>| join kind=leftouter(
 </span></span><span style="display:flex;"><span>    resourcecontainers
 </span></span><span style="display:flex;"><span>    | where type==<span style="color:#e6db74">&#39;microsoft.resources/subscriptions&#39;</span>
@@ -163,7 +160,7 @@ On a larger scale that query could look like this:</p>
 <p>You can do quite some nifty stuff by integrating ARG in your LogAnalytic workspace query.</p>
 <p>Here&rsquo;s one I borrowed from the online documentation:</p>
 <p><em>Retrieve performance data related to CPU utilization and filter to resources with the “prod” tag.</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>InsightsMetrics
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>InsightsMetrics
 </span></span><span style="display:flex;"><span>| where Name == <span style="color:#e6db74">&#34;UtilizationPercentage&#34;</span>
 </span></span><span style="display:flex;"><span>| lookup (
 </span></span><span style="display:flex;"><span>    arg(<span style="color:#e6db74">&#34;&#34;</span>).Resources

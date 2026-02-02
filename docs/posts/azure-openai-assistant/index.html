@@ -4,7 +4,7 @@
     <title>Azure OpenAI Assistant // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,20 +12,17 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Azure OpenAI Assistant">
   <meta name="twitter:description" content="OpenAI is the next shiny thing I’ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn’t use its full potential (Also I’m quite frugal…😏). Fortunately there’s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.
-When Microsoft announced their version, I was excited about it, as I’m always in Azure. I also have a monthly credit to spend.">
+When Microsoft announced their version, I was excited about it, as I’m always in Azure. I also have a monthly credit to spend. You do need to apply for it, but that process is quite easy. Once you gain access the fun can begin!">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/azure-openai-assistant/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Azure OpenAI Assistant">
   <meta property="og:description" content="OpenAI is the next shiny thing I’ve been following OpenAI developement closely ever since its inception. I was a bit hesitant on upgrading, fearing I wouldn’t use its full potential (Also I’m quite frugal…😏). Fortunately there’s also a pay-as-you-go plan for using the API directly. This gives you more control on your credits.
-When Microsoft announced their version, I was excited about it, as I’m always in Azure. I also have a monthly credit to spend.">
+When Microsoft announced their version, I was excited about it, as I’m always in Azure. I also have a monthly credit to spend. You do need to apply for it, but that process is quite easy. Once you gain access the fun can begin!">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -122,7 +119,7 @@ When Microsoft announced their version, I was excited about it, as I’m always 
 <h2 id="setting-up-azure-openai-instance">Setting up Azure OpenAI instance</h2>
 <p>Once you&rsquo;re eligble for the OpenAI you can deploy your OpenAI resource. Assistant is currently in <em>Preview</em> and only available from specific regions. I&rsquo;ve defaulted to <em>East US 2</em>.</p>
 <p>You can do this all in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/assistants-quickstart?tabs=command-line&amp;pivots=rest-api#set-up">portal</a>, but I was curious if there was support for bicep deployment. There is&hellip;&#x1f604;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>@<span style="color:#a6e22e">minLength</span>(2)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>@<span style="color:#a6e22e">minLength</span>(2)
 </span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">maxLength</span>(64)
 </span></span><span style="display:flex;"><span>@<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;Name of the AzOpenAI instance&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> name string = <span style="color:#75715e">//Instance name. This has to be unique</span>
@@ -187,7 +184,7 @@ When Microsoft announced their version, I was excited about it, as I’m always 
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> id string = open_ai_account.id
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">output</span> name string = open_ai_account.name
 </span></span></code></pre></div><p>Here&rsquo;s the bicepparam to accompany the bicep file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#e6db74">&#39;main.bicep&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#e6db74">&#39;main.bicep&#39;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location = <span style="color:#e6db74">&#39;eastus2&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> name = <span style="color:#75715e">//Unique instance name</span>
@@ -198,7 +195,7 @@ When Microsoft announced their version, I was excited about it, as I’m always 
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>At this point a pipeline may be a bit much, so here&rsquo;s how to deploy using the az cli.
 What? No PowerShell?!? A poor craftsman always blames his tools&hellip;There is merit in having more than one skill&hellip;&#x1f609;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### LOGIN TENANT</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### LOGIN TENANT</span>
 </span></span><span style="display:flex;"><span>TENANT_ID<span style="color:#f92672">=</span> <span style="color:#75715e">#Your Tenant</span>
 </span></span><span style="display:flex;"><span>SUBSCRIPTION_ID<span style="color:#f92672">=</span> <span style="color:#75715e">#Subscription you applied</span>
 </span></span><span style="display:flex;"><span>
@@ -218,18 +215,18 @@ What? No PowerShell?!? A poor craftsman always blames his tools&hellip;There is 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">### Validate bicep file</span>
 </span></span><span style="display:flex;"><span>az deployment group validate <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
+</span></span></span><span style="display:flex;"><span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">### Preview bicep file</span>
 </span></span><span style="display:flex;"><span>az deployment group what-if <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file\</span>
+</span></span></span><span style="display:flex;"><span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file\</span>
 </span></span><span style="display:flex;"><span>    --template-file <span style="color:#75715e">#Refer to your bicep file</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>az deployment group create <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
+</span></span></span><span style="display:flex;"><span>    --resource-group $RESOURCE_GROUP_NAME <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --parameters <span style="color:#75715e">#Refer to your bicepparam file</span>
 </span></span></code></pre></div><p>Ok now that we&rsquo;ve deployed our instance we can get down to business!</p>
 <h2 id="using-azure-openai-assistant">Using Azure OpenAI Assistant</h2>
 <p>As an introduction I&rsquo;d advice using the <em>Studio</em> to browse around. Once your comfortable you can give Doug Finke his <a href="https://github.com/dfinke/PowerShellAIAssistant">PowerShellAIAssistant</a> module a try. It supports both OpenAI &amp; AzureOpenAI &#x1f604;. Doug has contributed quite a few popular modules over the years with <a href="https://www.powershellgallery.com/packages/ImportExcel/7.8.6">ImportExcel</a> being &ldquo;the chef&rsquo;s kiss&rdquo;</p>

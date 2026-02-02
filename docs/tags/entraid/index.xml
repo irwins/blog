@@ -13,14 +13,14 @@
       <link>https://irwins.github.io/blog/posts/entra-id-access-review/</link>
       <pubDate>Sat, 06 Jul 2024 12:22:31 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/entra-id-access-review/</guid>
-      <description>Been working on Identity Governance, access review, and I&amp;rsquo;ll admit it can get confusing real fast!&#xA;If you&amp;rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!&#xA;You&amp;rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&amp;hellip; &amp;#x1f609;</description>
+      <description>&lt;p&gt;Been working on Identity Governance, access review, and I&amp;rsquo;ll admit it can get confusing real fast!&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!&lt;/p&gt;&#xA;&lt;p&gt;You&amp;rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&amp;hellip; &amp;#x1f609;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bicep Graph Support</title>
       <link>https://irwins.github.io/blog/posts/bicep-graph-support/</link>
       <pubDate>Sun, 16 Jun 2024 05:11:56 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/bicep-graph-support/</guid>
-      <description>Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).&#xA;For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources&#xA;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;</description>
+      <description>&lt;p&gt;Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../../images/bicep-graph-support/current-graph-resources.drawio.png&#34; alt=&#34;Graph resources&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;For those new to &lt;a href=&#34;https://learn.microsoft.com/en-gb/azure/azure-resource-manager/bicep/overview?tabs=bicep&#34;&gt;bicep&lt;/a&gt;, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources&lt;/p&gt;&#xA;&lt;p&gt;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

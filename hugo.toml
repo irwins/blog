@@ -2,7 +2,10 @@ baseURL = 'https://irwins.github.io/blog/'
 languageCode = 'en-us'
 title = 'My digital journey'
 theme = "m10c"
-paginate = 10
+
+[pagination]
+  pagerSize = 10
+
 publishDir = "docs"
 enableEmoji = true
 

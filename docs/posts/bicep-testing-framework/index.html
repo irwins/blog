@@ -4,7 +4,7 @@
     <title>Bicep Testing Framework // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,22 +12,19 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Bicep Testing Framework">
   <meta name="twitter:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
 Just a quick heads up it still is in preview aka not ready for production 😁
-Why validate? Some times, you just want to be sure of the current state of a configuration.">
+Why validate? Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I’d advice against that) or you could use code… Pester has saved me many of times… Let’s see if bicep can do the same…">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/bicep-testing-framework/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Bicep Testing Framework">
   <meta property="og:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
 Just a quick heads up it still is in preview aka not ready for production 😁
-Why validate? Some times, you just want to be sure of the current state of a configuration.">
+Why validate? Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I’d advice against that) or you could use code… Pester has saved me many of times… Let’s see if bicep can do the same…">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -119,7 +116,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 <h2 id="setting-up-bicep-for-testing">Setting up bicep for testing</h2>
 <h3 id="enable-assertions-and-testframework">Enable assertions and testFramework</h3>
 <p>The bicep experimentalFeature needs to be enabled. You can do this by adding it to the <em>bicepconfig.json</em> file</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Json" data-lang="Json"><span style="display:flex;"><span>{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Json" data-lang="Json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;experimentalFeaturesEnabled&#34;</span>: {
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;testFramework&#34;</span>: <span style="color:#66d9ef">true</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;assertions&#34;</span>: <span style="color:#66d9ef">true</span>
@@ -127,7 +124,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="create-testbicep-to-author-test">Create test.bicep to author test</h3>
 <p>I&rsquo;m keeping it simple and just deploy a simple storageAccount, just to see what I&rsquo;m working with&hellip;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
 </span></span><span style="display:flex;"><span>  params: {
 </span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
 </span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV2&#39;</span>
@@ -144,7 +141,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 </ul>
 <h3 id="author-assert-statements-within-the-referenced-bicep-file">Author assert statements within the referenced bicep file</h3>
 <p>Now for the assertions. The <em>assert</em> statements can be any boolean expression that references parameters, variables, or resource names. These boolean expressions can include Bicep functions such as &ldquo;contains()&rdquo;, &ldquo;length()&rdquo;, etc.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> storageAccountName string = <span style="color:#e6db74">&#39;st</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uniqueString</span>(<span style="color:#a6e22e">resourceGroup</span>().id)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> location string = <span style="color:#a6e22e">resourceGroup</span>().location
 </span></span><span style="display:flex;"><span>
@@ -181,7 +178,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 <li>You cannot assert on resource size, location, or other propreties yet as these depend on runtime deployment functionality</li>
 </ul>
 <p>Here is what that means for the following assertions:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#75715e">//This won&#39;t work. It depends on runtime deployment fucntionality</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#75715e">//This won&#39;t work. It depends on runtime deployment fucntionality</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageSkuName = skuName <span style="color:#f92672">==</span> storageAccount.sku.name
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">//This is hardcore to validate only for &#39;Standard_LRS&#39;</span>
@@ -195,12 +192,12 @@ Why validate? Some times, you just want to be sure of the current state of a con
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> storageName = <span style="color:#a6e22e">startsWith</span>(storageAccount.name,<span style="color:#e6db74">&#39;st&#39;</span>)
 </span></span></code></pre></div><h3 id="run-bicep-test">Run bicep test</h3>
 <p>The moment we&rsquo;ve all waited for! To execute the test run the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bicep test bicep/test.bicep
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bicep test bicep/test.bicep
 </span></span></code></pre></div><p>It passed!</p>
 <p><img src="../../images/bicep-testing-framework/bicep-test-passed.drawio.png" alt="bicep test passed"></p>
 <p>Ok, I was expecting each assertion in the test. I tried looking up if there was flag to expand the output&hellip; I didn&rsquo;t find any. It&rsquo;s experimental, so I can&rsquo;t complain.</p>
 <p>But what does a failed test looks like? I&rsquo;m glad you asked!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
 </span></span><span style="display:flex;"><span>  params: {
 </span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
 </span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV1&#39;</span> <span style="color:#75715e">//This should complain it&#39;s not &#39;StorageV2&#39;</span>
@@ -212,7 +209,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 <p><img src="../../images/bicep-testing-framework/bicep-test-failed.drawio.png" alt="bicep test failed"></p>
 <p>storageKind assertion failed. The evaluation did metion that 1/4 assertions failed. Again I was expecting to see the ones that were succesful as well&hellip; I&rsquo;m sure it&rsquo;s a flag I don&rsquo;t know about&hellip;</p>
 <p>Let&rsquo;s add one more failure</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>test testMain <span style="color:#e6db74">&#39;main.bicep&#39;</span> = {
 </span></span><span style="display:flex;"><span>  params: {
 </span></span><span style="display:flex;"><span>    location: <span style="color:#e6db74">&#39;westeurope&#39;</span>
 </span></span><span style="display:flex;"><span>    kind: <span style="color:#e6db74">&#39;StorageV1&#39;</span> <span style="color:#75715e">//This should complain it&#39;s not &#39;StorageV2&#39;</span>

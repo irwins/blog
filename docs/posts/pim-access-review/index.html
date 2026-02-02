@@ -4,7 +4,7 @@
     <title>Pim Access Review // My digital journey</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.128.2">
+    <meta name="generator" content="Hugo 0.155.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Irwin Strachan" />
     <meta name="description" content="" />
@@ -12,20 +12,17 @@
     
 
     
-  
-
-
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Pim Access Review">
   <meta name="twitter:description" content="My team recently got an automation request concerning privileged role access review. I’ve always been on the consumer side, so getting some PIM hands-on automation sound like fun! This was an interesting challenge on a few levels, I’ll explain as we go along…
-What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we’ll be focusing on is EntraId Role management.">
+What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we’ll be focusing on is EntraId Role management. There’s quite a bit you can do with PIM! I highly recommend reading the documentation!">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/pim-access-review/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Pim Access Review">
   <meta property="og:description" content="My team recently got an automation request concerning privileged role access review. I’ve always been on the consumer side, so getting some PIM hands-on automation sound like fun! This was an interesting challenge on a few levels, I’ll explain as we go along…
-What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we’ll be focusing on is EntraId Role management.">
+What is PIM? PIM (Priveleged Identity Management) enables you to manage, control, and monitor access to important resources in your organization. The part we’ll be focusing on is EntraId Role management. There’s quite a bit you can do with PIM! I highly recommend reading the documentation!">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -142,7 +139,7 @@ it&rsquo;s <em>AccessReview.ReadWrite.All</em> if you&rsquo;re feeling generous&
 <p>On of my responsibility as a senior is mentoring. Anyone who knows me, knows I&rsquo;m a huge fan of PowerShell! Nothing makes me happier than coding in PowerShell &#x1f604;</p>
 <p>I created a simple module to get things going. This will suffice for now.</p>
 <p><em><strong>PimHelper.psm1</strong></em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#75715e">#Set script variable</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#75715e">#Set script variable</span>
 </span></span><span style="display:flex;"><span>$script:graphApiVersion = <span style="color:#e6db74">&#34;Beta&#34;</span>
 </span></span><span style="display:flex;"><span>$script:baseUri = <span style="color:#e6db74">&#34;https://graph.microsoft.com/</span>$($graphApiVersion)<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
@@ -232,7 +229,7 @@ it&rsquo;s <em>AccessReview.ReadWrite.All</em> if you&rsquo;re feeling generous&
 <p>I&rsquo;m almost certain this will need refactoring. As far as MVP goes we have a working concept, it just works in my dev tenant&hellip; &#x1f601;</p>
 <p>Here&rsquo;s the script to get the current state of the AcccessReview currently in progress</p>
 <p><em><strong>Get-AccessReviewDecisionState.ps1</strong></em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>[CmdletBinding()]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span>(
 </span></span><span style="display:flex;"><span>   $TenantId
 </span></span><span style="display:flex;"><span>)

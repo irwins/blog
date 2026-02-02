@@ -13,14 +13,14 @@
       <link>https://irwins.github.io/blog/posts/entra-id-access-review/</link>
       <pubDate>Sat, 06 Jul 2024 12:22:31 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/entra-id-access-review/</guid>
-      <description>Been working on Identity Governance, access review, and I&amp;rsquo;ll admit it can get confusing real fast!&#xA;If you&amp;rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!&#xA;You&amp;rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&amp;hellip; &amp;#x1f609;</description>
+      <description>&lt;p&gt;Been working on Identity Governance, access review, and I&amp;rsquo;ll admit it can get confusing real fast!&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!&lt;/p&gt;&#xA;&lt;p&gt;You&amp;rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&amp;hellip; &amp;#x1f609;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Pester Validation Deployments</title>
       <link>https://irwins.github.io/blog/posts/pester-validation-deployments/</link>
       <pubDate>Fri, 28 Jun 2024 15:24:38 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/pester-validation-deployments/</guid>
-      <description>Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &amp;#x1f609;&#xA;Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do.</description>
+      <description>&lt;p&gt;Previously, I had a look at the &lt;a href=&#34;https://irwins.github.io/blog/posts/bicep-testing-framework/&#34;&gt;bicep testing framework&lt;/a&gt;. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &amp;#x1f609;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pester.dev/&#34;&gt;Pester&lt;/a&gt; is &lt;em&gt;the&lt;/em&gt; test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to &lt;a href=&#34;https://pshirwin.wordpress.com/2015/11/06/pester-script-to-test-dns-configuration/&#34;&gt;validate&lt;/a&gt; outcome of what a script was suppose to do. That changed my life!&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
