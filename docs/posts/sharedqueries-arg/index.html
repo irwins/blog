@@ -15,13 +15,13 @@
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Getting started with shared queries in Azure Resource Graph (ARG)">
-  <meta name="twitter:description" content="I’m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn’t think much of until I wanted a better way to manage my queries. That was my aha moment 😁. Shared queries makes for a better management experience of your queries.
+  <meta name="twitter:description" content="I’m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn’t think much of until I wanted a better way to manage my queries. That was my aha moment :grin:. Shared queries makes for a better management experience of your queries.
 What are Azure Resource Graph shared queries? Microsoft’s documentation explains it best:">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/sharedqueries-arg/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Getting started with shared queries in Azure Resource Graph (ARG)">
-  <meta property="og:description" content="I’m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn’t think much of until I wanted a better way to manage my queries. That was my aha moment 😁. Shared queries makes for a better management experience of your queries.
+  <meta property="og:description" content="I’m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn’t think much of until I wanted a better way to manage my queries. That was my aha moment :grin:. Shared queries makes for a better management experience of your queries.
 What are Azure Resource Graph shared queries? Microsoft’s documentation explains it best:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -93,7 +93,7 @@ What are Azure Resource Graph shared queries? Microsoft’s documentation explai
       </div>
     </header>
     <div class="post-content">
-      <p>I&rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&rsquo;t think much of until I wanted a better way to manage my queries. That was my <em>aha</em> moment &#x1f601;. Shared queries makes for a better management experience of your queries.</p>
+      <p>I&rsquo;m a fan of Azure Resource Graph! When I started with arg in the portal I noticed I coud save my query as private or shared. At that time I didn&rsquo;t think much of until I wanted a better way to manage my queries. That was my <em>aha</em> moment :grin:. Shared queries makes for a better management experience of your queries.</p>
 <h2 id="what-are-azure-resource-graph-shared-queries">What are Azure Resource Graph shared queries?</h2>
 <p>Microsoft&rsquo;s <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/tutorials/create-share-query">documentation</a> explains it best:</p>
 <blockquote>
@@ -165,7 +165,7 @@ What are Azure Resource Graph shared queries? Microsoft’s documentation explai
 <li>Load sharedQueries.json usingbicep&rsquo;s json function</li>
 <li>Iterate over the array</li>
 </ul>
-<p>A little preparation goes a long way&hellip;&#x1f609;</p>
+<p>A little preparation goes a long way&hellip;:wink:</p>
 <p><em><strong>main.bicep</strong></em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span><span style="color:#66d9ef">param</span> tags object
 </span></span><span style="display:flex;"><span>
@@ -193,7 +193,7 @@ What are Azure Resource Graph shared queries? Microsoft’s documentation explai
 </span></span><span style="display:flex;"><span>  environment: <span style="color:#e6db74">&#39;dev&#39;</span>
 </span></span><span style="display:flex;"><span>  createdBy: <span style="color:#e6db74">&#39;&lt;ContactInfo&gt;&#39;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Shared queries supports RBAC, so you could get creative on who has access&hellip; Just puttin it out there&hellip; &#x1f609;</p>
+</span></span></code></pre></div><p>Shared queries supports RBAC, so you could get creative on who has access&hellip; Just puttin it out there&hellip; :wink:</p>
 <p>I enjoy using az cli when it comes to prototyping&hellip;</p>
 <p><em><strong>deploy.azcli</strong></em>_</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">### LOGIN TENANT</span>
@@ -242,7 +242,7 @@ What are Azure Resource Graph shared queries? Microsoft’s documentation explai
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$sharedQueryResults = Search-AzGraph -Query <span style="color:#e6db74">&#34;{{</span>$SharedResourceIdQuery<span style="color:#e6db74">}} | where &lt;fill_in&gt;&#34;</span> -UseTenantScope -First <span style="color:#ae81ff">1000</span>
 </span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Shared queries definitely makes for a better management experience for you and your team. By keeping the kql code central, you won&rsquo;t need to update any hardcoded kql queries in scripts!
-The query code can be revised and results reviewed at any time! What&rsquo;s not to love about that? &#x1f601; I hope this useful in some way. Happy share querying!</p>
+The query code can be revised and results reviewed at any time! What&rsquo;s not to love about that? :grin: I hope this useful in some way. Happy share querying!</p>
 <p>Ttyl/Urv</p>
 <h2 id="additional-resources">Additional resources:</h2>
 <ul>

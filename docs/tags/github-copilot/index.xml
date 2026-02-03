@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub Copilot on My digital journey</title>
+    <link>https://irwins.github.io/blog/tags/github-copilot/</link>
+    <description>Recent content in GitHub Copilot on My digital journey</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Feb 2026 18:50:18 +0100</lastBuildDate>
+    <atom:link href="https://irwins.github.io/blog/tags/github-copilot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agent Ready Platform Repo</title>
+      <link>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</link>
+      <pubDate>Mon, 02 Feb 2026 18:50:18 +0100</pubDate>
+      <guid>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</guid>
+      <description>&lt;p&gt;Hi! It&amp;rsquo;s been a minute! Been trying to keep up with the latest trends in AI. Honestly, it&amp;rsquo;s almost a full-time job.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been following what the capabilities are for quite some time now. I remember when Prompt engineer was the next thing, then came context engineering. Then we had MCP servers and agents&amp;hellip; whole fleets!&lt;/p&gt;&#xA;&lt;p&gt;Agents really changed the game! The latest addition is skills. Skills seem very promising&amp;hellip; Here&amp;rsquo;s where my experiment led me&amp;hellip;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

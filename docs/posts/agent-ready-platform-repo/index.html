@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Agent Ready Platform Repo // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.155.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Agent Ready Platform Repo">
+  <meta name="twitter:description" content="Hi! It’s been a minute! Been trying to keep up with the latest trends in AI. Honestly, it’s almost a full-time job.
+I’ve been following what the capabilities are for quite some time now. I remember when Prompt engineer was the next thing, then came context engineering. Then we had MCP servers and agents… whole fleets!
+Agents really changed the game! The latest addition is skills. Skills seem very promising… Here’s where my experiment led me…">
+
+    <meta property="og:url" content="https://irwins.github.io/blog/posts/agent-ready-platform-repo/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Agent Ready Platform Repo">
+  <meta property="og:description" content="Hi! It’s been a minute! Been trying to keep up with the latest trends in AI. Honestly, it’s almost a full-time job.
+I’ve been following what the capabilities are for quite some time now. I remember when Prompt engineer was the next thing, then came context engineering. Then we had MCP servers and agents… whole fleets!
+Agents really changed the game! The latest addition is skills. Skills seem very promising… Here’s where my experiment led me…">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-02T18:50:18+01:00">
+    <meta property="article:modified_time" content="2026-02-02T18:50:18+01:00">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="GitHub Copilot">
+    <meta property="article:tag" content="Platform Engineering">
+    <meta property="article:tag" content="Bicep">
+    <meta property="article:tag" content="Azure">
+    <meta property="article:tag" content="IaC">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://irwins.github.io/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Agent Ready Platform Repo</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 2, 2026
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://irwins.github.io/blog/tags/ai/">AI</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/github-copilot/">GitHub Copilot</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/platform-engineering/">Platform Engineering</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/bicep/">Bicep</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/azure/">Azure</a>
+              <a class="tag" href="https://irwins.github.io/blog/tags/iac/">IaC</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Hi! It&rsquo;s been a minute! Been trying to keep up with the latest trends in AI. Honestly, it&rsquo;s almost a full-time job.</p>
+<p>I&rsquo;ve been following what the capabilities are for quite some time now. I remember when Prompt engineer was the next thing, then came context engineering. Then we had MCP servers and agents&hellip; whole fleets!</p>
+<p>Agents really changed the game! The latest addition is skills. Skills seem very promising&hellip; Here&rsquo;s where my experiment led me&hellip;</p>
+<p>Oh, full disclosure I did use AI to help me out with the blog post&hellip; here we go!</p>
+<h1 id="building-an-agent-ready-platform-engineering-repository">Building an Agent-Ready Platform Engineering Repository</h1>
+<p>In the world of Platform Engineering, automation is king. But as we move into the era of AI-augmented development, &ldquo;standard&rdquo; automation isn&rsquo;t enough. We need to build repositories that aren&rsquo;t just machine-readable, but <strong>Agent-Ready</strong>.</p>
+<p>This post explores how we transformed a standard Azure IaC repository into a high-performance environment for GitHub Copilot and other AI coding agents.</p>
+<h2 id="the-vision-closing-the-agent-context-gap">The Vision: Closing the &ldquo;Agent Context Gap&rdquo;</h2>
+<p>Standard repos are built for humans, but humans are surprisingly good at navigating ambiguity. We read between the lines of a README, we remember a Slack message about naming conventions, and we have &ldquo;tribal knowledge&rdquo; about why we use certain Azure modules over others.</p>
+<p>Copilot and other AI agents don&rsquo;t have that. They suffer from the <strong>Agent Context Gap</strong>: the space between what&rsquo;s in your code and the unspoken rules in your head.</p>
+<p>The goal isn&rsquo;t just &ldquo;Better Autocomplete.&rdquo; We want to turn the AI into a <strong>context-aware collaborator</strong>. By providing a structured hierarchy of instructions and tools (Skills), we can turn an agent into a junior engineer that not only knows <em>how</em> to write Bicep code but understands <strong>why</strong> we use Azure Verified Modules (AVM) and <strong>where</strong> to find our local validation logic.</p>
+<h2 id="the-architecture-of-an-agent-ready-repo">The Architecture of an Agent-Ready Repo</h2>
+<p>Our repository, <code>platform-agent-kit</code>, follows a specific scaffold designed for AI interaction. But more important than the folder structure is the <strong>Reasoning Framework</strong> behind it.</p>
+<p><img src="../../images/agent-ready-platform-repo/architecture.drawio.png" alt="Agent-Ready Architecture">
+<em>Figure 1: The dependency flow from mandatory context (.agents.md) to guardrails and execution tools.</em></p>
+<h3 id="1-instructions-the-platform-engineering-constitution">1. Instructions: The &ldquo;Platform Engineering Constitution&rdquo;</h3>
+<p>Instructions define <strong>what &ldquo;good&rdquo; looks like</strong>, not how to do things step-by-step. These are the immutable truths of our engineering culture that shouldn&rsquo;t change per task.</p>
+<ul>
+<li><strong>Content:</strong> Bicep linting rules, AVM expectations, PowerShell error handling standards, and Git conventional commit requirements.</li>
+<li><strong>Role:</strong> These are <strong>always loaded</strong> and <strong>always respected</strong>. They form the foundation that ensures the agent never forgets our core standards.</li>
+</ul>
+<h3 id="2-skills-the-procedural-tools">2. Skills: The &ldquo;Procedural Tools&rdquo;</h3>
+<p>Skills are for work that is multi-step, repeatable, and based on a process rather than a preference.</p>
+<ul>
+<li><strong>Example:</strong> A <strong>Git Commit Generator</strong> is a skill because it follows a deterministic workflow (analyze diff -&gt; generate message). A <strong>Bicep Expert</strong>, on the other hand, is a knowledge domain that belongs in Instructions.</li>
+<li><strong>Role:</strong> Skills handle the heavy lifting of automated tasks like scaffolding or running Pester tests.</li>
+</ul>
+<h3 id="3-prompts-the-workflow-invocations">3. Prompts: The &ldquo;Workflow Invocations&rdquo;</h3>
+<p>Prompts are manual triggers for when you want to execute a specific, high-value workflow.</p>
+<ul>
+<li><strong>Role:</strong> Unlike instructions (which enforce behavior), prompts are <strong>invocations</strong>. They act as the &ldquo;Start&rdquo; button for complex routines, referencing both instructions for standards and skills for execution.</li>
+</ul>
+<h3 id="4-agents-the-domain-personas">4. Agents: The &ldquo;Domain Personas&rdquo;</h3>
+<p>We avoid &ldquo;agent swarms&rdquo; and instead focus on one primary <strong>Platform Engineer Agent</strong> supported by specialized personas.</p>
+<ul>
+<li><strong>Role:</strong> Specialists (like a Bicep or PowerShell agent) are only triggered for deep, domain-heavy reasoning. They aren&rsquo;t running all the time; they are domain experts used through handoff workflows.</li>
+</ul>
+<hr>
+<h3 id="the-mental-model-hierarchy-of-control">The Mental Model: Hierarchy of Control</h3>
+<p>In an agent-ready repo, the hierarchy is clear: <strong>Instructions &gt; Agents &gt; Skills &gt; Prompts</strong>. Instructions define how everything else behaves.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>.github/
+</span></span><span style="display:flex;"><span>  instructions/  # Culture, Expectations, Non-negotiables
+</span></span><span style="display:flex;"><span>  skills/        # Automated, procedural tools
+</span></span><span style="display:flex;"><span>  prompts/       # Reusable workflows
+</span></span><span style="display:flex;"><span>.agents.md       # The &#34;System Prompt Extension&#34; (Mandatory Context)
+</span></span></code></pre></div><h3 id="1-context-injection-agentsmd">1. Context Injection (<code>.agents.md</code>)</h3>
+<p>The <code>.agents.md</code> file at the root acts as a persistent memory for any agent entering the workspace. It enforces repository-wide policies:</p>
+<ul>
+<li><strong>Mandatory Retrieval</strong>: Agents <em>must</em> read specific instruction files before modifying Bicep or PowerShell code.</li>
+<li><strong>Skill Change Contract</strong>: Any modification to a tool must include updated evaluation fixtures.</li>
+</ul>
+<h3 id="2-progressive-disclosure--expert-hooks">2. Progressive Disclosure &amp; &ldquo;Expert Hooks&rdquo;</h3>
+<p>One of the biggest challenges with AI agents is <strong>Context Fatigue</strong>. If you dump every rule, standard, and script into the agent&rsquo;s memory at once, the &ldquo;signal&rdquo; of your current task gets lost in the &ldquo;noise&rdquo; of documentation.</p>
+<p>We solved this using <strong>Progressive Disclosure</strong> in our <code>SKILL.md</code> files.</p>
+<p>We don&rsquo;t force the agent to remember everything. Instead, we use <strong>Trigger Keywords</strong> (our &ldquo;Expert Hooks&rdquo;). For example, our Bicep skill description might say: <em>&ldquo;Use this when the user mentions Azure, Bicep, or Infrastructure.&rdquo;</em></p>
+<p>By keeping the high-level descriptions concise, we protect the agent&rsquo;s precious token window. The agent only &ldquo;opens&rdquo; the full expertise—the complex regex for naming conventions or the specific Bicep linter codes—when it identifies a task that truly requires that knowledge. This ensures the agent&rsquo;s focus remains laser-sharp on the problem at hand.</p>
+<h3 id="3-validation-as-a-coaching-loop">3. Validation as a Coaching Loop</h3>
+<p>An agent is only as reliable as its feedback loop. In our <code>platform-iac</code> repo, we&rsquo;ve moved validation from &ldquo;CI-only&rdquo; to &ldquo;In-Agent.&rdquo;</p>
+<p><img src="../../images/agent-ready-platform-repo/validation-loop.drawio.png" alt="Validation Coaching Loop"></p>
+<p><em>Figure 2: The self-healing loop where the agent triages compiler errors and auto-corrects based on remediation hints.</em></p>
+<p>We created a <code>bicep-validator</code> skill that doesn&rsquo;t just run <code>az bicep build</code> and fail. It <strong>triages</strong> the output. If the agent makes a mistake—like a parameter mismatch (BCP036)—the tool doesn&rsquo;t just error out. It provides a <strong>Remediation Hint</strong> directly in the agent&rsquo;s interaction flow.</p>
+<p>This creates a &ldquo;self-healing&rdquo; developer experience. The agent breaks a rule, the tool coaches it on the fix, and the agent corrects itself—all before the human even sees the code. This turns validation from a &ldquo;gatekeeper&rdquo; into a &ldquo;tutor,&rdquo; ensuring that the code that hits your PR is already pre-validated against your specific standards.</p>
+<h2 id="technical-deep-dive">Technical Deep Dive</h2>
+<h3 id="azure-verified-modules-avm-decision-logic">Azure Verified Modules (AVM) Decision Logic</h3>
+<p>We taught our agents <strong>how to choose</strong> between AVM and custom modules. Our AVM skill includes a decision tree:</p>
+<ol>
+<li><strong>Reuse</strong>: Always check for an existing AVM.</li>
+<li><strong>Extend</strong>: If AVM exists but lacks a feature, document the gap.</li>
+<li><strong>Build</strong>: Only build custom if no AVM exists.</li>
+</ol>
+<h3 id="powershell-verb--pester-standards">PowerShell Verb &amp; Pester Standards</h3>
+<p>For our PowerShell automation, we integrated <code>PSScriptAnalyzer</code> and <code>Pester</code> into the agent&rsquo;s workflow. The <code>powershell-module-scaffolder</code> skill ensures every new function uses approved verbs (like <code>Invoke</code>, <code>Get</code>, <code>New</code>) and automatically generates a matching <code>.Tests.ps1</code> file.</p>
+<h2 id="lessons-from-the-journey-the-agent-ready-mindset">Lessons from the Journey: The &ldquo;Agent-Ready&rdquo; Mindset</h2>
+<p>Building this wasn&rsquo;t just about writing YAML and Markdown. It was a shift in how we think about &ldquo;Infrastructure as Code.&rdquo;</p>
+<ul>
+<li><strong>Constraints are Creative</strong>: By giving the agent clear <code>NEVER</code> and <code>MANDATORY</code> lists, we actually made it <em>more</em> creative. It spends less time guessing what we want and more time solving the complex parts of the architecture.</li>
+<li><strong>Documentation is Code</strong>: In an agent-ready repo, your documentation <em>is</em> part of the execution path. If a standard isn&rsquo;t written in a way an agent can retrieve, it doesn&rsquo;t exist.</li>
+<li><strong>Trust But Verify</strong>: We don&rsquo;t just trust the agent to read the docs; we use <code>test/eval/</code> fixtures to prove that the agent&rsquo;s tools (the Skills) actually work as intended.</li>
+</ul>
+<h2 id="summary-the-agent-ready-checklist">Summary: The &ldquo;Agent-Ready&rdquo; Checklist</h2>
+<p>To make your repository Agent-Ready:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>Define your &ldquo;Ground Truth&rdquo;</strong>: Use <code>.agents.md</code> for global rules.</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>Modularize Instructions</strong>: Don&rsquo;t let your README become a junk drawer.</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>Build Validation Skills</strong>: Give the agent the tools to test its own work.</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>Create Evaluation Fixtures</strong>: Provide examples of &ldquo;Good&rdquo; and &ldquo;Bad&rdquo; code for the agent to learn from.</li>
+</ul>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Here are some of the key resources I used to build and refine this setup:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/copilot/overview">VS Code Copilot Documentation</a> - The foundation for understanding how extension context works.</li>
+<li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Anthropic Prompt Engineering Guide</a> - Essential reading for structuring agent instructions and context.</li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">Anthropic Skills Best practices</a></li>
+<li><a href="https://agentskills.io/home">agentskills.io</a></li>
+<li><a href="https://skills.sh/">skills.sh</a></li>
+</ul>
+<h2 id="whats-next">What&rsquo;s Next?</h2>
+<p>You can find the code here: <a href="https://github.com/irwins/platform-agent-kit">platform-agent-kit</a>.
+It&rsquo;s a work-in-progress&hellip;</p>
+<p>By treating AI as a first-class citizen in our repo structure, we&rsquo;ve ensured that every line of code—whether written by a human or an agent—meets our platform standards&hellip; Well at least that&rsquo;s what we&rsquo;re aiming for&hellip; 😉</p>
+<p>Ttyl,</p>
+<p>Urv</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

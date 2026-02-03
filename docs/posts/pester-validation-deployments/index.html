@@ -15,13 +15,13 @@
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Pester Validation Deployments">
-  <meta name="twitter:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
+  <meta name="twitter:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this :wink:
 Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do. That changed my life!">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/pester-validation-deployments/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Pester Validation Deployments">
-  <meta property="og:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this 😉
+  <meta property="og:description" content="Previously, I had a look at the bicep testing framework. The assertions done are more to validate parameter,variables and resource names. You can’t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this :wink:
 Pester is the test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn’t resonate with me, until I saw Kevin Marquette use pester to validate outcome of what a script was suppose to do. That changed my life!">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -109,16 +109,16 @@ Pester is the test framework for PowerShell! When I first got introduced to pest
       </div>
     </header>
     <div class="post-content">
-      <p>Previously, I had a look at the <a href="https://irwins.github.io/blog/posts/bicep-testing-framework/">bicep testing framework</a>. The assertions done are more to validate parameter,variables and resource names. You can&rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &#x1f609;</p>
+      <p>Previously, I had a look at the <a href="https://irwins.github.io/blog/posts/bicep-testing-framework/">bicep testing framework</a>. The assertions done are more to validate parameter,variables and resource names. You can&rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this :wink:</p>
 <p><a href="https://pester.dev/">Pester</a> is <em>the</em> test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&rsquo;t resonate with me, until I saw Kevin Marquette use pester to <a href="https://pshirwin.wordpress.com/2015/11/06/pester-script-to-test-dns-configuration/">validate</a> outcome of what a script was suppose to do. That changed my life!</p>
-<p>This is me everytime Is sit down to use pester &#x1f601;</p>
+<p>This is me everytime Is sit down to use pester :grin:</p>
 <p><img src="../../images/pester-validation-deployments/pester-ovf.drawio.png" alt="Use it solely for Operation validation"></p>
 <p>Pester is definitely worth looking into. Pester v6 is in the works as we speak! Let&rsquo;s have a look at what pester could mean for us post bicep deployment&hellip;</p>
 <h2 id="why-validate">Why validate?</h2>
 <p>Validating the outcome of what you expect is a game changer. No more guessing! Back in the days I did quite a lot of Active Directory migrations. It feels good knowing that your script did what you expect. Sometimes there was a glitch and pester would pick it up for you.</p>
 <p>Why would you validate post deployment? I mean if the deployment was successful, doesn&rsquo;t that mean things are as you would expect? Sounds like <strong>yak shaving</strong> to me&hellip; Ok hear me out&hellip;</p>
 <p>Say you deployed a solution using bicep and it was successful, yet someone went into the portal and changed a vital property. how would you know? It may/may not break. Ideally you&rsquo;d update your solution and redeploy, IaC remember? Using pester you can quickly validate the current state of your deployed resources. Think configuration drift, did things changed considerably?</p>
-<p>And before you come after me, terraform has something like this in the form of a plan &#x1f601;</p>
+<p>And before you come after me, terraform has something like this in the form of a plan :grin:</p>
 <blockquote>
 <p>Azure recently introduced <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks?tabs=azure-powershell">deployment stacks</a>. Also worth looking into</p>
 </blockquote>
@@ -156,7 +156,7 @@ Pester is the test framework for PowerShell! When I first got introduced to pest
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$deploymentOutput = ($deployment.Outputs.storageAccount | ConvertTo-Json -Depth <span style="color:#ae81ff">10</span> | ConvertFrom-Json).Value
 </span></span></code></pre></div><p>Best practice is to give your deployments <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli#deployment-name">unique names</a>
-Just to keep it simple, grab the deployments from the resource group and sort on TimeStamp descending, selct the first object. This will give you the latest deployment. You may/may not need additional filtering, but you get the drift &#x1f609;</p>
+Just to keep it simple, grab the deployments from the resource group and sort on TimeStamp descending, selct the first object. This will give you the latest deployment. You may/may not need additional filtering, but you get the drift :wink:</p>
 <p>To get the deployment Output as a PowerShell object I needed to <em>ConvertTo-Json</em> and then <em>ConvertFrom-Json</em> That took a bit of puzzling.</p>
 <h2 id="create-the-pester-test">Create the pester test</h2>
 <p>Ok here&rsquo;s the fun bit, the pester test!</p>
@@ -220,7 +220,7 @@ Just to keep it simple, grab the deployments from the resource group and sort on
 <p>The kind and name test failed as expected.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Pester can definitely help with validating post runtime deployment! It&rsquo;s a great way to detect configuration drift. I realize there are other ways of doing this. I do have some terraform skills as well, but I prefer bicep for anything Azure related when IaC is required. Azure deployment stack is the new kid on the block. It&rsquo;ll be interesting to see how that evolves.</p>
-<p>Using pester to validate deployments is an option, yet another tool you can add to your toolbox. Having unique deployment names, makes a deployment much like a snapshot, giving you leverage on your validation time frame. You could potentionally go back even further and verify when a configuration drift started. You could also use a scheduled pipeline to keep track of your solution expected outcome. The possibilities&hellip; &#x1f601; I hope this is some value to you!</p>
+<p>Using pester to validate deployments is an option, yet another tool you can add to your toolbox. Having unique deployment names, makes a deployment much like a snapshot, giving you leverage on your validation time frame. You could potentionally go back even further and verify when a configuration drift started. You could also use a scheduled pipeline to keep track of your solution expected outcome. The possibilities&hellip; :grin: I hope this is some value to you!</p>
 <p>Ttyl,</p>
 <p>Urv</p>
 <h2 id="additional-resources">Additional resources</h2>

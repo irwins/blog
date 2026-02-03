@@ -15,15 +15,15 @@
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Bicep Testing Framework">
-  <meta name="twitter:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
-Just a quick heads up it still is in preview aka not ready for production 😁
+  <meta name="twitter:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester :wink:. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
+Just a quick heads up it still is in preview aka not ready for production :grin:
 Why validate? Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I’d advice against that) or you could use code… Pester has saved me many of times… Let’s see if bicep can do the same…">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/bicep-testing-framework/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Bicep Testing Framework">
-  <meta property="og:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester 😉. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
-Just a quick heads up it still is in preview aka not ready for production 😁
+  <meta property="og:description" content="Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I’m familiar with using Pester :wink:. I remembered reading about bicep having an experimental feature for testing. I though I’d give it a try.
+Just a quick heads up it still is in preview aka not ready for production :grin:
 Why validate? Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I’d advice against that) or you could use code… Pester has saved me many of times… Let’s see if bicep can do the same…">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -109,8 +109,8 @@ Why validate? Some times, you just want to be sure of the current state of a con
       </div>
     </header>
     <div class="post-content">
-      <p>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&rsquo;m familiar with using Pester &#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&rsquo;d give it a try.</p>
-<p>Just a quick heads up it still is in preview aka not ready for production &#x1f601;</p>
+      <p>Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&rsquo;m familiar with using Pester :wink:. I remembered reading about bicep having an experimental feature for testing. I though I&rsquo;d give it a try.</p>
+<p>Just a quick heads up it still is in preview aka not ready for production :grin:</p>
 <h2 id="why-validate">Why validate?</h2>
 <p>Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I&rsquo;d advice against that) or you could use code&hellip; Pester has saved me many of times&hellip; Let&rsquo;s see if bicep can do the same&hellip;</p>
 <h2 id="setting-up-bicep-for-testing">Setting up bicep for testing</h2>
@@ -221,7 +221,7 @@ Why validate? Some times, you just want to be sure of the current state of a con
 <p>Ok! Both failed as expected!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The current bicep test functionality is more akin to validating parameters values and naming conventions. If your naming convention dictates that you storage account name starts with &lsquo;st&rsquo; then sure by all means use it. What I&rsquo;m really interested in, is validating <em>after</em> the deployment. Bicep test  doesn&rsquo;t support runtime deployment functionality at the moment.</p>
-<p>I asked  the community if it&rsquo;s worth investing. Currently development is on hold. I&rsquo;d agrue using pester might be a better fit for validating actual deployments! That will be for a next time &#x1f609;</p>
+<p>I asked  the community if it&rsquo;s worth investing. Currently development is on hold. I&rsquo;d agrue using pester might be a better fit for validating actual deployments! That will be for a next time :wink:</p>
 <h2 id="additional-resources">Additional resources</h2>
 <ul>
 <li><a href="https://github.com/Azure/bicep/issues/11967">Bicep experimental test framework</a></li>

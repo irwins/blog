@@ -17,14 +17,14 @@
   <meta name="twitter:title" content="Entra Id Access Review">
   <meta name="twitter:description" content="Been working on Identity Governance, access review, and I’ll admit it can get confusing real fast!
 If you’re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!
-You’ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can… 😉">
+You’ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can… :wink:">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/entra-id-access-review/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Entra Id Access Review">
   <meta property="og:description" content="Been working on Identity Governance, access review, and I’ll admit it can get confusing real fast!
 If you’re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!
-You’ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can… 😉">
+You’ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can… :wink:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -111,13 +111,13 @@ You’ll need a P2 license to play with Identity governance. I still have access
     <div class="post-content">
       <p>Been working on Identity Governance, access review, and I&rsquo;ll admit it can get confusing real fast!</p>
 <p>If you&rsquo;re still using excel spreadsheet to keep track who should have access or be a member of a security group, then access review is worth looking into!</p>
-<p>You&rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&hellip; &#x1f609;</p>
+<p>You&rsquo;ll need a P2 license to play with Identity governance. I still have access to my dev tenant, better put it to use as long as I can&hellip; :wink:</p>
 <h2 id="entraid-identity-governance">EntraId Identity Governance</h2>
 <p>Microsoft does a better job at explaining this:</p>
 <blockquote>
 <p><a href="https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview?view=graph-rest-1.0">Identity governance</a> allows you to balance your organization&rsquo;s need for security and employee productivity with the right processes and visibility. It provides you with capabilities to ensure that the right principals have the right access to the right resources and at the right time.</p>
 </blockquote>
-<p>The part I&rsquo;m most excited about are the programmatical capabilities, using Microsoft Graph APIs &#x1f609;</p>
+<p>The part I&rsquo;m most excited about are the programmatical capabilities, using Microsoft Graph APIs :wink:</p>
 <p>PowerShell module <em>Microsoft.Graph.Identity.Governance</em> has all the necessary cmdlets. Just be warned the names can be confusing at times, it is what it is.</p>
 <h2 id="access-review">Access Review</h2>
 <p>As someone who&rsquo;s been in IT well over two decades &ldquo;<em>ahem</em>&rdquo;, I&rsquo;m all too familiar with maintaining/migrating security group members and reporting who has access or not. Ah the stories I could tell&hellip; but I digress&hellip;</p>
@@ -135,8 +135,8 @@ You’ll need a P2 license to play with Identity governance. I still have access
 <li>AccessPackage Reviews: Review assignments to accessPackages. AccessPackages are a great way to delegate the granting/reviewing process to the owners/delegates</li>
 <li>Privileged roleassignments Reviews. Review assignments to privileged roles. This is great for PIM access reviews</li>
 </ul>
-<p>I started looking first at group membership review. Looking at the <a href="https://learn.microsoft.com/en-us/graph/api/accessreviewset-list-definitions?view=graph-rest-1.0&amp;tabs=powershell">documentation</a> it seems schedule definitions is the place to start. Also, I should have read a bit further&hellip; I mean why read if you can learn things the hard way right? &#x1f601;</p>
-<p>Running the cmdlet <em>Get-MgIdentityGovernanceAccessReviewDefinition</em> gave me more than just the security groups scheduled definitions I saw in my access review blade. The access review interacts with the above mentioned types &#x1f604;</p>
+<p>I started looking first at group membership review. Looking at the <a href="https://learn.microsoft.com/en-us/graph/api/accessreviewset-list-definitions?view=graph-rest-1.0&amp;tabs=powershell">documentation</a> it seems schedule definitions is the place to start. Also, I should have read a bit further&hellip; I mean why read if you can learn things the hard way right? :grin:</p>
+<p>Running the cmdlet <em>Get-MgIdentityGovernanceAccessReviewDefinition</em> gave me more than just the security groups scheduled definitions I saw in my access review blade. The access review interacts with the above mentioned types :smile:</p>
 <p>My first attempt was to filter on the displayName or id.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-AccessReviewDefinition {
 </span></span><span style="display:flex;"><span>    [CmdletBinding(<span style="color:#a6e22e">DefaultParameterSetName</span> = <span style="color:#e6db74">&#39;DisplayName&#39;</span>)]
@@ -219,15 +219,15 @@ You’ll need a P2 license to play with Identity governance. I still have access
 <blockquote>
 <p>&ldquo;I want to learn about EntraId access review. Identify and share the most important 20% of learnings from this topic that will help me understand 80% of it.&rdquo;</p>
 </blockquote>
-<p>Give it a try, It will not dissapoint! &#x1f609;</p>
-<p>Here are some points AI brought to my attention, great for selling an implementation to management&hellip; &#x1f609;</p>
+<p>Give it a try, It will not dissapoint! :wink:</p>
+<p>Here are some points AI brought to my attention, great for selling an implementation to management&hellip; :wink:</p>
 <h3 id="initiating-an-access-review">Initiating an Access Review</h3>
 <ul>
 <li>Define Review Scope: Specify which resources and users will be reviewed.</li>
 <li>Select Reviewers: Assign individuals or groups who will conduct the review.</li>
 <li>Set Review Period: Determine the duration and frequency of the review process.</li>
 </ul>
-<p>For security group access, I&rsquo;d go with a monthly review. Access package review probably quaterly. PIM Roleassignments are tricky. Depending on how paranoid you are on a weekly basis, also maybe not for all roles. Some roles are more important than other&hellip; &#x1f609; As long as you follow company&rsquo;s policies.</p>
+<p>For security group access, I&rsquo;d go with a monthly review. Access package review probably quaterly. PIM Roleassignments are tricky. Depending on how paranoid you are on a weekly basis, also maybe not for all roles. Some roles are more important than other&hellip; :wink: As long as you follow company&rsquo;s policies.</p>
 <h3 id="review-process">Review Process</h3>
 <ul>
 <li>Notification: Reviewers receive notifications to begin the review process.</li>

@@ -2,10 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://irwins.github.io/blog/tags/accessreview/</loc>
-    <lastmod>2024-07-06T12:22:31+02:00</lastmod>
+    <loc>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/ai/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/tags/azure/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/bicep/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/github-copilot/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/iac/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/platform-engineering/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/posts/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/</loc>
+    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/accessreview/</loc>
     <lastmod>2024-07-06T12:22:31+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/posts/entra-id-access-review/</loc>
@@ -16,21 +43,6 @@
   </url><url>
     <loc>https://irwins.github.io/blog/tags/identity-governance/</loc>
     <lastmod>2024-07-06T12:22:31+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/</loc>
-    <lastmod>2024-07-06T12:22:31+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/posts/</loc>
-    <lastmod>2024-07-06T12:22:31+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/</loc>
-    <lastmod>2024-07-06T12:22:31+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/bicep/</loc>
-    <lastmod>2024-06-28T15:24:38+02:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/iac/</loc>
-    <lastmod>2024-06-28T15:24:38+02:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/tags/pester/</loc>
     <lastmod>2024-06-28T15:24:38+02:00</lastmod>

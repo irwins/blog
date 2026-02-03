@@ -6,28 +6,35 @@
     <description>Recent content in Bicep on My digital journey</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Jun 2024 15:24:38 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 02 Feb 2026 18:50:18 +0100</lastBuildDate>
     <atom:link href="https://irwins.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agent Ready Platform Repo</title>
+      <link>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</link>
+      <pubDate>Mon, 02 Feb 2026 18:50:18 +0100</pubDate>
+      <guid>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</guid>
+      <description>&lt;p&gt;Hi! It&amp;rsquo;s been a minute! Been trying to keep up with the latest trends in AI. Honestly, it&amp;rsquo;s almost a full-time job.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been following what the capabilities are for quite some time now. I remember when Prompt engineer was the next thing, then came context engineering. Then we had MCP servers and agents&amp;hellip; whole fleets!&lt;/p&gt;&#xA;&lt;p&gt;Agents really changed the game! The latest addition is skills. Skills seem very promising&amp;hellip; Here&amp;rsquo;s where my experiment led me&amp;hellip;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Pester Validation Deployments</title>
       <link>https://irwins.github.io/blog/posts/pester-validation-deployments/</link>
       <pubDate>Fri, 28 Jun 2024 15:24:38 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/pester-validation-deployments/</guid>
-      <description>&lt;p&gt;Previously, I had a look at the &lt;a href=&#34;https://irwins.github.io/blog/posts/bicep-testing-framework/&#34;&gt;bicep testing framework&lt;/a&gt;. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this &amp;#x1f609;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pester.dev/&#34;&gt;Pester&lt;/a&gt; is &lt;em&gt;the&lt;/em&gt; test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to &lt;a href=&#34;https://pshirwin.wordpress.com/2015/11/06/pester-script-to-test-dns-configuration/&#34;&gt;validate&lt;/a&gt; outcome of what a script was suppose to do. That changed my life!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Previously, I had a look at the &lt;a href=&#34;https://irwins.github.io/blog/posts/bicep-testing-framework/&#34;&gt;bicep testing framework&lt;/a&gt;. The assertions done are more to validate parameter,variables and resource names. You can&amp;rsquo;t assert resource size, or properties, as they depend on runtime deployment. I think pester will be a great fit for this :wink:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pester.dev/&#34;&gt;Pester&lt;/a&gt; is &lt;em&gt;the&lt;/em&gt; test framework for PowerShell! When I first got introduced to pester it was for unit testing. As someone who identifies with OPS, it didn&amp;rsquo;t resonate with me, until I saw Kevin Marquette use pester to &lt;a href=&#34;https://pshirwin.wordpress.com/2015/11/06/pester-script-to-test-dns-configuration/&#34;&gt;validate&lt;/a&gt; outcome of what a script was suppose to do. That changed my life!&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bicep Testing Framework</title>
       <link>https://irwins.github.io/blog/posts/bicep-testing-framework/</link>
       <pubDate>Sat, 22 Jun 2024 07:07:04 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/bicep-testing-framework/</guid>
-      <description>&lt;p&gt;Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&amp;rsquo;m familiar with using Pester &amp;#x1f609;. I remembered reading about bicep having an experimental feature for testing. I though I&amp;rsquo;d give it a try.&lt;/p&gt;&#xA;&lt;p&gt;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-validate&#34;&gt;Why validate?&lt;/h2&gt;&#xA;&lt;p&gt;Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I&amp;rsquo;d advice against that) or you could use code&amp;hellip; Pester has saved me many of times&amp;hellip; Let&amp;rsquo;s see if bicep can do the same&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Bicep is my goto IaC tools for deploying Azure Resources! I recently had a discussion with my team about validating deployments. Now validation is something I&amp;rsquo;m familiar with using Pester :wink:. I remembered reading about bicep having an experimental feature for testing. I though I&amp;rsquo;d give it a try.&lt;/p&gt;&#xA;&lt;p&gt;Just a quick heads up it still is in preview aka not ready for production :grin:&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-validate&#34;&gt;Why validate?&lt;/h2&gt;&#xA;&lt;p&gt;Some times, you just want to be sure of the current state of a configuration. Is property value really set as I expect? Now you can look it up manually (I&amp;rsquo;d advice against that) or you could use code&amp;hellip; Pester has saved me many of times&amp;hellip; Let&amp;rsquo;s see if bicep can do the same&amp;hellip;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bicep Graph Support</title>
       <link>https://irwins.github.io/blog/posts/bicep-graph-support/</link>
       <pubDate>Sun, 16 Jun 2024 05:11:56 +0200</pubDate>
       <guid>https://irwins.github.io/blog/posts/bicep-graph-support/</guid>
-      <description>&lt;p&gt;Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../../images/bicep-graph-support/current-graph-resources.drawio.png&#34; alt=&#34;Graph resources&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;For those new to &lt;a href=&#34;https://learn.microsoft.com/en-gb/azure/azure-resource-manager/bicep/overview?tabs=bicep&#34;&gt;bicep&lt;/a&gt;, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources&lt;/p&gt;&#xA;&lt;p&gt;Just a quick heads up it still is in preview aka not ready for production &amp;#x1f601;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;../../images/bicep-graph-support/current-graph-resources.drawio.png&#34; alt=&#34;Graph resources&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;For those new to &lt;a href=&#34;https://learn.microsoft.com/en-gb/azure/azure-resource-manager/bicep/overview?tabs=bicep&#34;&gt;bicep&lt;/a&gt;, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources&lt;/p&gt;&#xA;&lt;p&gt;Just a quick heads up it still is in preview aka not ready for production :grin:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

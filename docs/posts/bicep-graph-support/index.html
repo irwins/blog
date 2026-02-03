@@ -17,14 +17,14 @@
   <meta name="twitter:title" content="Bicep Graph Support">
   <meta name="twitter:description" content="Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).
 For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources
-Just a quick heads up it still is in preview aka not ready for production 😁">
+Just a quick heads up it still is in preview aka not ready for production :grin:">
 
     <meta property="og:url" content="https://irwins.github.io/blog/posts/bicep-graph-support/">
   <meta property="og:site_name" content="My digital journey">
   <meta property="og:title" content="Bicep Graph Support">
   <meta property="og:description" content="Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).
 For those new to bicep, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources
-Just a quick heads up it still is in preview aka not ready for production 😁">
+Just a quick heads up it still is in preview aka not ready for production :grin:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -112,10 +112,10 @@ Just a quick heads up it still is in preview aka not ready for production 😁">
       <p>Bicep support for Microsoft Graph was a long anticipated feature! Supporting Microsoft Graph in bicep allows you to define the tenant infrastructure (think EntraId among other things) you want to deploy. Currently a subset is support (As of 24th May 2024).</p>
 <p><img src="../../images/bicep-graph-support/current-graph-resources.drawio.png" alt="Graph resources"></p>
 <p>For those new to <a href="https://learn.microsoft.com/en-gb/azure/azure-resource-manager/bicep/overview?tabs=bicep">bicep</a>, bicep is a domain-specific language (DSL) that uses declarative syntax to deploy resources</p>
-<p>Just a quick heads up it still is in preview aka not ready for production &#x1f601;</p>
+<p>Just a quick heads up it still is in preview aka not ready for production :grin:</p>
 <h2 id="why-bother">Why bother?</h2>
 <p>As it so happens I need to create some security groups as part of a migration. I&rsquo;m a fan of any and eveything IaC (Infrastructure as Code) related! Having this as part of your solution avoids manual configuration and helps with enforcing your desired environment states.</p>
-<p>I think it&rsquo;s really cool being able to deploy a security group using bicep! Don&rsquo;t get me wrong, nothing wrong with using Powershell &#x1f609;</p>
+<p>I think it&rsquo;s really cool being able to deploy a security group using bicep! Don&rsquo;t get me wrong, nothing wrong with using Powershell :wink:</p>
 <p>Let&rsquo;s dive in shall we?</p>
 <h2 id="deploying-security-groups-using-bicep">Deploying security groups using bicep</h2>
 <p>To get started we need to enable the bicep preview feature by configuring <em><em>bicepconfig.json</em></em></p>
@@ -167,9 +167,9 @@ Here&rsquo;s what the main.bicep file looks like</p>
 <p>The uniqueName reminds me of Acitive Directory&rsquo;s <em>sAMAccountName</em></p>
 <p>The beauty of the uniqueName is that it&rsquo;s immutable. I knew immediately that the uniqueName would be guid generated in bicep!</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bicep" data-lang="bicep"><span style="display:flex;"><span>uniqueName: <span style="color:#a6e22e">guid</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">toLower</span>(securityGroupDisplayName)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span>managedIdentity.id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tenant</span>().tenantId<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-</span></span></code></pre></div><p>I can generate a guid using: displayName (security group), managedIdentityId and tenantId. Now you can always determine which object you meant to apply! Happy days, expect this is still in preview&hellip; &#x1f614;</p>
+</span></span></code></pre></div><p>I can generate a guid using: displayName (security group), managedIdentityId and tenantId. Now you can always determine which object you meant to apply! Happy days, expect this is still in preview&hellip; :pensive:</p>
 <p>Here&rsquo;s some documentation to read up this: <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">group-upsert</a>
-I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&hellip; &#x1f609;</p>
+I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&hellip; :wink:</p>
 <h2 id="using-uniquename-in-powershell">Using uniqueName in PowerShell</h2>
 <p>While I&rsquo;m tempted to just go ahead and use it in production (Don&rsquo;t!) it got me thinking, where is this uniqueName in the cmdlets? and how can I harness this power?</p>
 <p>I remember wanting the same function used in bicep to generate a guid in PowerShell. Turns out you can! <strong>Simon Wahlin</strong> has created a module <a href="https://www.powershellgallery.com/packages/AzExpression/0.2.7">AzExpression</a> that delivers this functionality!</p>
@@ -251,18 +251,18 @@ I can&rsquo;t say for sure how long it&rsquo;s been there, I know about it now&h
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;UniqueName: </span>$uniqueName<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Get-MgGroupByUniqueName -UniqueName $uniqueName
-</span></span></code></pre></div><p>The guid is case-sensitive. That&rsquo;s the reason for converting displayName tolower(), maybe the managedIdentity should also be converted&hellip; &#x1f914;</p>
+</span></span></code></pre></div><p>The guid is case-sensitive. That&rsquo;s the reason for converting displayName tolower(), maybe the managedIdentity should also be converted&hellip; :thinking:</p>
 <p>I used it to retrieve the security group. New-MgGroup supports the uniqueName. I didn&rsquo;t see that property on New-AzAdGroup.</p>
 <h2 id="some-things-to-consider">Some things to consider</h2>
 <h3 id="portal-experience-uniquename">Portal experience uniqueName</h3>
-<p>Searching in the portal with the uniqueName doesn&rsquo;t return anything. Not sure if that is intentional. You&rsquo;ll need to know the uniqueName. Granted you can keep it simple, I thought that generating a guid made for a pretty unique experience&hellip; Hehe&hellip;Couldn&rsquo;t help myself&hellip;&#x1f603;</p>
+<p>Searching in the portal with the uniqueName doesn&rsquo;t return anything. Not sure if that is intentional. You&rsquo;ll need to know the uniqueName. Granted you can keep it simple, I thought that generating a guid made for a pretty unique experience&hellip; Hehe&hellip;Couldn&rsquo;t help myself&hellip;:smiley:</p>
 <p>You can also use the Get-AzAdGroup (Az.Resources) using the filter:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-pwsh" data-lang="pwsh"><span style="display:flex;"><span>Get-AzAdGroup -Filter <span style="color:#e6db74">&#34;uniqueName eq &#39;&lt;uniqueName&gt;&#39;&#34;</span>
 </span></span></code></pre></div><p>That works just fine. I&rsquo;d advice using New-MgGroup to create a security group supporting uniqueName. Either that or <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">upsert</a>. Making the REST API call keeps you in control, no need to download modules. The graph modules can sometimes be a chore to work with.</p>
 <h3 id="permissions">Permissions</h3>
 <p>If you&rsquo;re using a ServicePrincipal or ManagedIdentity you&rsquo;ll need to set up the proper Graph API <a href="https://learn.microsoft.com/en-us/graph/api/group-upsert?view=graph-rest-1.0&amp;tabs=http">permissions</a>.</p>
 <blockquote>
-<p>Update: I got a crash course from <a href="https://x.com/alexandair">Alexander Nikolić</a> on Graph scoping. Turns out that when you aquire an accessToken from AzPS you get AzPS scopes, not yours. I had a quick look and saw that the scope included <em>Directory.AccessAsUser.All</em>. That explains why it worked. I have too much permissions in my own tenant (Hey, it&rsquo;s where I do research&hellip; &#x1f609;). You can read more about that on the <a href="https://graphpermissions.merill.net/permission/Directory.AccessAsUser.All">Microsoft Graph Permission Explorer</a> courtesy of <a href="https://x.com/merill">Merill Fernando</a>. Thanks for bringing that to my attention!</p>
+<p>Update: I got a crash course from <a href="https://x.com/alexandair">Alexander Nikolić</a> on Graph scoping. Turns out that when you aquire an accessToken from AzPS you get AzPS scopes, not yours. I had a quick look and saw that the scope included <em>Directory.AccessAsUser.All</em>. That explains why it worked. I have too much permissions in my own tenant (Hey, it&rsquo;s where I do research&hellip; :wink:). You can read more about that on the <a href="https://graphpermissions.merill.net/permission/Directory.AccessAsUser.All">Microsoft Graph Permission Explorer</a> courtesy of <a href="https://x.com/merill">Merill Fernando</a>. Thanks for bringing that to my attention!</p>
 </blockquote>
 <p>For production I&rsquo;d strongly advice using a Service principal with the proper Graph API permissions&hellip;</p>
 <h2 id="conclusion">Conclusion</h2>
