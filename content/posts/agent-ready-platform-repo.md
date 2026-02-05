@@ -11,55 +11,46 @@ I've been following what the capabilities are for quite some time now. I remembe
 
 Agents really changed the game! The latest addition is skills. Skills seem very promising... Here's where my experiment led me...
 
-Oh, full disclosure I did use AI to help me out with the blog post... here we go!
+Oh, full disclosure I did use AI to help me out with the blog post... anyway, here's what I've been working on.
 
-# Building an Agent-Ready Platform Engineering Repository
+## Why "Agent-Ready" matters
 
-In the world of Platform Engineering, automation is king. But as we move into the era of AI-augmented development, "standard" automation isn't enough. We need to build repositories that aren't just machine-readable, but **Agent-Ready**.
+In Platform Engineering, we usually focus on automation for people or CI/CD pipelines. But as I started using AI more in my own workflow, I realized that "standard" automation just isn't enough. We need to build repositories that aren't just machine-readable, but actually ready for an AI agent to navigate.
 
-This post explores how we transformed a standard Azure IaC repository into a high-performance environment for GitHub Copilot and other AI coding agents.
+So, I’ve been working on transforming a standard Azure IaC repository into what I call an "agent-ready" environment.
 
-## The Vision: Closing the "Agent Context Gap"
+## Closing the gap between us and the agent
 
-Standard repos are built for humans, but humans are surprisingly good at navigating ambiguity. We read between the lines of a README, we remember a Slack message about naming conventions, and we have "tribal knowledge" about why we use certain Azure modules over others.
+Standard repos are built for humans, and humans are surprisingly good at dealing with ambiguity. We read between the lines, we remember that one Slack message about naming conventions, and we just "know" why we use certain Azure modules.
 
-Copilot and other AI agents don't have that. They suffer from the **Agent Context Gap**: the space between what's in your code and the unspoken rules in your head.
+But Copilot and other AI agents don't have that context. They suffer from what I call the "Agent Context Gap"—the space between the code they see and the unspoken rules we have in our heads.
 
-The goal isn't just "Better Autocomplete." We want to turn the AI into a **context-aware collaborator**. By providing a structured hierarchy of instructions and tools (Skills), we can turn an agent into a junior engineer that not only knows *how* to write Bicep code but understands **why** we use Azure Verified Modules (AVM) and **where** to find our local validation logic.
+The goal here isn't just better autocomplete. I want the AI to be a collaborator that actually understands the project. By giving it a structured set of instructions and tools (skills), we can turn an agent into a junior engineer that not only knows how to write Bicep code but understands why we use Azure Verified Modules (AVM) and where our validation logic lives.
 
 ## The Architecture of an Agent-Ready Repo
 
-Our repository, `platform-agent-kit`, follows a specific scaffold designed for AI interaction. But more important than the folder structure is the **Reasoning Framework** behind it.
+In the `platform-agent-kit` repo, I followed a specific scaffold designed for AI interaction. But more important than the folder structure is the reasoning framework behind it.
 
 ![Agent-Ready Architecture](../../images/agent-ready-platform-repo/architecture.drawio.png)
+
 *Figure 1: The dependency flow from mandatory context (.agents.md) to guardrails and execution tools.*
 
-### 1. Instructions: The "Platform Engineering Constitution"
-Instructions define **what "good" looks like**, not how to do things step-by-step. These are the immutable truths of our engineering culture that shouldn't change per task.
+### Instructions: The "Engineering Constitution"
+Instructions define what "good" looks like. These are the truths of our engineering culture that don't change from task to task—things like Bicep linting rules, AVM expectations, or how we handle PowerShell errors. These are always loaded and always respected by the agent.
 
-*   **Content:** Bicep linting rules, AVM expectations, PowerShell error handling standards, and Git conventional commit requirements.
-*   **Role:** These are **always loaded** and **always respected**. They form the foundation that ensures the agent never forgets our core standards.
+### Skills: The Procedural Tools
+Skills are for multi-step, repeatable work. For example, a git commit generator is a skill because it follows a set workflow: analyze the diff, then generate a message. On the other hand, being a Bicep expert is a knowledge domain that belongs in Instructions. Skills handle the heavy lifting like scaffolding or running Pester tests.
 
-### 2. Skills: The "Procedural Tools"
-Skills are for work that is multi-step, repeatable, and based on a process rather than a preference.
+### Prompts: Workflow Invocations
+Prompts are manual triggers for when you want to run a specific, high-value workflow. Unlike instructions, which enforce behavior, prompts are invocations. They act as the "Start" button for complex routines.
 
-*   **Example:** A **Git Commit Generator** is a skill because it follows a deterministic workflow (analyze diff -> generate message). A **Bicep Expert**, on the other hand, is a knowledge domain that belongs in Instructions.
-*   **Role:** Skills handle the heavy lifting of automated tasks like scaffolding or running Pester tests.
-
-### 3. Prompts: The "Workflow Invocations"
-Prompts are manual triggers for when you want to execute a specific, high-value workflow.
-
-*   **Role:** Unlike instructions (which enforce behavior), prompts are **invocations**. They act as the "Start" button for complex routines, referencing both instructions for standards and skills for execution.
-
-### 4. Agents: The "Domain Personas"
-We avoid "agent swarms" and instead focus on one primary **Platform Engineer Agent** supported by specialized personas.
-
-*   **Role:** Specialists (like a Bicep or PowerShell agent) are only triggered for deep, domain-heavy reasoning. They aren't running all the time; they are domain experts used through handoff workflows.
+### Agents: Domain Personas
+I try to avoid "agent swarms." Instead, I focus on one primary Platform Engineer agent supported by specialized personas. Specialists, like a Bicep or PowerShell agent, are only triggered for deep, domain-heavy reasoning when needed.
 
 ---
 
-### The Mental Model: Hierarchy of Control
-In an agent-ready repo, the hierarchy is clear: **Instructions > Agents > Skills > Prompts**. Instructions define how everything else behaves.
+### Hierarchy of Control
+In an agent-ready repo, the hierarchy is pretty clear: Instructions > Agents > Skills > Prompts. Instructions define how everything else behaves.
 
 ```text
 .github/
@@ -69,71 +60,67 @@ In an agent-ready repo, the hierarchy is clear: **Instructions > Agents > Skills
 .agents.md       # The "System Prompt Extension" (Mandatory Context)
 ```
 
-### 1. Context Injection (`.agents.md`)
-The `.agents.md` file at the root acts as a persistent memory for any agent entering the workspace. It enforces repository-wide policies:
-- **Mandatory Retrieval**: Agents *must* read specific instruction files before modifying Bicep or PowerShell code.
-- **Skill Change Contract**: Any modification to a tool must include updated evaluation fixtures.
+### Context Injection with `.agents.md`
+The `.agents.md` file at the root acts as a persistent memory for any agent entering the workspace. It enforces repo-wide policies like mandatory retrieval (agents *must* read specific instruction files before touching code) and skill change contracts.
 
-### 2. Progressive Disclosure & "Expert Hooks"
-One of the biggest challenges with AI agents is **Context Fatigue**. If you dump every rule, standard, and script into the agent's memory at once, the "signal" of your current task gets lost in the "noise" of documentation.
+### Progressive Disclosure and "Expert Hooks"
+One of the biggest challenges with AI agents is context fatigue. If you dump every rule and script into the agent's memory at once, it loses focus on the actual task.
 
-We solved this using **Progressive Disclosure** in our `SKILL.md` files.
+I solved this using progressive disclosure in the `SKILL.md` files.
 
-We don't force the agent to remember everything. Instead, we use **Trigger Keywords** (our "Expert Hooks"). For example, our Bicep skill description might say: *"Use this when the user mentions Azure, Bicep, or Infrastructure."*
+Instead of forcing the agent to remember everything, I use trigger keywords—what I call "Expert Hooks." For example, a Bicep skill description might say: *"Use this when the user mentions Azure, Bicep, or Infrastructure."*
 
-By keeping the high-level descriptions concise, we protect the agent's precious token window. The agent only "opens" the full expertise—the complex regex for naming conventions or the specific Bicep linter codes—when it identifies a task that truly requires that knowledge. This ensures the agent's focus remains laser-sharp on the problem at hand.
+By keeping the high-level descriptions concise, we protect the agent's token window. It only "opens" the full expertise—the complex regex for naming conventions or specific Bicep linter codes—when it identifies a task that actually requires it.
 
-### 3. Validation as a Coaching Loop
-An agent is only as reliable as its feedback loop. In our `platform-iac` repo, we've moved validation from "CI-only" to "In-Agent."
+### Validation as a Coaching Loop
+An agent is only as reliable as its feedback loop. In our repo, we've moved validation from "CI-only" to "In-Agent."
 
 ![Validation Coaching Loop](../../images/agent-ready-platform-repo/validation-loop.drawio.png)
 
 *Figure 2: The self-healing loop where the agent triages compiler errors and auto-corrects based on remediation hints.*
 
-We created a `bicep-validator` skill that doesn't just run `az bicep build` and fail. It **triages** the output. If the agent makes a mistake—like a parameter mismatch (BCP036)—the tool doesn't just error out. It provides a **Remediation Hint** directly in the agent's interaction flow.
+We created a `bicep-validator` skill that doesn't just run a build and fail. It triages the output. If the agent makes a mistake, like a parameter mismatch, the tool provides a remediation hint directly in the agent's interaction flow.
 
-This creates a "self-healing" developer experience. The agent breaks a rule, the tool coaches it on the fix, and the agent corrects itself—all before the human even sees the code. This turns validation from a "gatekeeper" into a "tutor," ensuring that the code that hits your PR is already pre-validated against your specific standards.
+This creates a "self-healing" experience. The agent breaks a rule, the tool coaches it on the fix, and the agent corrects itself—often before I even see the code. This turns validation from a gatekeeper into a tutor.
 
-## Technical Deep Dive
+## Some technical details
 
-### Azure Verified Modules (AVM) Decision Logic
-We taught our agents **how to choose** between AVM and custom modules. Our AVM skill includes a decision tree:
-1. **Reuse**: Always check for an existing AVM.
-2. **Extend**: If AVM exists but lacks a feature, document the gap.
-3. **Build**: Only build custom if no AVM exists.
+### Choosing between AVM and custom modules
+I taught the agents how to choose between Azure Verified Modules (AVM) and custom ones. The AVM skill includes a simple decision tree:
+1. Always check for an existing AVM first.
+2. If it exists but lacks a feature, document the gap.
+3. Only build custom if there's no AVM available.
 
-### PowerShell Verb & Pester Standards
-For our PowerShell automation, we integrated `PSScriptAnalyzer` and `Pester` into the agent's workflow. The `powershell-module-scaffolder` skill ensures every new function uses approved verbs (like `Invoke`, `Get`, `New`) and automatically generates a matching `.Tests.ps1` file.
+### PowerShell and Pester
+For PowerShell automation, I integrated `PSScriptAnalyzer` and `Pester` into the workflow. The `powershell-module-scaffolder` skill ensures new functions use approved verbs like `Invoke` or `Get`, and it automatically generates a matching `.Tests.ps1` file.
 
-## Lessons from the Journey: The "Agent-Ready" Mindset
+## What I learned along the way
 
-Building this wasn't just about writing YAML and Markdown. It was a shift in how we think about "Infrastructure as Code."
+Building this was a shift in how I think about Infrastructure as Code.
 
-*   **Constraints are Creative**: By giving the agent clear `NEVER` and `MANDATORY` lists, we actually made it *more* creative. It spends less time guessing what we want and more time solving the complex parts of the architecture.
-*   **Documentation is Code**: In an agent-ready repo, your documentation *is* part of the execution path. If a standard isn't written in a way an agent can retrieve, it doesn't exist.
-*   **Trust But Verify**: We don't just trust the agent to read the docs; we use `test/eval/` fixtures to prove that the agent's tools (the Skills) actually work as intended.
+*   **Constraints are actually helpful**: By giving the agent clear "never" and "mandatory" lists, it actually became more creative. It spends less time guessing what I want and more time solving the complex parts.
+*   **Documentation is now code**: Your documentation is part of the execution path. If a standard isn't written in a way an agent can find it, it basically doesn't exist.
+*   **Trust but verify**: I don't just trust the agent to read the docs. I use evaluation fixtures to prove that the skills actually work as intended.
 
-## Summary: The "Agent-Ready" Checklist
+## A quick checklist for "Agent-Readiness"
 
-To make your repository Agent-Ready:
+If you want to make your own repo agent-ready:
 - [x] **Define your "Ground Truth"**: Use `.agents.md` for global rules.
-- [x] **Modularize Instructions**: Don't let your README become a junk drawer.
-- [x] **Build Validation Skills**: Give the agent the tools to test its own work.
-- [x] **Create Evaluation Fixtures**: Provide examples of "Good" and "Bad" code for the agent to learn from.
+- [x] **Modularize Instructions**: Keep your README from becoming a junk drawer.
+- [x] **Build Validation Skills**: Give the agent tools to test its own work.
+- [x] **Create Evaluation Fixtures**: Provide examples of "Good" and "Bad" code.
 
-## Additional resources
-Here are some of the key resources I used to build and refine this setup:
-- [VS Code Copilot Documentation](https://code.visualstudio.com/docs/copilot/overview) - The foundation for understanding how extension context works.
-- [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) - Essential reading for structuring agent instructions and context.
+## Want to dive deeper?
+Here are some of the resources I found useful while building this:
+- [VS Code Copilot Documentation](https://code.visualstudio.com/docs/copilot/overview)
+- [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
 - [Anthropic Skills Best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 - [agentskills.io](https://agentskills.io/home)
 - [skills.sh](https://skills.sh/)
 
-## What's Next?
-You can find the code here: [platform-agent-kit](https://github.com/irwins/platform-agent-kit).
-It's a work-in-progress...
+You can find the code I've been working on here: [platform-agent-kit](https://github.com/irwins/platform-agent-kit). It's still a work in progress, but it's a start.
 
-By treating AI as a first-class citizen in our repo structure, we've ensured that every line of code—whether written by a human or an agent—meets our platform standards... Well at least that's what we're aiming for... 😉
+By treating AI as a first-class citizen in the repo structure, the goal is to ensure that every line of code—whether written by me or an agent—meets the same standards. At least, that's what I'm aiming for! 😉
 
 Ttyl,
 
