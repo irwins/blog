@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+    <title>Testing the msgraph Copilot Skill: Giving AI Agents a Local Graph API Brain // My digital journey</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.157.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Irwin Strachan" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/blog/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Testing the msgraph Copilot Skill: Giving AI Agents a Local Graph API Brain">
+  <meta name="twitter:description" content="The Problem I Wanted to Solve Large language models are trained on data that is months — sometimes over a year — old. The Microsoft Graph API has 27,700&#43; endpoints and is updated weekly. That gap creates a real problem: AI agents hallucinate endpoints that don’t exist, suggest deprecated paths, miss required permissions, or get $filter syntax wrong.
+I wanted to see whether the open-source msgraph skill by Merill Fernando could close that gap — and whether I could wire it directly into specialist Copilot agents for a fully grounded, anti-hallucination workflow.">
+
+    <meta property="og:url" content="http://localhost:1313/blog/posts/testing-msgraph-agent-skill/">
+  <meta property="og:site_name" content="My digital journey">
+  <meta property="og:title" content="Testing the msgraph Copilot Skill: Giving AI Agents a Local Graph API Brain">
+  <meta property="og:description" content="The Problem I Wanted to Solve Large language models are trained on data that is months — sometimes over a year — old. The Microsoft Graph API has 27,700&#43; endpoints and is updated weekly. That gap creates a real problem: AI agents hallucinate endpoints that don’t exist, suggest deprecated paths, miss required permissions, or get $filter syntax wrong.
+I wanted to see whether the open-source msgraph skill by Merill Fernando could close that gap — and whether I could wire it directly into specialist Copilot agents for a fully grounded, anti-hallucination workflow.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-03-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-05T00:00:00+00:00">
+    <meta property="article:tag" content="Microsoft Graph">
+    <meta property="article:tag" content="GitHub Copilot">
+    <meta property="article:tag" content="AI Skills">
+    <meta property="article:tag" content="Entra ID">
+    <meta property="article:tag" content="PIM">
+    <meta property="article:tag" content="Global Secure Access">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/blog/"><img class="app-header-avatar" src="/blog/avatar.jpg" alt="Irwin Strachan" /></a>
+      <span class="app-header-title">My digital journey</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/blog/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/blog/about/">About</a>
+      </nav>
+      <p>A blog about my digital transformation journey to cloud native and beyond.</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/irwins" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>GitHub</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://twitter.com/irwinstrachan" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/irwinstrachan/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Testing the msgraph Copilot Skill: Giving AI Agents a Local Graph API Brain</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 5, 2026
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="http://localhost:1313/blog/tags/microsoft-graph/">Microsoft Graph</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/github-copilot/">GitHub Copilot</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/ai-skills/">AI Skills</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/entra-id/">Entra ID</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/pim/">PIM</a>
+              <a class="tag" href="http://localhost:1313/blog/tags/global-secure-access/">Global Secure Access</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="the-problem-i-wanted-to-solve">The Problem I Wanted to Solve</h2>
+<p>Large language models are trained on data that is months — sometimes over a year — old. The Microsoft Graph API has <strong>27,700+ endpoints</strong> and is <strong>updated weekly</strong>. That gap creates a real problem: AI agents hallucinate endpoints that don&rsquo;t exist, suggest deprecated paths, miss required permissions, or get <code>$filter</code> syntax wrong.</p>
+<p>I wanted to see whether the open-source <a href="https://github.com/merill/msgraph"><code>msgraph</code> skill</a> by Merill Fernando could close that gap — and whether I could wire it directly into specialist Copilot agents for a fully grounded, anti-hallucination workflow.</p>
+<p>In my case, this wasn&rsquo;t theoretical. I hit one run where Copilot suggested a stale Graph path, then another where the path looked fine but permissions still failed at execution. That was enough for me to stop trusting best-guess output and move to a lookup-first workflow.</p>
+<p>I learned this the hard way in my earlier PIM access review automation work: I almost optimized the wrong workflow because I solved what looked technically interesting, not what the reviewers actually needed. I do not want to repeat that mistake with Graph automation.</p>
+<h2 id="agent-files">Agent Files</h2>
+<p>If you want to use the same specialist agent setup, download the exact files here:</p>
+<ul>
+<li><a href="/blog/downloads/testing-msgraph-agent-skill/graph-analyst.agent.md">Download <code>graph-analyst.agent.md</code></a></li>
+<li><a href="/blog/downloads/testing-msgraph-agent-skill/graph-reviewer.agent.md">Download <code>graph-reviewer.agent.md</code></a></li>
+</ul>
+<h2 id="why-this-matters-to-me">Why This Matters to Me</h2>
+<p>This wasn&rsquo;t my first MgGraph automation project. In my earlier post on <a href="../../posts/pim-access-review/">PIM access review</a>, I worked through the practical edge cases of Entra role access review automation and learned the hard way where Graph workflows break down in real environments. That background is exactly why I built this lookup-first approach: I wanted reliability over guesswork.</p>
+<h2 id="why-i-added-the-msgraph-skill-to-my-toolkit">Why I Added the <code>msgraph</code> Skill to My Toolkit</h2>
+<p>The skill bundles the complete Microsoft Graph API surface as <strong>local indexes</strong> that an agent can search instantly — no network calls, no latency. It ships as a set of pre-compiled CLI binaries (macOS, Linux, Windows) with four searchable indexes:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Index</th>
+          <th>Count</th>
+          <th>What It Contains</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>OpenAPI endpoints</td>
+          <td>27,700+</td>
+          <td>Path, method, summary, description, permission scopes</td>
+      </tr>
+      <tr>
+          <td>Endpoint docs</td>
+          <td>6,200+</td>
+          <td>Permissions (delegated/app), query parameters, required headers</td>
+      </tr>
+      <tr>
+          <td>Resource schemas</td>
+          <td>4,200+</td>
+          <td>Properties with types, supported <code>$filter</code> operators</td>
+      </tr>
+      <tr>
+          <td>Community samples</td>
+          <td>Growing</td>
+          <td>Hand-verified queries mapping natural-language tasks to exact API calls</td>
+      </tr>
+  </tbody>
+</table>
+<p>Before I trusted it, I needed three things: endpoint coverage, permission accuracy, and speed during live investigation. The local index model checked all three in my workflow. I still use it as a <strong>knowledge layer</strong>, not an execution engine, and pair it with my scripts for actual API calls.</p>
+<h2 id="setting-up-the-skill-in-my-repo">Setting Up the Skill in My Repo</h2>
+<p>I integrated the skill into an existing Azure DevOps repo focused on Entra ID PIM automation. The directory structure:</p>
+<pre tabindex="0"><code>.agents/
+└── skills/
+    └── msgraph/
+        ├── SKILL.md              # Skill manifest and instructions
+        ├── CONTRIBUTING.md       # How to add community samples
+        ├── references/
+        │   ├── REFERENCE.md      # Quick-reference for common patterns
+        │   ├── graph-api-index.json      # 27,700+ OpenAPI endpoints
+        │   ├── api-docs-index.json       # 6,200+ endpoint docs
+        │   ├── samples-index.json        # Community samples
+        │   └── docs/             # Concept docs (paging, batching, etc.)
+        └── scripts/
+            ├── run.sh            # macOS/Linux launcher
+            ├── run.ps1           # Windows launcher
+            └── bin/              # Pre-compiled binaries per platform
+</code></pre><p>I then created two specialist agents in <code>.github/agents/</code> and hardwired them to use the skill by default:</p>
+<ul>
+<li><strong><code>graph-analyst</code></strong> — Designs accurate Graph API calls following a progressive lookup strategy.</li>
+<li><strong><code>graph-reviewer</code></strong> — Reviews Graph scripts for correctness, security, and maintainability.</li>
+</ul>
+<p>Both agents have the same first instruction: <em>&ldquo;Always use the local <code>msgraph</code> skill as the first source of truth.&rdquo;</em></p>
+<p>I prefer shipping these as blog assets so the post and file versions stay in sync. A gist is still useful as an optional mirror for sharing.</p>
+<h2 id="test-1-finding-the-accessreview-endpoint">Test 1: Finding the <code>accessReview</code> Endpoint</h2>
+<p><strong>Prompt:</strong> <em>&ldquo;What is the endpoint for accessReview?&rdquo;</em></p>
+<p>The agent ran <code>api-docs-search</code> and <code>openapi-search</code> and returned both:</p>
+<ul>
+<li><strong>Modern path:</strong> <code>GET /identityGovernance/accessReviews/definitions</code> (v1.0)</li>
+<li><strong>Deprecated path:</strong> <code>GET /accessReviews</code> (beta, deprecated)</li>
+</ul>
+<p>It flagged the deprecation and recommended the modern path. Without the skill, an LLM would likely have returned the deprecated endpoint — or worse, invented one.</p>
+<p>My read: this was a strong start for endpoint discovery, especially where v1.0 and beta history overlap.</p>
+<h2 id="test-2-pim-for-groups-endpoints">Test 2: PIM for Groups Endpoints</h2>
+<p><strong>Prompt:</strong> <em>&ldquo;What are the PIM for Groups endpoints?&rdquo;</em></p>
+<p>The agent ran:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash .agents/skills/msgraph/scripts/run.sh api-docs-search <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --endpoint <span style="color:#e6db74">&#34;/identityGovernance/privilegedAccess/group&#34;</span> --method GET
+</span></span></code></pre></div><p>It returned the full family of endpoints:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Endpoint</th>
+          <th>Method</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/identityGovernance/privilegedAccess/group/assignmentScheduleRequests</code></td>
+          <td>POST</td>
+          <td>Request a new PIM group assignment</td>
+      </tr>
+      <tr>
+          <td><code>/identityGovernance/privilegedAccess/group/assignmentScheduleInstances</code></td>
+          <td>GET</td>
+          <td>List active assignment instances</td>
+      </tr>
+      <tr>
+          <td><code>/identityGovernance/privilegedAccess/group/eligibilityScheduleRequests</code></td>
+          <td>POST</td>
+          <td>Request eligibility for a group role</td>
+      </tr>
+      <tr>
+          <td><code>/identityGovernance/privilegedAccess/group/eligibilityScheduleInstances</code></td>
+          <td>GET</td>
+          <td>List active eligibility instances</td>
+      </tr>
+  </tbody>
+</table>
+<p>It also provided the required permission: <code>PrivilegedAssignmentSchedule.ReadWrite.AzureADGroup</code>.</p>
+<p>My read: this saved the most time. Scope guidance in the same lookup removed a lot of trial-and-error.</p>
+<h2 id="test-3-creating-a-pim-assignment-request">Test 3: Creating a PIM Assignment Request</h2>
+<p><strong>Prompt:</strong> <em>&ldquo;Show me how to create an assignmentScheduleRequest.&rdquo;</em></p>
+<p>The agent ran:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash .agents/skills/msgraph/scripts/run.sh api-docs-search <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --resource privilegedAccessGroupAssignmentScheduleRequest --method POST
+</span></span></code></pre></div><p>It returned the full resource schema, and produced a ready-to-run PowerShell example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$requestBody = @{
+</span></span><span style="display:flex;"><span>    accessId     = <span style="color:#e6db74">&#34;member&#34;</span>
+</span></span><span style="display:flex;"><span>    principalId  = <span style="color:#e6db74">&#34;&lt;user-or-group-object-id&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    groupId      = <span style="color:#e6db74">&#34;&lt;target-group-id&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    action       = <span style="color:#e6db74">&#34;adminAssign&#34;</span>
+</span></span><span style="display:flex;"><span>    scheduleInfo = @{
+</span></span><span style="display:flex;"><span>        startDateTime = (Get-Date).ToUniversalTime().ToString(<span style="color:#e6db74">&#34;o&#34;</span>)
+</span></span><span style="display:flex;"><span>        expiration    = @{
+</span></span><span style="display:flex;"><span>            type     = <span style="color:#e6db74">&#34;afterDuration&#34;</span>
+</span></span><span style="display:flex;"><span>            duration = <span style="color:#e6db74">&#34;PT8H&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    justification = <span style="color:#e6db74">&#34;Deploying change CHANGE-1234&#34;</span>
+</span></span><span style="display:flex;"><span>} | ConvertTo-Json -Depth <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Invoke-MgGraphRequest -Method POST `
+</span></span><span style="display:flex;"><span>    -Uri <span style="color:#e6db74">&#34;https://graph.microsoft.com/v1.0/identityGovernance/privilegedAccess/group/assignmentScheduleRequests&#34;</span> `
+</span></span><span style="display:flex;"><span>    -Body $requestBody `
+</span></span><span style="display:flex;"><span>    -ContentType <span style="color:#e6db74">&#34;application/json&#34;</span>
+</span></span></code></pre></div><p>This mattered because I standardize on <code>Invoke-MgGraphRequest</code> in my automation scripts. It correctly used that cmdlet instead of the non-existent <code>Invoke-MgGraphRestMethod</code> that LLMs often hallucinate.</p>
+<p>My read: high confidence for schema and request construction, but I still validate production-bound payloads through dry runs.</p>
+<h2 id="test-4-microsoft-entra-private-access">Test 4: Microsoft Entra Private Access</h2>
+<p>The agent ran multiple <code>openapi-search</code> queries and mapped out the full <code>networkAccess</code> resource tree:</p>
+<ul>
+<li><strong>Forwarding Profiles:</strong> <code>POST /beta/networkAccess/forwardingProfiles</code></li>
+<li><strong>Filtering Policies:</strong> <code>POST /beta/networkAccess/filteringPolicies</code></li>
+<li><strong>Policy Rules:</strong> <code>POST /beta/networkAccess/filteringPolicies/{id}/policyRules</code></li>
+<li><strong>Branch Connectivity:</strong> <code>POST /beta/networkAccess/connectivity/branches</code></li>
+<li><strong>Settings:</strong> <code>PATCH /beta/networkAccess/settings/conditionalAccess</code></li>
+</ul>
+<p>It flagged that all of these are <code>beta</code>-only and noted the required permission: <code>NetworkAccess.ReadWrite.All</code>.</p>
+<p>This is an area where generic LLM knowledge is thin. The skill&rsquo;s local OpenAPI index made the difference.</p>
+<p>My read: very useful for newer Entra surfaces where generic model knowledge is still patchy.</p>
+<p>What I did next: I treated these as design-time endpoints only, documented the beta constraint, and avoided wiring production automation until we had a stable rollout path.</p>
+<h2 id="where-i-still-step-in">Where I Still Step In</h2>
+<p>Once I had the right endpoint and permission, I validated the role context and tenant state manually before execution. The lookup layer got me to the right API shape quickly. The <a href="https://graph.pm/reference/cli/#authentication-commands">cli</a> does support authentication, something I&rsquo;ll look into in the near future.</p>
+<p>That boundary is important for me. Fast local lookup lowers hallucination risk, but live Graph writes still need operational guardrails. For now I&rsquo;d rather be in the driver&rsquo;s seat&hellip;</p>
+<h2 id="what-worked-well">What Worked Well</h2>
+<ol>
+<li>
+<p><strong>Anti-hallucination by design.</strong> The progressive lookup strategy (<code>sample-search</code> → <code>api-docs-search</code> → <code>openapi-search</code>) grounds answers in indexed data.</p>
+</li>
+<li>
+<p><strong>Permission and deprecation accuracy.</strong> Getting scopes and deprecation cues in one pass helped me avoid bad defaults.</p>
+</li>
+<li>
+<p><strong>Offline-first speed.</strong> Local indexes gave near-instant lookups with no network dependency and no token cost.</p>
+</li>
+</ol>
+<p>Hardwiring this behavior into <code>.agent.md</code> files also reduced repeated prompt setup. Each session starts with the same lookup discipline.</p>
+<h2 id="what-i-trust-vs-what-i-still-verify">What I Trust vs What I Still Verify</h2>
+<p>I trust the skill for endpoint discovery, permission direction, and rapid lookup during investigations.</p>
+<p>I still verify three things manually before any write path: tenant context, role assignment blast radius, and rollback options.</p>
+<p>Two constraints are worth calling out:</p>
+<ol>
+<li><strong>Skill updates.</strong> The indexes are static snapshots. When Microsoft ships new endpoints, you need a new skill release. The <code>skills-lock.json</code> tracks the version, but there&rsquo;s no auto-update mechanism yet. Fast local lookup is the upside; snapshot staleness is the trade-off.</li>
+<li><strong>Community samples are sparse.</strong> The curated sample library is growing but still small (16 samples as of 2026-03-05). Contributing your own working queries back is the practical way to improve this over time.</li>
+</ol>
+<h2 id="my-setup-in-a-nutshell">My Setup in a Nutshell</h2>
+<pre tabindex="0"><code>.github/
+├── copilot-instructions.md          # Repo-wide rules (Graph, commits)
+└── agents/
+    ├── graph-analyst.agent.md       # Endpoint design specialist
+    └── graph-reviewer.agent.md      # Code review specialist
+
+.agents/
+└── skills/
+    └── msgraph/                     # Local Graph API knowledge base
+</code></pre><h2 id="my-verdict-for-ops-teams">My Verdict (For Ops Teams)</h2>
+<p>If you run Graph-heavy ops automation, adopt this now as a lookup layer. It turns Copilot from &ldquo;probably right&rdquo; into &ldquo;show me the endpoint and scope,&rdquo; which is a much safer baseline.</p>
+<p>My non-negotiable rule: I do not ship write-capable Graph automation that has not passed lookup validation plus environment-specific safety checks.</p>
+<p>If your team needs end-to-end execution guarantees out of the box, wait until you define guardrails for tenant validation and change control. The skill improves answer quality, but it does not replace operational controls.</p>
+<p>For me, pairing it with specialist agents that always look before they leap is already catching deprecated paths and permission mismatches that used to slip through.</p>
+<h2 id="shout-out-to-merill">Shout out to Merill</h2>
+<p>Credit where credit is due: Merill Fernando built and maintains a tool that makes real-world Graph work safer for the rest of us. This isn&rsquo;t just &ldquo;nice for demos&rdquo; tooling. It has practical, day-to-day value when you&rsquo;re trying to avoid bad API calls, bad scopes, and bad assumptions.</p>
+<p>If you work with Microsoft Graph and have not explored it yet, start here: <a href="https://graph.pm/">graph.pm</a></p>
+<p>Open source only works long-term when people contribute back. If this tool saves you time, send a PR, add a sample, or sponsor the work.</p>
+<h2 id="if-you-want-to-try-this-in-30-minutes">If You Want to Try This in 30 Minutes</h2>
+<ol>
+<li>Install the <code>msgraph</code> skill locally and confirm the binaries run on your platform.</li>
+<li>Run one endpoint lookup for a task you already automate, then verify scope output against your current script.</li>
+<li>Add one agent instruction to always run lookup before code generation, then compare output quality in two back-to-back prompts.</li>
+</ol>
+<p>Build fast, validate hard, ship safely.</p>
+<p>Ttyl,</p>
+<p>Urv</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

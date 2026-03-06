@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://irwins.github.io/blog/tags/ai-skills/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/entra-id/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/github-copilot/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/global-secure-access/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/microsoft-graph/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/pim/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/posts/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/tags/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://irwins.github.io/blog/posts/testing-msgraph-agent-skill/</loc>
+    <lastmod>2026-03-05T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://irwins.github.io/blog/posts/agent-ready-platform-repo/</loc>
     <lastmod>2026-02-02T18:50:18+01:00</lastmod>
   </url><url>
@@ -14,22 +44,10 @@
     <loc>https://irwins.github.io/blog/tags/bicep/</loc>
     <lastmod>2026-02-02T18:50:18+01:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/tags/github-copilot/</loc>
-    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
-  </url><url>
     <loc>https://irwins.github.io/blog/tags/iac/</loc>
     <lastmod>2026-02-02T18:50:18+01:00</lastmod>
   </url><url>
-    <loc>https://irwins.github.io/blog/</loc>
-    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
-  </url><url>
     <loc>https://irwins.github.io/blog/tags/platform-engineering/</loc>
-    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/posts/</loc>
-    <lastmod>2026-02-02T18:50:18+01:00</lastmod>
-  </url><url>
-    <loc>https://irwins.github.io/blog/tags/</loc>
     <lastmod>2026-02-02T18:50:18+01:00</lastmod>
   </url><url>
     <loc>https://irwins.github.io/blog/tags/accessreview/</loc>
